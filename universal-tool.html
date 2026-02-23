@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Text Tools - All Languages</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f4f4f9; display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; width: 100%; max-width: 700px; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 5px; }
+        p.subtitle { text-align: center; color: #7f8c8d; margin-bottom: 25px; }
+        
+        textarea { 
+            width: 100%; height: 200px; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; 
+            font-size: 18px; box-sizing: border-box; resize: vertical; transition: 0.3s;
+        }
+        textarea:focus { border-color: #3498db; outline: none; }
+
+        .stats { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .box { flex: 1; min-width: 140px; background: #3498db; color: white; padding: 15px; border-radius: 10px; text-align: center; }
+        .box span { display: block; font-size: 22px; font-weight: bold; }
+        
+        .actions { margin-top: 20px; display: flex; gap: 10px; }
+        button { flex: 1; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        .copy-btn { background: #2ecc71; color: white; }
+        .clear-btn { background: #e74c3c; color: white; }
+        button:hover { opacity: 0.9; }
+
+        /* Support for Right-to-Left languages like Urdu/Arabic */
+        [dir="rtl"] textarea { text-align: right; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🌍 All-in-One Text Tool</h1>
+    <p class="subtitle">Works for English, Urdu, Hindi, Arabic & more!</p>
+
+    <textarea id="mainInput" placeholder="Write or paste anything here..."></textarea>
+
+    <div class="stats">
+        <div class="box">Words<span id="words">0</span></div>
+        <div class="box">Characters<span id="chars">0</span></div>
+        <div class="box">Lines<span id="lines">0</span></div>
+    </div>
+
+    <div class="actions">
+        <button class="copy-btn" onclick="copyText()">Copy Text</button>
+        <button class="clear-btn" onclick="clearText()">Clear</button>
+    </div>
+</div>
+
+<script>
+    const input = document.getElementById('mainInput');
+    
+    input.addEventListener('input', () => {
+        let text = input.value.trim();
+        
+        // Word count for all languages (using Regex to handle global scripts)
+        const wordArr = text.match(/\S+/g);
+        const wordCount = wordArr ? wordArr.length : 0;
+        
+        document.getElementById('words').innerText = wordCount;
+        document.getElementById('chars').innerText = text.length;
+        document.getElementById('lines').innerText = text.split(/\r\n|\r|\n/).filter(line => line.length > 0).length;
+
+        // Auto-detect direction (Urdu/Arabic support)
+        if (text.length > 0) {
+            const firstChar = text.charAt(0);
+            const rtlChars = /[\u0600-\u06FF\u0750-\u077F\u0590-\u05FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
+            input.style.direction = rtlChars.test(firstChar) ? "rtl" : "ltr";
+        }
+    });
+
+    function copyText() {
+        input.select();
+        document.execCommand('copy');
+        alert("Text copied!");
+    }
+
+    function clearText() {
+        input.value = "";
+        document.getElementById('words').innerText = "0";
+        document.getElementById('chars').innerText = "0";
+        document.getElementById('lines').innerText = "0";
+    }
+</script>
+
+</body>
+</html>
