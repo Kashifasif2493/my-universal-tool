@@ -149,7 +149,7 @@ footer{
 <div class="box">No Space <span id="noSpace">0</span></div>
 <div class="box">Lines <span id="lines">0</span></div>
 <div class="box">Sentences <span id="sentences">0</span></div>
-<div class="box">Reading Time <span id="reading">0 sec</span></div>
+<div class="box">Reading Time <span id="reading">0 min</span></div>
 </div>
 
 <div class="actions">
@@ -173,16 +173,17 @@ input.addEventListener("input",function(){
 let text = input.value;
 
 const words = text.trim().match(/\S+/g);
-document.getElementById("words").innerText = words ? words.length : 0;
+const wordCount = words ? words.length : 0;
 
+document.getElementById("words").innerText = wordCount;
 document.getElementById("chars").innerText = text.length;
 document.getElementById("noSpace").innerText = text.replace(/\s/g,'').length;
-document.getElementById("lines").innerText = text.split(/\n/).filter(l=>l.trim()!="").length;
+document.getElementById("lines").innerText = text.split(/\r\n|\r|\n/).filter(l=>l.trim()!="").length;
 
 const sentenceArr = text.match(/[^\.!\?]+[\.!\?]+/g);
 document.getElementById("sentences").innerText = sentenceArr ? sentenceArr.length : 0;
 
-const readingTime = words ? Math.ceil(words.length / 200) : 0;
+const readingTime = wordCount ? Math.ceil(wordCount / 200) : 0;
 document.getElementById("reading").innerText = readingTime + " min";
 
 const rtl = /[\u0600-\u06FF]/;
@@ -225,4 +226,5 @@ document.body.classList.toggle("dark");
 
 </body>
 </html>
+
 
