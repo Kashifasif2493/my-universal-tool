@@ -16,7 +16,7 @@
         nav a:hover { opacity: 1; color: #38bdf8; }
         .container { max-width: 1000px; width: 100%; background: var(--card); backdrop-filter: blur(12px); border-radius: 24px; padding: 40px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); box-sizing: border-box; }
         h1 { text-align: center; font-size: 2.5rem; margin-bottom: 5px; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        textarea { width: 100%; height: 280px; border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 20px; font-size: 16px; outline: none; resize: vertical; background: rgba(0,0,0,0.2); color: inherit; transition: 0.3s; margin-top: 10px; box-sizing: border-box; }
+        textarea { width: 100%; height: 280px; border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 20px; font-size: 16px; outline: none; resize: vertical; background: rgba(0,0,0,0.2); color: inherit; transition: 0.3s; margin-top: 10px; box-sizing: border-box; line-height: 1.6; }
         .light textarea { background: #fff; border-color: #cbd5e1; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 30px 0; }
         .stat-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
@@ -28,7 +28,7 @@
         button:hover { transform: translateY(-2px); }
         .article-section { max-width: 1000px; margin-top: 50px; line-height: 1.8; opacity: 0.8; }
         footer { margin-top: 50px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); width: 100%; text-align: center; font-size: 14px; }
-        .mode-toggle { position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: inherit; padding: 10px; border-radius: 50%; cursor: pointer; }
+        .mode-toggle { position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: inherit; padding: 10px; border-radius: 50%; cursor: pointer; z-index: 100; }
     </style>
 </head>
 <body>
@@ -46,7 +46,9 @@
     <h1>Word Counter Online</h1>
     <p style="text-align: center; opacity: 0.6;">The Professional SEO Writing Workstation</p>
 
-    <textarea id="mainInput" placeholder="Start typing your SEO content..." oninput="process()"></textarea>
+    <p id="correction-info" style="font-size: 12px; color: #38bdf8; text-align: center; height: 15px; margin: 0;"></p>
+    
+    <textarea id="mainInput" placeholder="Try typing 'teh' or 'dont' and press space..." oninput="process(event)"></textarea>
 
     <div class="stats-grid">
         <div class="stat-card">Words<span id="words">0</span></div>
@@ -76,13 +78,9 @@
 
 <div class="article-section">
     <h2>Why Use an Online Word Counter?</h2>
-    <p>In the world of SEO and digital marketing, content length matters. Whether you are writing a blog post, a meta description, or a social media update, staying within the recommended word count is crucial for ranking on Google. Our <strong>Word Counter Online</strong> provides real-time analysis to help you optimize your writing.</p>
-    <h3>Key Features for Writers:</h3>
-    <ul>
-        <li><strong>Real-time Word Count:</strong> No need to click any buttons.</li>
-        <li><strong>Keyword Density Analysis:</strong> Avoid keyword stuffing and improve ranking.</li>
-        <li><strong>Readability Score:</strong> Ensure your content is easy for users to read.</li>
-    </ul>
+    <p>In the world of SEO and digital marketing, content length matters. Our <strong>Word Counter Online</strong> provides real-time analysis to help you optimize your writing.</p>
+    <h3>Advanced Auto-Correction Features:</h3>
+    <p>We have integrated a real-time auto-correction engine that fixes common spelling mistakes instantly as you type. This ensures your content remains professional and error-free.</p>
 </div>
 
 <footer>
@@ -91,19 +89,54 @@
 
 <script>
 const input = document.getElementById('mainInput');
-const corrections = { "teh": "the", "recieve": "receive", "dont": "don't" };
+const info = document.getElementById('correction-info');
 
-function process() {
+// Expanded Auto-Correction Dictionary
+const corrections = { 
+    "teh": "the", 
+    "recieve": "receive", 
+    "dont": "don't", 
+    "doesnt": "doesn't", 
+    "wrold": "world",
+    "mispell": "misspell",
+    "beleive": "believe",
+    "abd": "and",
+    "form": "from",
+    "ti": "to",
+    "u": "you",
+    "r": "are",
+    "i": "I"
+};
+
+function process(e) {
     let text = input.value;
-    if(text.endsWith(" ")) {
-        let words = text.trim().split(/\s+/);
-        let last = words[words.length-1].toLowerCase();
-        if(corrections[last]) {
-            words[words.length-1] = corrections[last];
-            input.value = words.join(" ") + " ";
+    
+    // Auto-correction triggers on SPACE or ENTER
+    if (text.endsWith(" ") || text.endsWith("\n")) {
+        let lines = text.split("\n");
+        let currentLine = lines[lines.length - 1];
+        let words = text.split(/\s+/);
+        
+        // Get the word just typed before the space
+        let lastWordIndex = words.length - 2;
+        if (lastWordIndex >= 0) {
+            let lastWord = words[lastWordIndex].toLowerCase().replace(/[.,!?;:]/g, "");
+            
+            if (corrections[lastWord]) {
+                // Apply correction
+                words[lastWordIndex] = corrections[lastWord];
+                
+                // Preserve trailing space/newline
+                let suffix = text.endsWith("\n") ? "\n" : " ";
+                input.value = words.join(" ") + suffix;
+                
+                // Visual Feedback
+                info.innerText = `Fixed: ${lastWord} → ${corrections[lastWord]}`;
+                setTimeout(() => { info.innerText = ""; }, 2000);
+            }
         }
     }
-    updateStats(text);
+    updateStats(input.value);
 }
 
 function updateStats(text) {
@@ -130,14 +163,14 @@ function updateStats(text) {
 }
 
 function toggleMode() { document.body.classList.toggle('light'); }
-function toUpper() { input.value = input.value.toUpperCase(); process(); }
-function capitalize() { input.value = input.value.replace(/\b\w/g, l => l.toUpperCase()); process(); }
-function clearAll() { input.value = ""; process(); }
+function toUpper() { input.value = input.value.toUpperCase(); updateStats(input.value); }
+function capitalize() { input.value = input.value.replace(/\b\w/g, l => l.toUpperCase()); updateStats(input.value); }
+function clearAll() { if(confirm("Clear all text?")) { input.value = ""; updateStats(""); } }
 function download() {
     let blob = new Blob([input.value], {type: "text/plain"});
     let a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "content.txt";
+    a.download = "seo-content.txt";
     a.click();
 }
 </script>
