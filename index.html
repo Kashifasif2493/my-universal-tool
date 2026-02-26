@@ -3,32 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free Word Counter Online - Pro SEO Writing Tool with Auto-Correction, Grammar Alerts, and Keyword Density.">
-    <title>Word Counter Online | Pro SEO & Grammar Tool</title>
+    <title>Word Counter Online | Pro SEO Tool</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #0f172a; --card: rgba(30, 41, 59, 0.7); --text: #f1f5f9; --accent: linear-gradient(135deg,#38bdf8,#818cf8); }
-        .light { --bg: #f8fafc; --card: rgba(255, 255, 255, 0.9); --text: #1e293b; }
+        /* Yahan Maine Colors Change Kiye Hain */
+        :root { 
+            --bg: #0f172a; 
+            --card: rgba(30, 41, 59, 0.7); 
+            --text: #f1f5f9; 
+            --accent: linear-gradient(135deg,#38bdf8,#818cf8); 
+            --input-bg: rgba(0,0,0,0.2);
+        }
+        
+        /* Naya Light Mode Color (Soft Premium Blue-Grey) */
+        .light { 
+            --bg: #e2e8f0; 
+            --card: #ffffff; 
+            --text: #1e293b; 
+            --accent: linear-gradient(135deg,#0284c7,#4f46e5);
+            --input-bg: #f8fafc;
+        }
+
         body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); transition: .4s; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; }
         nav { margin-bottom: 20px; display: flex; gap: 20px; }
         nav a { color: var(--text); text-decoration: none; font-size: 14px; opacity: 0.7; transition: 0.3s; }
         nav a:hover { opacity: 1; color: #38bdf8; }
-        .container { max-width: 1000px; width: 100%; background: var(--card); backdrop-filter: blur(12px); border-radius: 24px; padding: 40px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); box-sizing: border-box; }
+        .container { max-width: 1000px; width: 100%; background: var(--card); border-radius: 24px; padding: 40px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); box-sizing: border-box; }
         h1 { text-align: center; font-size: 2.5rem; margin-bottom: 5px; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         #msg-box { height: 25px; text-align: center; font-size: 13px; font-weight: 500; margin-bottom: 10px; color: #38bdf8; }
-        textarea { width: 100%; height: 280px; border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 20px; font-size: 16px; outline: none; resize: vertical; background: rgba(0,0,0,0.2); color: inherit; transition: 0.3s; box-sizing: border-box; line-height: 1.6; }
-        .light textarea { background: #fff; border-color: #cbd5e1; }
+        
+        textarea { 
+            width: 100%; height: 280px; border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 20px; 
+            font-size: 16px; outline: none; resize: vertical; background: var(--input-bg); 
+            color: inherit; transition: 0.3s; box-sizing: border-box; line-height: 1.6; 
+        }
+        .light textarea { border-color: #cbd5e1; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 30px 0; }
-        .stat-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
-        .stat-card span { display: block; font-size: 1.8rem; font-weight: 700; color: #38bdf8; }
+        .stat-card { background: rgba(56, 189, 248, 0.1); padding: 20px; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .light .stat-card { background: #f1f5f9; border-color: #e2e8f0; }
+        .stat-card span { display: block; font-size: 1.8rem; font-weight: 700; color: #0284c7; }
+
         .seo-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; }
         .score-circle { width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#22c55e 0%, #334155 0%); display: flex; align-items: center; justify-content: center; margin: auto; font-size: 1.2rem; font-weight: 800; }
         .controls { text-align: center; margin-top: 30px; }
         button { padding: 12px 24px; margin: 5px; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; background: var(--accent); color: white; transition: 0.3s; }
         button:hover { transform: translateY(-2px); }
-        .article-section { max-width: 1000px; margin-top: 50px; line-height: 1.8; opacity: 0.8; }
         footer { margin-top: 50px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); width: 100%; text-align: center; font-size: 14px; }
-        .mode-toggle { position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: inherit; padding: 10px; border-radius: 50%; cursor: pointer; z-index: 100; }
+        .mode-toggle { position: fixed; top: 20px; right: 20px; background: var(--card); border: 1px solid rgba(0,0,0,0.1); color: inherit; padding: 10px; border-radius: 50%; cursor: pointer; z-index: 100; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
@@ -44,11 +66,11 @@
 
 <div class="container">
     <h1>Word Counter Online</h1>
-    <p style="text-align: center; opacity: 0.6; margin-bottom: 5px;">Professional SEO & Grammar Workstation</p>
+    <p style="text-align: center; opacity: 0.6;">Professional SEO Writing Workstation</p>
     
     <div id="msg-box"></div>
     
-    <textarea id="mainInput" placeholder="Start typing... (Auto-correction & Grammar Alert active)" oninput="handleInput(event)"></textarea>
+    <textarea id="mainInput" placeholder="Type here..." oninput="handleInput(event)"></textarea>
 
     <div class="stats-grid">
         <div class="stat-card">Words<span id="words">0</span></div>
@@ -76,13 +98,8 @@
     </div>
 </div>
 
-<div class="article-section">
-    <h2>Advanced SEO Writing Tool</h2>
-    <p>Our <strong>Word Counter Online</strong> is more than just a character counter. It features a built-in grammar assistant that monitors sentence length and an auto-correction engine for common spelling errors.</p>
-</div>
-
 <footer>
-    <p>&copy; 2026 Word Counter Online. Optimized for AdSense Approval.</p>
+    <p>&copy; 2026 Word Counter Online. All rights reserved.</p>
 </footer>
 
 <script>
@@ -91,19 +108,15 @@ const msgBox = document.getElementById('msg-box');
 
 const corrections = { 
     "teh": "the", "recieve": "receive", "dont": "don't", "doesnt": "doesn't", 
-    "wrold": "world", "abd": "and", "form": "from", "u": "you", "r": "are"
+    "wrold": "world", "abd": "and", "form": "from"
 };
 
 function handleInput(e) {
     let text = input.value;
-
-    // 1. Grammar Rule: Auto-fix double spaces
     if (text.includes("  ")) {
         text = text.replace(/  +/g, ' ');
         input.value = text;
     }
-
-    // 2. Spelling Auto-Correction (Trigger on Space or Newline)
     if (text.endsWith(" ") || text.endsWith("\n")) {
         let words = text.split(/\s+/);
         let lastWordIdx = words.length - 2;
@@ -113,18 +126,10 @@ function handleInput(e) {
                 words[lastWordIdx] = corrections[lastWord];
                 let suffix = text.endsWith("\n") ? "\n" : " ";
                 input.value = words.join(" ") + suffix;
-                showMsg(`Auto-fixed: ${lastWord} → ${corrections[lastWord]}`, "#38bdf8");
+                showMsg(`Fixed: ${lastWord} → ${corrections[lastWord]}`, "#0284c7");
             }
         }
     }
-
-    // 3. Grammar Alert: Long Sentences (>25 words)
-    let sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
-    let hasLongSentence = sentences.some(s => s.trim().split(/\s+/).length > 25);
-    if (hasLongSentence) {
-        showMsg("⚠️ Note: Long sentences detected. Keep them short for better SEO.", "#ff4757");
-    }
-
     updateStats(input.value);
 }
 
@@ -138,40 +143,31 @@ function updateStats(text) {
     let words = text.trim().split(/\s+/).filter(Boolean);
     let wordCount = words.length;
     let sentenceCount = text.split(/[.!?]+/).filter(Boolean).length;
-    
     document.getElementById('words').innerText = wordCount;
     document.getElementById('sentences').innerText = sentenceCount;
     document.getElementById('read').innerText = Math.ceil(wordCount / 200) + "m";
-
-    // Score Logic
-    let score = 0;
-    if(wordCount > 100) score += 30;
-    if(wordCount > 300) score += 40;
-    if(sentenceCount > 5) score += 30;
-    
-    document.getElementById('scoreCircle').innerText = score + "%";
-    document.getElementById('scoreText').innerText = score + "%";
+    let score = Math.min(100, (wordCount / 5) + (sentenceCount * 5));
+    document.getElementById('scoreCircle').innerText = Math.round(score) + "%";
+    document.getElementById('scoreText').innerText = Math.round(score) + "%";
     document.getElementById('scoreCircle').style.background = `conic-gradient(#22c55e ${score}%, #334155 ${score}%)`;
-
-    // Keyword Density
     let freq = {};
     words.forEach(w => {
         w = w.toLowerCase().replace(/[.,!]/g, "");
         if(w.length > 3) freq[w] = (freq[w] || 0) + 1;
     });
     let sorted = Object.entries(freq).sort((a,b) => b[1] - a[1]).slice(0, 5);
-    document.getElementById('keywordDensity').innerHTML = sorted.map(i => `<span style="background:rgba(56,189,248,0.2); padding:4px 12px; border-radius:20px; font-size:12px; border:1px solid #38bdf8;">${i[0]}</span>`).join("");
+    document.getElementById('keywordDensity').innerHTML = sorted.map(i => `<span style="background:rgba(2,132,199,0.1); padding:4px 12px; border-radius:20px; font-size:12px; border:1px solid #0284c7; color:#0284c7;">${i[0]}</span>`).join("");
 }
 
 function toggleMode() { document.body.classList.toggle('light'); }
 function toUpper() { input.value = input.value.toUpperCase(); updateStats(input.value); }
 function capitalize() { input.value = input.value.replace(/\b\w/g, l => l.toUpperCase()); updateStats(input.value); }
-function clearAll() { if(confirm("Clear everything?")) { input.value = ""; updateStats(""); } }
+function clearAll() { if(confirm("Clear text?")) { input.value = ""; updateStats(""); } }
 function download() {
     let blob = new Blob([input.value], {type: "text/plain"});
     let a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "seo-analysis.txt";
+    a.download = "report.txt";
     a.click();
 }
 </script>
