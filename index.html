@@ -26,7 +26,6 @@
 
         body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); transition: 0.5s; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
 
-        /* Navigation Bar */
         nav { margin-bottom: 30px; background: var(--card); padding: 12px 25px; border-radius: 50px; border: 1px solid var(--border); box-shadow: 0 10px 25px rgba(0,0,0,0.3); position: sticky; top: 20px; z-index: 1000; }
         nav a { color: var(--text); text-decoration: none; font-size: 15px; margin: 0 15px; font-weight: 600; cursor: pointer; transition: 0.3s; }
         nav a:hover { color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
@@ -36,7 +35,7 @@
 
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        h1 { text-align: center; font-size: 2.5rem; margin-bottom: 10px; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h1 { text-align: center; font-size: 2.5rem; margin-bottom: 10px; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
         
         textarea { width: 100%; height: 250px; border: 2px solid var(--border); border-radius: 20px; padding: 20px; font-size: 16px; background: var(--input-bg); color: var(--text); outline: none; resize: none; transition: 0.3s; box-sizing: border-box; }
         textarea:focus { border-color: #ffd700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.1); }
@@ -97,44 +96,42 @@
 
 <div id="about-section" class="info-section">
     <h1>About Our Tool</h1>
-    <p>Welcome to <strong>Word Counter Pro</strong>, the most advanced online tool for writers, students, and SEO professionals. We designed this tool to help you monitor your writing pace and content quality in real-time.</p>
-    <p>Whether you are writing a blog post, a social media caption, or a thesis, our tool ensures you stay within the limits while maintaining high SEO standards.</p>
+    <p>Welcome to <strong>Word Counter Pro</strong>, your dedicated partner for high-quality content writing. We specialize in providing real-time text analysis tools that help writers, bloggers, and SEO experts optimize their work.</p>
+    <p>Our goal is to make content counting and analysis effortless. With our <strong>Deep Ocean & Gold</strong> premium interface, you can focus on your creativity while we handle the metrics.</p>
     <button onclick="showSection('main')">← Back to Tool</button>
 </div>
 
 <div id="privacy-section" class="info-section">
     <h1>Privacy Policy</h1>
-    <p>At Word Counter Pro, we take your data security seriously. <strong>We do not save, store, or share any text you type in our editor.</strong></p>
-    <p>All calculations and processing happen directly on your device (Client-side). Your content never leaves your browser, making it 100% safe for confidential work.</p>
+    <p>Your data security is our top priority. At <strong>Word Counter Pro</strong>, we follow a strict no-logs policy.</p>
+    <p><strong>Safe & Secure:</strong> We do not store, upload, or save any of the text you enter into our editor. All processing is done locally on your device, ensuring your privacy is never compromised.</p>
     <button onclick="showSection('main')">← Back to Tool</button>
 </div>
 
 <div id="contact-section" class="info-section">
     <h1>Contact Support</h1>
-    <p>Have a suggestion or facing an issue? We'd love to hear from you!</p>
-    <div style="background: var(--input-bg); padding: 20px; border-radius: 15px; border: 1px solid var(--border);">
-        <p>📧 Email: <strong>contact@yourbrand.com</strong></p>
-        <p>📍 Location: Remote Global Office</p>
+    <p>Have a question or feedback? We are here to help you!</p>
+    <div style="background: var(--input-bg); padding: 25px; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        <p>📧 Email: <strong>kashif.asif72@gmail.com</strong></p>
+        <p>📍 Location: Professional Remote Support</p>
+        <p>⏱️ Response Time: Within 24-48 Hours</p>
     </div>
     <br>
     <button onclick="showSection('main')">← Back to Tool</button>
 </div>
 
 <footer>
-    <p>&copy; 2026 Word Counter Pro. Designed for AdSense Approval.</p>
+    <p>&copy; 2026 Word Counter Pro. All Rights Reserved.</p>
 </footer>
 
 <script>
     const input = document.getElementById('mainInput');
     const msgBox = document.getElementById('msg-box');
 
-    // YE FUNCTION NAVIGATION KO THEEK KARTA HAI
     function showSection(sectionName) {
-        // Sab sections chhupa do
         document.querySelectorAll('.container, .info-section').forEach(section => {
             section.classList.remove('active-section');
         });
-        // Sirf click kiya hua section dikhao
         const target = document.getElementById(sectionName + '-section');
         if(target) {
             target.classList.add('active-section');
