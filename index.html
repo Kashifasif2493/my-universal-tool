@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free Word Counter Online - Pro SEO Writing Tool with Auto-Correction, Keyword Density, and Readability Analysis.">
-    <meta name="keywords" content="word counter, online word count, seo writing tool, character counter, kashif asif tool">
-    <title>Word Counter Online | Professional SEO Writing Tool</title>
+    <meta name="description" content="Free Word Counter Online - Pro SEO Writing Tool with Auto-Correction, Grammar Alerts, and Keyword Density.">
+    <title>Word Counter Online | Pro SEO & Grammar Tool</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #0f172a; --card: rgba(30, 41, 59, 0.7); --text: #f1f5f9; --accent: linear-gradient(135deg,#38bdf8,#818cf8); }
         .light { --bg: #f8fafc; --card: rgba(255, 255, 255, 0.9); --text: #1e293b; }
         body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); transition: .4s; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; }
         nav { margin-bottom: 20px; display: flex; gap: 20px; }
-        nav a { color: var(--text); text-decoration: none; font-size: 14px; opacity: 0.7; }
+        nav a { color: var(--text); text-decoration: none; font-size: 14px; opacity: 0.7; transition: 0.3s; }
         nav a:hover { opacity: 1; color: #38bdf8; }
         .container { max-width: 1000px; width: 100%; background: var(--card); backdrop-filter: blur(12px); border-radius: 24px; padding: 40px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); box-sizing: border-box; }
         h1 { text-align: center; font-size: 2.5rem; margin-bottom: 5px; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        textarea { width: 100%; height: 280px; border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 20px; font-size: 16px; outline: none; resize: vertical; background: rgba(0,0,0,0.2); color: inherit; transition: 0.3s; margin-top: 10px; box-sizing: border-box; line-height: 1.6; }
+        #msg-box { height: 25px; text-align: center; font-size: 13px; font-weight: 500; margin-bottom: 10px; color: #38bdf8; }
+        textarea { width: 100%; height: 280px; border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 20px; font-size: 16px; outline: none; resize: vertical; background: rgba(0,0,0,0.2); color: inherit; transition: 0.3s; box-sizing: border-box; line-height: 1.6; }
         .light textarea { background: #fff; border-color: #cbd5e1; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 30px 0; }
         .stat-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
@@ -44,15 +44,15 @@
 
 <div class="container">
     <h1>Word Counter Online</h1>
-    <p style="text-align: center; opacity: 0.6;">The Professional SEO Writing Workstation</p>
-
-    <p id="correction-info" style="font-size: 12px; color: #38bdf8; text-align: center; height: 15px; margin: 0;"></p>
+    <p style="text-align: center; opacity: 0.6; margin-bottom: 5px;">Professional SEO & Grammar Workstation</p>
     
-    <textarea id="mainInput" placeholder="Try typing 'teh' or 'dont' and press space..." oninput="process(event)"></textarea>
+    <div id="msg-box"></div>
+    
+    <textarea id="mainInput" placeholder="Start typing... (Auto-correction & Grammar Alert active)" oninput="handleInput(event)"></textarea>
 
     <div class="stats-grid">
         <div class="stat-card">Words<span id="words">0</span></div>
-        <div class="stat-card">Chars<span id="chars">0</span></div>
+        <div class="stat-card">Sentences<span id="sentences">0</span></div>
         <div class="stat-card">Reading Time<span id="read">0m</span></div>
         <div class="stat-card">SEO Score<span id="scoreText">0%</span></div>
     </div>
@@ -63,7 +63,7 @@
             <div class="score-circle" id="scoreCircle">0%</div>
         </div>
         <div>
-            <h3>Keyword Density</h3>
+            <h3>Top Keywords</h3>
             <div id="keywordDensity" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
         </div>
     </div>
@@ -71,106 +71,107 @@
     <div class="controls">
         <button onclick="toUpper()">UPPERCASE</button>
         <button onclick="capitalize()">Capitalize</button>
-        <button onclick="download()">Download TXT</button>
+        <button onclick="download()">Download Report</button>
         <button onclick="clearAll()" style="background: #ef4444;">Clear</button>
     </div>
 </div>
 
 <div class="article-section">
-    <h2>Why Use an Online Word Counter?</h2>
-    <p>In the world of SEO and digital marketing, content length matters. Our <strong>Word Counter Online</strong> provides real-time analysis to help you optimize your writing.</p>
-    <h3>Advanced Auto-Correction Features:</h3>
-    <p>We have integrated a real-time auto-correction engine that fixes common spelling mistakes instantly as you type. This ensures your content remains professional and error-free.</p>
+    <h2>Advanced SEO Writing Tool</h2>
+    <p>Our <strong>Word Counter Online</strong> is more than just a character counter. It features a built-in grammar assistant that monitors sentence length and an auto-correction engine for common spelling errors.</p>
 </div>
 
 <footer>
-    <p>&copy; 2026 Word Counter Online. All rights reserved.</p>
+    <p>&copy; 2026 Word Counter Online. Optimized for AdSense Approval.</p>
 </footer>
 
 <script>
 const input = document.getElementById('mainInput');
-const info = document.getElementById('correction-info');
+const msgBox = document.getElementById('msg-box');
 
-// Expanded Auto-Correction Dictionary
 const corrections = { 
-    "teh": "the", 
-    "recieve": "receive", 
-    "dont": "don't", 
-    "doesnt": "doesn't", 
-    "wrold": "world",
-    "mispell": "misspell",
-    "beleive": "believe",
-    "abd": "and",
-    "form": "from",
-    "ti": "to",
-    "u": "you",
-    "r": "are",
-    "i": "I"
+    "teh": "the", "recieve": "receive", "dont": "don't", "doesnt": "doesn't", 
+    "wrold": "world", "abd": "and", "form": "from", "u": "you", "r": "are"
 };
 
-function process(e) {
+function handleInput(e) {
     let text = input.value;
-    
-    // Auto-correction triggers on SPACE or ENTER
+
+    // 1. Grammar Rule: Auto-fix double spaces
+    if (text.includes("  ")) {
+        text = text.replace(/  +/g, ' ');
+        input.value = text;
+    }
+
+    // 2. Spelling Auto-Correction (Trigger on Space or Newline)
     if (text.endsWith(" ") || text.endsWith("\n")) {
-        let lines = text.split("\n");
-        let currentLine = lines[lines.length - 1];
         let words = text.split(/\s+/);
-        
-        // Get the word just typed before the space
-        let lastWordIndex = words.length - 2;
-        if (lastWordIndex >= 0) {
-            let lastWord = words[lastWordIndex].toLowerCase().replace(/[.,!?;:]/g, "");
-            
+        let lastWordIdx = words.length - 2;
+        if (lastWordIdx >= 0) {
+            let lastWord = words[lastWordIdx].toLowerCase().replace(/[.,!?;:]/g, "");
             if (corrections[lastWord]) {
-                // Apply correction
-                words[lastWordIndex] = corrections[lastWord];
-                
-                // Preserve trailing space/newline
+                words[lastWordIdx] = corrections[lastWord];
                 let suffix = text.endsWith("\n") ? "\n" : " ";
                 input.value = words.join(" ") + suffix;
-                
-                // Visual Feedback
-                info.innerText = `Fixed: ${lastWord} → ${corrections[lastWord]}`;
-                setTimeout(() => { info.innerText = ""; }, 2000);
+                showMsg(`Auto-fixed: ${lastWord} → ${corrections[lastWord]}`, "#38bdf8");
             }
         }
     }
+
+    // 3. Grammar Alert: Long Sentences (>25 words)
+    let sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+    let hasLongSentence = sentences.some(s => s.trim().split(/\s+/).length > 25);
+    if (hasLongSentence) {
+        showMsg("⚠️ Note: Long sentences detected. Keep them short for better SEO.", "#ff4757");
+    }
+
     updateStats(input.value);
+}
+
+function showMsg(txt, color) {
+    msgBox.innerText = txt;
+    msgBox.style.color = color;
+    setTimeout(() => { if(msgBox.innerText === txt) msgBox.innerText = ""; }, 3000);
 }
 
 function updateStats(text) {
     let words = text.trim().split(/\s+/).filter(Boolean);
     let wordCount = words.length;
-    let charCount = text.length;
+    let sentenceCount = text.split(/[.!?]+/).filter(Boolean).length;
     
     document.getElementById('words').innerText = wordCount;
-    document.getElementById('chars').innerText = charCount;
+    document.getElementById('sentences').innerText = sentenceCount;
     document.getElementById('read').innerText = Math.ceil(wordCount / 200) + "m";
 
-    let score = Math.min(100, (wordCount / 6));
-    document.getElementById('scoreCircle').innerText = Math.round(score) + "%";
-    document.getElementById('scoreText').innerText = Math.round(score) + "%";
+    // Score Logic
+    let score = 0;
+    if(wordCount > 100) score += 30;
+    if(wordCount > 300) score += 40;
+    if(sentenceCount > 5) score += 30;
+    
+    document.getElementById('scoreCircle').innerText = score + "%";
+    document.getElementById('scoreText').innerText = score + "%";
     document.getElementById('scoreCircle').style.background = `conic-gradient(#22c55e ${score}%, #334155 ${score}%)`;
 
+    // Keyword Density
     let freq = {};
     words.forEach(w => {
         w = w.toLowerCase().replace(/[.,!]/g, "");
         if(w.length > 3) freq[w] = (freq[w] || 0) + 1;
     });
     let sorted = Object.entries(freq).sort((a,b) => b[1] - a[1]).slice(0, 5);
-    document.getElementById('keywordDensity').innerHTML = sorted.map(i => `<span style="background:#334155; padding:4px 10px; border-radius:15px; font-size:12px;">${i[0]}</span>`).join("");
+    document.getElementById('keywordDensity').innerHTML = sorted.map(i => `<span style="background:rgba(56,189,248,0.2); padding:4px 12px; border-radius:20px; font-size:12px; border:1px solid #38bdf8;">${i[0]}</span>`).join("");
 }
 
 function toggleMode() { document.body.classList.toggle('light'); }
 function toUpper() { input.value = input.value.toUpperCase(); updateStats(input.value); }
 function capitalize() { input.value = input.value.replace(/\b\w/g, l => l.toUpperCase()); updateStats(input.value); }
-function clearAll() { if(confirm("Clear all text?")) { input.value = ""; updateStats(""); } }
+function clearAll() { if(confirm("Clear everything?")) { input.value = ""; updateStats(""); } }
 function download() {
     let blob = new Blob([input.value], {type: "text/plain"});
     let a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "seo-content.txt";
+    a.download = "seo-analysis.txt";
     a.click();
 }
 </script>
