@@ -1,236 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Ultimate SEO Writing Tool</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
-<style>
-:root{
---bg1:#0f2027;
---bg2:#203a43;
---bg3:#2c5364;
---card:rgba(255,255,255,0.08);
---text:white;
-}
-
-.light{
---bg1:#ffecd2;
---bg2:#fcb69f;
---bg3:#ff9a9e;
---card:rgba(0,0,0,0.05);
---text:#222;
-}
-
-body{
-margin:0;
-font-family:'Poppins',sans-serif;
-background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
-color:var(--text);
-transition:0.4s;
-}
-
-.container{
-max-width:1100px;
-margin:30px auto;
-padding:25px;
-background:var(--card);
-backdrop-filter:blur(20px);
-border-radius:20px;
-box-shadow:0 0 40px rgba(0,0,0,0.4);
-}
-
-h1{text-align:center;}
-
-textarea{
-width:100%;
-height:220px;
-border:none;
-border-radius:15px;
-padding:15px;
-font-size:16px;
-resize:none;
-outline:none;
-}
-
-.stats{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-gap:15px;
-margin-top:20px;
-}
-
-.box{
-background:linear-gradient(135deg,#00f260,#0575e6);
-padding:15px;
-border-radius:15px;
-text-align:center;
-font-weight:bold;
-color:white;
-}
-
-.progress{
-width:100%;
-height:10px;
-background:#333;
-border-radius:10px;
-margin-top:8px;
-overflow:hidden;
-}
-
-.bar{
-height:10px;
-width:0%;
-background:linear-gradient(90deg,#ff512f,#dd2476);
-}
-
-button{
-padding:8px 15px;
-margin:5px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-background:linear-gradient(135deg,#fc466b,#3f5efb);
-color:white;
-font-weight:bold;
-}
-
-.circle{
-width:120px;
-height:120px;
-border-radius:50%;
-background:conic-gradient(#00f260 0%, #0575e6 0%);
-display:flex;
-align-items:center;
-justify-content:center;
-margin:auto;
-font-size:22px;
-font-weight:bold;
-}
-
-.toggle{
-float:right;
-cursor:pointer;
-font-size:14px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Word Counter Online - Pro SEO Writing Tool with Auto-Correction, Keyword Density, and Readability Analysis.">
+    <meta name="keywords" content="word counter, online word count, seo writing tool, character counter, kashif asif tool">
+    <title>Word Counter Online | Professional SEO Writing Tool</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #0f172a; --card: rgba(30, 41, 59, 0.7); --text: #f1f5f9; --accent: linear-gradient(135deg,#38bdf8,#818cf8); }
+        .light { --bg: #f8fafc; --card: rgba(255, 255, 255, 0.9); --text: #1e293b; }
+        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); transition: .4s; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        nav { margin-bottom: 20px; display: flex; gap: 20px; }
+        nav a { color: var(--text); text-decoration: none; font-size: 14px; opacity: 0.7; }
+        nav a:hover { opacity: 1; color: #38bdf8; }
+        .container { max-width: 1000px; width: 100%; background: var(--card); backdrop-filter: blur(12px); border-radius: 24px; padding: 40px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); box-sizing: border-box; }
+        h1 { text-align: center; font-size: 2.5rem; margin-bottom: 5px; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        textarea { width: 100%; height: 280px; border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 20px; font-size: 16px; outline: none; resize: vertical; background: rgba(0,0,0,0.2); color: inherit; transition: 0.3s; margin-top: 10px; box-sizing: border-box; }
+        .light textarea { background: #fff; border-color: #cbd5e1; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 30px 0; }
+        .stat-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .stat-card span { display: block; font-size: 1.8rem; font-weight: 700; color: #38bdf8; }
+        .seo-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; }
+        .score-circle { width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#22c55e 0%, #334155 0%); display: flex; align-items: center; justify-content: center; margin: auto; font-size: 1.2rem; font-weight: 800; }
+        .controls { text-align: center; margin-top: 30px; }
+        button { padding: 12px 24px; margin: 5px; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; background: var(--accent); color: white; transition: 0.3s; }
+        button:hover { transform: translateY(-2px); }
+        .article-section { max-width: 1000px; margin-top: 50px; line-height: 1.8; opacity: 0.8; }
+        footer { margin-top: 50px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); width: 100%; text-align: center; font-size: 14px; }
+        .mode-toggle { position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: inherit; padding: 10px; border-radius: 50%; cursor: pointer; }
+    </style>
 </head>
-
 <body>
 
+<button class="mode-toggle" onclick="toggleMode()">🌓</button>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="privacy.html">Privacy Policy</a>
+</nav>
+
 <div class="container">
-<span class="toggle" onclick="toggleMode()">🌙 Toggle Mode</span>
-<h1>🚀 Ultimate SEO Writing Tool</h1>
+    <h1>Word Counter Online</h1>
+    <p style="text-align: center; opacity: 0.6;">The Professional SEO Writing Workstation</p>
 
-<textarea id="text" placeholder="Start writing here..."></textarea>
+    <textarea id="mainInput" placeholder="Start typing your SEO content..." oninput="process()"></textarea>
 
-<div class="stats">
-<div class="box">Words<br><span id="words">0</span></div>
-<div class="box">Characters<br><span id="chars">0</span></div>
-<div class="box">Reading Time<br><span id="read">0</span> min</div>
-<div class="box">WPM<br><span id="wpm">0</span></div>
+    <div class="stats-grid">
+        <div class="stat-card">Words<span id="words">0</span></div>
+        <div class="stat-card">Chars<span id="chars">0</span></div>
+        <div class="stat-card">Reading Time<span id="read">0m</span></div>
+        <div class="stat-card">SEO Score<span id="scoreText">0%</span></div>
+    </div>
+
+    <div class="seo-panel">
+        <div style="text-align: center;">
+            <h3>Content Score</h3>
+            <div class="score-circle" id="scoreCircle">0%</div>
+        </div>
+        <div>
+            <h3>Keyword Density</h3>
+            <div id="keywordDensity" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button onclick="toUpper()">UPPERCASE</button>
+        <button onclick="capitalize()">Capitalize</button>
+        <button onclick="download()">Download TXT</button>
+        <button onclick="clearAll()" style="background: #ef4444;">Clear</button>
+    </div>
 </div>
 
-<h3 style="text-align:center;margin-top:20px;">SEO Score</h3>
-<div class="circle" id="circle">0%</div>
-
-<h3>Meta Title (60 characters)</h3>
-<div class="progress"><div class="bar" id="metaBar"></div></div>
-
-<h3>Meta Description (160 characters)</h3>
-<div class="progress"><div class="bar" id="descBar"></div></div>
-
-<h3>Top Keywords</h3>
-<div id="keywords"></div>
-
-<div id="passive" style="color:#ffb3b3;font-weight:bold;margin-top:10px;"></div>
-
-<div style="text-align:center;margin-top:15px;">
-<button onclick="toUpper()">UPPERCASE</button>
-<button onclick="toLower()">lowercase</button>
-<button onclick="capitalize()">Capitalize</button>
-<button onclick="sentence()">Sentence case</button>
-<button onclick="downloadTXT()">Download TXT</button>
-<button onclick="clearText()">Clear</button>
+<div class="article-section">
+    <h2>Why Use an Online Word Counter?</h2>
+    <p>In the world of SEO and digital marketing, content length matters. Whether you are writing a blog post, a meta description, or a social media update, staying within the recommended word count is crucial for ranking on Google. Our <strong>Word Counter Online</strong> provides real-time analysis to help you optimize your writing.</p>
+    <h3>Key Features for Writers:</h3>
+    <ul>
+        <li><strong>Real-time Word Count:</strong> No need to click any buttons.</li>
+        <li><strong>Keyword Density Analysis:</strong> Avoid keyword stuffing and improve ranking.</li>
+        <li><strong>Readability Score:</strong> Ensure your content is easy for users to read.</li>
+    </ul>
 </div>
 
-</div>
+<footer>
+    <p>&copy; 2026 Word Counter Online. All rights reserved.</p>
+</footer>
 
 <script>
-let startTime=Date.now();
-const textarea=document.getElementById("text");
+const input = document.getElementById('mainInput');
+const corrections = { "teh": "the", "recieve": "receive", "dont": "don't" };
 
-textarea.addEventListener("input",update);
-
-function update(){
-let text=textarea.value;
-localStorage.setItem("seoText",text);
-
-let words=text.trim().split(/\s+/).filter(Boolean);
-let wordCount=words.length;
-let charCount=text.length;
-
-document.getElementById("words").innerText=wordCount;
-document.getElementById("chars").innerText=charCount;
-document.getElementById("read").innerText=(wordCount/200).toFixed(2);
-
-let minutes=(Date.now()-startTime)/60000;
-document.getElementById("wpm").innerText=minutes>0?(wordCount/minutes).toFixed(0):0;
-
-let score=0;
-if(wordCount>=300)score+=40;
-if(wordCount>=600)score+=20;
-if(text.length>0)score+=20;
-if(words.length>0 && text.toLowerCase().includes(words[0].toLowerCase()))score+=20;
-
-document.getElementById("circle").innerText=score+"%";
-document.getElementById("circle").style.background=
-"conic-gradient(#00f260 "+score+"%, #444 "+score+"%)";
-
-document.getElementById("metaBar").style.width=Math.min((charCount/60)*100,100)+"%";
-document.getElementById("descBar").style.width=Math.min((charCount/160)*100,100)+"%";
-
-let freq={};
-words.forEach(w=>{
-w=w.toLowerCase();
-if(w.length>3)freq[w]=(freq[w]||0)+1;
-});
-let sorted=Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,5);
-let out="";
-sorted.forEach(i=>{
-let p=((i[1]/wordCount)*100).toFixed(1);
-out+=i[0]+" - "+p+"%<br>";
-});
-document.getElementById("keywords").innerHTML=out;
-
-let passive=text.match(/\b(is|was|were|been|being)\b/gi);
-document.getElementById("passive").innerText=
-passive?"Passive Voice Found: "+passive.length:"";
+function process() {
+    let text = input.value;
+    if(text.endsWith(" ")) {
+        let words = text.trim().split(/\s+/);
+        let last = words[words.length-1].toLowerCase();
+        if(corrections[last]) {
+            words[words.length-1] = corrections[last];
+            input.value = words.join(" ") + " ";
+        }
+    }
+    updateStats(text);
 }
 
-function toggleMode(){
-document.body.classList.toggle("light");
+function updateStats(text) {
+    let words = text.trim().split(/\s+/).filter(Boolean);
+    let wordCount = words.length;
+    let charCount = text.length;
+    
+    document.getElementById('words').innerText = wordCount;
+    document.getElementById('chars').innerText = charCount;
+    document.getElementById('read').innerText = Math.ceil(wordCount / 200) + "m";
+
+    let score = Math.min(100, (wordCount / 6));
+    document.getElementById('scoreCircle').innerText = Math.round(score) + "%";
+    document.getElementById('scoreText').innerText = Math.round(score) + "%";
+    document.getElementById('scoreCircle').style.background = `conic-gradient(#22c55e ${score}%, #334155 ${score}%)`;
+
+    let freq = {};
+    words.forEach(w => {
+        w = w.toLowerCase().replace(/[.,!]/g, "");
+        if(w.length > 3) freq[w] = (freq[w] || 0) + 1;
+    });
+    let sorted = Object.entries(freq).sort((a,b) => b[1] - a[1]).slice(0, 5);
+    document.getElementById('keywordDensity').innerHTML = sorted.map(i => `<span style="background:#334155; padding:4px 10px; border-radius:15px; font-size:12px;">${i[0]}</span>`).join("");
 }
 
-function toUpper(){textarea.value=textarea.value.toUpperCase();update();}
-function toLower(){textarea.value=textarea.value.toLowerCase();update();}
-function capitalize(){textarea.value=textarea.value.replace(/\b\w/g,l=>l.toUpperCase());update();}
-function sentence(){textarea.value=textarea.value.charAt(0).toUpperCase()+textarea.value.slice(1).toLowerCase();update();}
-function clearText(){textarea.value="";update();}
-
-function downloadTXT(){
-let blob=new Blob([textarea.value],{type:"text/plain"});
-let link=document.createElement("a");
-link.href=URL.createObjectURL(blob);
-link.download="content.txt";
-link.click();
-}
-
-window.onload=function(){
-let saved=localStorage.getItem("seoText");
-if(saved){textarea.value=saved;update();}
+function toggleMode() { document.body.classList.toggle('light'); }
+function toUpper() { input.value = input.value.toUpperCase(); process(); }
+function capitalize() { input.value = input.value.replace(/\b\w/g, l => l.toUpperCase()); process(); }
+function clearAll() { input.value = ""; process(); }
+function download() {
+    let blob = new Blob([input.value], {type: "text/plain"});
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "content.txt";
+    a.click();
 }
 </script>
-
 </body>
 </html>
