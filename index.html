@@ -1,252 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultimate SEO Writing Tool Pro - No Yellow</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter Online | Premium Dual Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            /* Midnight Dark Mode (Default) */
+            --bg: #0f172a; 
+            --card: #1e293b; 
+            --text: #f1f5f9; 
+            --accent: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); 
+            --input-bg: #0f172a;
+            --border: #334155;
+            --stat-card: rgba(255, 255, 255, 0.03);
+        }
 
-<style>
-:root{
-  --bg: linear-gradient(135deg,#141E30,#243B55); /* Dark gradient */
-  --card: rgba(255,255,255,0.07);
-  --text: #fff;
-  --accent: linear-gradient(135deg,#ff00cc,#3333ff);
-}
+        /* Premium Champagne Light Mode (No Boring White!) */
+        .light { 
+            --bg: #fdfaf1; /* Soft Creamy Background */
+            --card: #ffffff; 
+            --text: #433422; /* Deep Coffee Text */
+            --accent: linear-gradient(135deg, #d4af37 0%, #f1c40f 100%); /* Gold Gradient */
+            --input-bg: #fffcf5;
+            --border: #eaddca;
+            --stat-card: #fff9e6;
+        }
 
-.light{
-  --bg: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* Light mode - blue gradient */
-  --card: rgba(255,255,255,0.05);
-  --text: #222;
-}
+        body { 
+            margin: 0; 
+            font-family: 'Poppins', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 20px; 
+        }
 
-body{
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  transition:.4s;
-}
+        nav { margin-bottom: 25px; display: flex; gap: 20px; }
+        nav a { color: var(--text); text-decoration: none; font-size: 14px; font-weight: 500; opacity: 0.7; transition: 0.3s; }
+        nav a:hover { opacity: 1; color: #d4af37; }
 
-.container{
-  max-width:1200px;
-  margin:30px auto;
-  padding:25px;
-  background:var(--card);
-  backdrop-filter:blur(20px);
-  border-radius:20px;
-  box-shadow:0 0 50px rgba(0,0,0,.4);
-}
+        .container { 
+            max-width: 900px; 
+            width: 100%; 
+            background: var(--card); 
+            border-radius: 30px; 
+            padding: 40px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
+            border: 1px solid var(--border); 
+            box-sizing: border-box; 
+        }
 
-h1{text-align:center;margin-bottom:20px;}
+        h1 { 
+            text-align: center; 
+            font-size: 2.8rem; 
+            margin-bottom: 10px; 
+            background: var(--accent); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            font-weight: 800;
+        }
 
-textarea{
-  width:100%;
-  height:250px;
-  border:none;
-  border-radius:15px;
-  padding:15px;
-  font-size:16px;
-  outline:none;
-  resize:none;
-}
+        #msg-box { height: 25px; text-align: center; font-size: 14px; font-weight: 600; margin-bottom: 10px; color: #d4af37; }
+        
+        textarea { 
+            width: 100%; 
+            height: 260px; 
+            border: 2px solid var(--border); 
+            border-radius: 20px; 
+            padding: 20px; 
+            font-size: 17px; 
+            outline: none; 
+            resize: none; 
+            background: var(--input-bg); 
+            color: var(--text); 
+            transition: 0.3s; 
+            box-sizing: border-box; 
+            line-height: 1.6;
+        }
+        textarea:focus { border-color: #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
-  margin-top:20px;
-}
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+            gap: 15px; 
+            margin: 30px 0; 
+        }
 
-.box{
-  background:var(--accent);
-  padding:15px;
-  border-radius:15px;
-  text-align:center;
-  font-weight:bold;
-}
+        .stat-card { 
+            background: var(--stat-card); 
+            padding: 20px; 
+            border-radius: 20px; 
+            text-align: center; 
+            border: 1px solid var(--border); 
+            transition: 0.3s; 
+        }
+        .stat-card span { display: block; font-size: 2rem; font-weight: 700; color: #d4af37; }
 
-.progress{
-  width:100%;
-  height:8px;
-  background:#444;
-  border-radius:10px;
-  overflow:hidden;
-  margin-top:5px;
-}
+        .seo-panel { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px; 
+            margin-top: 20px; 
+            border-top: 1px solid var(--border); 
+            padding-top: 30px; 
+        }
 
-.bar{
-  height:8px;
-  width:0%;
-  background:linear-gradient(90deg,#00f260,#0575e6);
-}
+        .score-circle { 
+            width: 100px; 
+            height: 100px; 
+            border-radius: 50%; 
+            background: conic-gradient(#d4af37 0%, var(--bg) 0%); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin: auto; 
+            font-size: 1.2rem; 
+            font-weight: 800; 
+            border: 5px solid var(--border);
+        }
+        
+        .controls { text-align: center; margin-top: 30px; }
+        button { 
+            padding: 14px 28px; 
+            margin: 6px; 
+            border: none; 
+            border-radius: 15px; 
+            cursor: pointer; 
+            font-weight: 600; 
+            background: var(--accent); 
+            color: #fff; 
+            transition: 0.3s; 
+        }
+        button:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
+        .btn-clear { background: #e63946 !important; }
 
-.circle{
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  background:conic-gradient(#00f260 0%, #444 0%);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:auto;
-  font-size:22px;
-  font-weight:bold;
-}
-
-button{
-  padding:8px 15px;
-  margin:5px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  background:var(--accent);
-  color:#fff;
-  font-weight:bold;
-}
-
-.toggle{
-  float:right;
-  cursor:pointer;
-  font-size:14px;
-}
-
-.highlight{
-  background:rgba(255,0,0,0.3);
-}
-</style>
+        footer { margin-top: 50px; opacity: 0.6; text-align: center; font-size: 13px; padding-bottom: 30px;}
+        
+        /* Floating Toggle Button */
+        .mode-toggle { 
+            position: fixed; top: 20px; right: 20px; 
+            background: var(--card); border: 2px solid var(--border); 
+            color: var(--text); padding: 12px; border-radius: 50%; 
+            cursor: pointer; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 20px;
+        }
+    </style>
 </head>
+<body class="light"> <button class="mode-toggle" onclick="toggleMode()">🌓</button>
 
-<body>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="privacy.html">Privacy Policy</a>
+</nav>
+
 <div class="container">
-  <span class="toggle" onclick="toggleMode()">🌙 Toggle</span>
-  <h1>🚀 Ultimate SEO Writing Tool PRO</h1>
+    <h1>Word Counter</h1>
+    <p style="text-align: center; opacity: 0.7; margin-top: -10px;">The Royal SEO Suite</p>
+    
+    <div id="msg-box"></div>
+    
+    <textarea id="mainInput" placeholder="Start typing..."></textarea>
 
-  <select id="language" onchange="update()">
-    <option value="en">English</option>
-    <option value="ur">Urdu</option>
-    <option value="es">Spanish</option>
-  </select>
+    <div class="stats-grid">
+        <div class="stat-card">Words<span id="words">0</span></div>
+        <div class="stat-card">Chars<span id="chars">0</span></div>
+        <div class="stat-card">Reading<span id="read">0m</span></div>
+        <div class="stat-card">SEO Score<span id="scoreText">0%</span></div>
+    </div>
 
-  <textarea id="text" placeholder="Start writing here..."></textarea>
+    <div class="seo-panel">
+        <div style="text-align: center;">
+            <h3>Content Score</h3>
+            <div class="score-circle" id="scoreCircle">0%</div>
+        </div>
+        <div>
+            <h3>Keywords Found</h3>
+            <div id="keywordDensity" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+        </div>
+    </div>
 
-  <div class="stats">
-    <div class="box">Words<br><span id="words">0</span></div>
-    <div class="box">Characters<br><span id="chars">0</span></div>
-    <div class="box">Reading Time<br><span id="read">0</span> min</div>
-    <div class="box">WPM<br><span id="wpm">0</span></div>
-  </div>
-
-  <h3 style="text-align:center;margin-top:20px;">SEO Score</h3>
-  <div class="circle" id="circle">0%</div>
-
-  <h4>Meta Title (60 characters)</h4>
-  <div class="progress"><div class="bar" id="metaBar"></div></div>
-
-  <h4>Meta Description (160 characters)</h4>
-  <div class="progress"><div class="bar" id="descBar"></div></div>
-
-  <h3>Top Keywords</h3>
-  <div id="keywords"></div>
-
-  <div id="passive" style="color:#ff8080;font-weight:bold;margin-top:10px;"></div>
-
-  <div style="text-align:center;margin-top:15px;">
-    <button onclick="toUpper()">UPPERCASE</button>
-    <button onclick="toLower()">lowercase</button>
-    <button onclick="capitalize()">Capitalize</button>
-    <button onclick="sentence()">Sentence case</button>
-    <button onclick="downloadTXT()">TXT</button>
-    <button onclick="downloadPDF()">PDF</button>
-    <button onclick="clearText()">Clear</button>
-  </div>
+    <div class="controls">
+        <button onclick="toUpper()">UPPERCASE</button>
+        <button onclick="capitalize()">Capitalize</button>
+        <button onclick="download()">Download</button>
+        <button class="btn-clear" onclick="clearAll()">Clear All</button>
+    </div>
 </div>
 
+<footer>
+    <p>&copy; 2026 Word Counter Online. Multi-Theme Edition.</p>
+</footer>
+
 <script>
-let startTime = Date.now();
-const textarea = document.getElementById("text");
+const input = document.getElementById('mainInput');
+const msgBox = document.getElementById('msg-box');
 
-textarea.addEventListener("input", update);
+const corrections = { "teh": "the", "recieve": "receive", "dont": "don't", "abd": "and" };
 
-function update(){
-    let text = textarea.value;
-    localStorage.setItem("seoProText", text);
+input.addEventListener('input', () => {
+    let text = input.value;
+    if (text.endsWith(" ")) {
+        let words = text.split(/\s+/);
+        let lastWordIdx = words.length - 2;
+        if (lastWordIdx >= 0) {
+            let lastWord = words[lastWordIdx].toLowerCase().replace(/[.,!?;:]/g, "");
+            if (corrections[lastWord]) {
+                words[lastWordIdx] = corrections[lastWord];
+                input.value = words.join(" ") + " ";
+                showMsg(`Auto-Fixed: ${lastWord} → ${corrections[lastWord]}`);
+            }
+        }
+    }
+    updateStats(text);
+});
 
+function showMsg(txt) {
+    msgBox.innerText = txt;
+    setTimeout(() => { if(msgBox.innerText === txt) msgBox.innerText = ""; }, 3000);
+}
+
+function updateStats(text) {
     let words = text.trim().split(/\s+/).filter(Boolean);
     let wordCount = words.length;
-    let charCount = text.length;
+    document.getElementById('words').innerText = wordCount;
+    document.getElementById('chars').innerText = text.length;
+    document.getElementById('read').innerText = Math.ceil(wordCount / 200) + "m";
 
-    document.getElementById("words").innerText = wordCount;
-    document.getElementById("chars").innerText = charCount;
-    document.getElementById("read").innerText = (wordCount / 200).toFixed(2);
-
-    let minutes = (Date.now() - startTime) / 60000;
-    document.getElementById("wpm").innerText = minutes > 0 ? (wordCount / minutes).toFixed(0) : 0;
-
-    // SEO Score
-    let score = 0;
-    if(wordCount>=300) score+=30;
-    if(wordCount>=600) score+=20;
-    if(text.match(/<h[1-6]>.*?<\/h[1-6]>/gi)) score+=20;
-    if(wordCount>10) score+=30;
-
-    document.getElementById("circle").innerText = score + "%";
-    document.getElementById("circle").style.background = "conic-gradient(#00f260 " + score + "%, #444 " + score + "%)";
-
-    document.getElementById("metaBar").style.width = Math.min((charCount/60)*100,100) + "%";
-    document.getElementById("descBar").style.width = Math.min((charCount/160)*100,100) + "%";
+    let score = Math.min(100, (wordCount / 6));
+    document.getElementById('scoreCircle').innerText = Math.round(score) + "%";
+    document.getElementById('scoreText').innerText = Math.round(score) + "%";
+    document.getElementById('scoreCircle').style.background = `conic-gradient(#d4af37 ${score}%, var(--border) ${score}%)`;
 
     let freq = {};
-    words.forEach(w=>{
-        w=w.toLowerCase();
-        if(w.length>3) freq[w]=(freq[w]||0)+1;
+    words.forEach(w => {
+        w = w.toLowerCase().replace(/[.,!]/g, "");
+        if(w.length > 3) freq[w] = (freq[w] || 0) + 1;
     });
-    let sorted = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,5);
-    let out="";
-    sorted.forEach(i=>{
-        let p=((i[1]/wordCount)*100).toFixed(1);
-        out+=i[0]+" - "+p+"%<br>";
-    });
-    document.getElementById("keywords").innerHTML=out;
-
-    let passive=text.match(/\b(is|was|were|been|being|am|are|be)\b/gi);
-    document.getElementById("passive").innerText=passive?"Passive Voice Found: "+passive.length:"";
-
-    basicGrammarCheck(text);
+    let sorted = Object.entries(freq).sort((a,b) => b[1] - a[1]).slice(0, 5);
+    document.getElementById('keywordDensity').innerHTML = sorted.map(i => `<span style="background:var(--stat-card); padding:6px 14px; border-radius:12px; font-size:12px; border:1px solid var(--border); color:var(--text); font-weight:600;">${i[0]}</span>`).join("");
 }
 
-function basicGrammarCheck(text){
-    let mistakes=text.match(/\b(very very|good good|bad bad)\b/gi);
-    if(mistakes){ document.getElementById("passive").innerText+=" | Repeated Words Found"; }
-}
-
-function toggleMode(){ document.body.classList.toggle("light"); }
-
-function toUpper(){ textarea.value=textarea.value.toUpperCase(); update(); }
-function toLower(){ textarea.value=textarea.value.toLowerCase(); update(); }
-function capitalize(){ textarea.value=textarea.value.replace(/\b\w/g,l=>l.toUpperCase()); update(); }
-function sentence(){ textarea.value=textarea.value.replace(/(?:^|[.!?]\s+)([a-z])/g,(m,p)=>p.toUpperCase()); update(); }
-function clearText(){ textarea.value=""; update(); }
-
-function downloadTXT(){ let blob=new Blob([textarea.value],{type:"text/plain"}); let link=document.createElement("a"); link.href=URL.createObjectURL(blob); link.download="content.txt"; link.click(); }
-
-function downloadPDF(){
-    const { jsPDF }=window.jspdf;
-    let doc=new jsPDF();
-    let lines=textarea.value.split("\n");
-    let y=10;
-    lines.forEach(line=>{
-        doc.text(line,10,y);
-        y+=10;
-        if(y>280){ doc.addPage(); y=10; }
-    });
-    doc.save("content.pdf");
-}
-
-window.onload=function(){
-    let saved=localStorage.getItem("seoProText");
-    if(saved){ textarea.value=saved; update(); }
+function toggleMode() { document.body.classList.toggle('light'); }
+function toUpper() { input.value = input.value.toUpperCase(); updateStats(input.value); }
+function capitalize() { input.value = input.value.replace(/\b\w/g, l => l.toUpperCase()); updateStats(input.value); }
+function clearAll() { if(confirm("Clear everything?")) { input.value = ""; updateStats(""); } }
+function download() {
+    let blob = new Blob([input.value], {type: "text/plain"});
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "content-report.txt";
+    a.click();
 }
 </script>
 </body>
