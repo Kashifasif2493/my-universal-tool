@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LexiMetric Pro | All-in-One SEO Tool</title>
+    <title>LexiMetric Pro | SEO Word Counter</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -22,11 +22,11 @@
         /* Layout */
         .main-wrapper { display: flex; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto; justify-content: center; align-items: flex-start; }
         .content-area { flex: 2; min-width: 320px; }
-        .page-section { display: none; background: var(--card); border-radius: 30px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); animation: fadeIn 0.4s; }
+        .page-section { display: none; background: var(--card); border-radius: 30px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); animation: fadeIn 0.4s; line-height: 1.6; }
         .active-section { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Clock Fix */
+        /* Clock */
         .side-panel { flex: 0.8; min-width: 260px; display: flex; flex-direction: column; align-items: center; background: var(--card); padding: 25px; border-radius: 30px; border: 1px solid var(--border); position: sticky; top: 100px; }
         .wall-clock { width: 180px; height: 180px; border: 8px solid #ffd700; border-radius: 50%; position: relative; background: #000; margin-bottom: 20px; box-shadow: 0 0 20px rgba(255,215,0,0.3); }
         .number { position: absolute; width: 100%; height: 100%; text-align: center; font-weight: 700; color: #fff; padding: 5px; box-sizing: border-box; }
@@ -41,32 +41,28 @@
         .n9 { transform: rotate(270deg); } .n9 span { transform: rotate(-270deg); display: block; }
         .n10 { transform: rotate(300deg); } .n10 span { transform: rotate(-300deg); display: block; }
         .n11 { transform: rotate(330deg); } .n11 span { transform: rotate(-330deg); display: block; }
-        
         .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; border-radius: 10px; transform: translateX(-50%); }
         .hour { width: 6px; height: 45px; background: #fff; }
         .minute { width: 4px; height: 65px; background: #ffd700; }
         .second { width: 2px; height: 75px; background: #ff4444; }
 
-        /* Tool Styles */
-        h1 { margin-top:0; text-align:center; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
-        textarea { width: 100%; height: 260px; border-radius: 20px; padding: 20px; background: var(--input); color: white; border: 1px solid var(--border); outline: none; box-sizing: border-box; font-size: 16px; transition: 0.3s; }
+        /* Tool & Content */
+        h1, h2 { background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+        textarea { width: 100%; height: 260px; border-radius: 20px; padding: 20px; background: var(--input); color: white; border: 1px solid var(--border); outline: none; box-sizing: border-box; font-size: 16px; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin: 25px 0; }
         .stat-card { background: var(--input); padding: 15px; border-radius: 15px; text-align: center; border: 1px solid var(--border); }
         .stat-card span { display: block; font-size: 1.6rem; font-weight: 700; color: #ffd700; }
-        
-        /* Buttons Group */
-        .btn-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px; }
-        button { padding: 12px 20px; border-radius: 10px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; color: #000; transition: 0.3s; }
-        button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3); }
+        .btn-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        button { padding: 12px 20px; border-radius: 10px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; color: #000; }
 
-        /* 🤖 ROBOT BOT (Fixed) */
+        /* Robot SVG Bot */
         #bot-launcher { position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px; cursor: pointer; z-index: 2000; animation: float 3s infinite ease-in-out; }
         #bot-window { position: fixed; bottom: 110px; right: 30px; width: 320px; background: var(--card); border: 1px solid var(--border); border-radius: 25px; display: none; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.7); z-index: 2000; overflow: hidden; }
         .bot-header { background: #ffd700; color: #000; padding: 15px; font-weight: 800; display: flex; justify-content: space-between; }
-        .bot-body { height: 300px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #0c121e; }
-        .msg { padding: 10px; border-radius: 10px; max-width: 80%; font-size: 13px; }
+        .bot-body { height: 300px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #0c121e; font-size: 13px; }
+        .msg { padding: 10px; border-radius: 10px; max-width: 80%; }
         .bot-msg { background: var(--input); align-self: flex-start; color: #fff; }
-        .user-msg { background: #ffd700; color: #000; align-self: flex-end; font-weight: 600; }
+        .user-msg { background: #ffd700; color: #000; align-self: flex-end; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     </style>
 </head>
@@ -84,26 +80,52 @@
     <div class="content-area">
         <section id="home" class="page-section active-section">
             <h1>LexiMetric Pro</h1>
-            <textarea id="mainInput" placeholder="Start typing or paste your content..."></textarea>
-            
+            <textarea id="mainInput" placeholder="Start typing..."></textarea>
             <div class="stats-grid">
                 <div class="stat-card">Words<span id="wCount">0</span></div>
-                <div class="stat-card">Characters<span id="cCount">0</span></div>
-                <div class="stat-card">Reading Time<span id="rTime">0m</span></div>
+                <div class="stat-card">Chars<span id="cCount">0</span></div>
+                <div class="stat-card">Read Time<span id="rTime">0m</span></div>
             </div>
-
             <div class="btn-container">
                 <button onclick="changeCase('up')">UPPERCASE</button>
                 <button onclick="changeCase('low')">lowercase</button>
                 <button onclick="copyText()">Copy Text</button>
-                <button onclick="clearText()" style="background:#ff4444; color:#fff;">Clear All</button>
+                <button onclick="clearText()" style="background:#ff4444; color:#fff;">Clear</button>
             </div>
         </section>
 
-        <section id="about" class="page-section"><h1>About Us</h1><p>Professional SEO and writing tools for everyone. 100% Secure.</p></section>
-        <section id="contact" class="page-section"><h1>Contact</h1><p>Email us at: <strong>kashif.asif72@gmail.com</strong></p></section>
-        <section id="privacy" class="page-section"><h1>Privacy Policy</h1><p>We do not store any of your data. Everything happens in your browser.</p></section>
-        <section id="terms" class="page-section"><h1>Terms</h1><p>Free for personal and commercial use.</p></section>
+        <section id="about" class="page-section">
+            <h2>About LexiMetric Pro</h2>
+            <p>Welcome to <strong>LexiMetric Pro</strong>, your ultimate destination for precise text analysis. We understand that in the world of content creation, every word counts. Our tool is designed to help writers, students, and SEO experts optimize their work with lightning speed.</p>
+            <p>Our mission is to provide professional-grade tools that are 100% free and respect user privacy. LexiMetric Pro is built with modern web technologies to ensure a seamless experience across all devices.</p>
+        </section>
+
+        <section id="contact" class="page-section">
+            <h2>Contact Us</h2>
+            <p>Have a question or feedback? We'd love to hear from you! Our team is dedicated to improving LexiMetric Pro based on your suggestions.</p>
+            <div style="background:var(--input); padding:20px; border-radius:15px; border:1px solid var(--border); margin-top:15px;">
+                <p>📧 <strong>Email:</strong> kashif.asif72@gmail.com</p>
+                <p>📍 <strong>Location:</strong> Digital Space, Global</p>
+                <p>🕒 <strong>Support:</strong> 24/7 via AI Assistant</p>
+            </div>
+        </section>
+
+        <section id="privacy" class="page-section">
+            <h2>Privacy Policy</h2>
+            <p>At LexiMetric Pro, we take your privacy seriously. Here is how we handle your data:</p>
+            <ul>
+                <li><strong>No Data Collection:</strong> We do not store, save, or upload any text you paste into our tool.</li>
+                <li><strong>Local Processing:</strong> All calculations are performed directly in your browser using JavaScript.</li>
+                <li><strong>No Cookies:</strong> We do not use tracking cookies to monitor your personal behavior.</li>
+                <li><strong>Third-Party Links:</strong> Our site may contain links to other websites; we are not responsible for their privacy practices.</li>
+            </ul>
+        </section>
+
+        <section id="terms" class="page-section">
+            <h2>Terms of Service</h2>
+            <p>By using LexiMetric Pro, you agree to the following terms:</p>
+            <p>The tool is provided "as is" without any warranties. We are not responsible for any data loss or inaccuracies. Users are free to use this tool for both personal and commercial projects without any attribution required.</p>
+        </section>
     </div>
 
     <div class="side-panel">
@@ -136,10 +158,10 @@
 <div id="bot-window">
     <div class="bot-header"><span>🤖 AI LexiBot</span><span onclick="toggleChat()" style="cursor:pointer">×</span></div>
     <div class="bot-body" id="chatBody">
-        <div class="msg bot-msg">System Active. 🦾 How can I assist you today?</div>
+        <div class="msg bot-msg">Hello! I am LexiBot. 🦾 All pages are now updated with content. How can I help?</div>
     </div>
-    <div class="bot-footer">
-        <input type="text" id="botInput" placeholder="Ask me something..." onkeypress="if(event.key=='Enter') sendBotMsg()">
+    <div class="bot-footer" style="padding:10px; display:flex; gap:5px; border-top:1px solid var(--border);">
+        <input type="text" id="botInput" placeholder="Ask me..." style="flex:1; background:var(--input); border:1px solid var(--border); color:#fff; padding:8px; border-radius:5px;" onkeypress="if(event.key=='Enter') sendBotMsg()">
         <button onclick="sendBotMsg()" style="padding:5px 10px;">Send</button>
     </div>
 </div>
@@ -175,20 +197,8 @@
         else inputArea.value = inputArea.value.toLowerCase();
     }
 
-    function clearText() {
-        if(confirm("Are you sure?")) {
-            inputArea.value = "";
-            document.getElementById('wCount').innerText = "0";
-            document.getElementById('cCount').innerText = "0";
-            document.getElementById('rTime').innerText = "0m";
-        }
-    }
-
-    function copyText() {
-        inputArea.select();
-        document.execCommand('copy');
-        alert("Text copied!");
-    }
+    function clearText() { inputArea.value = ""; }
+    function copyText() { inputArea.select(); document.execCommand('copy'); alert("Copied!"); }
 
     function toggleChat() {
         const win = document.getElementById('bot-window');
@@ -203,9 +213,9 @@
         const val = inp.value.toLowerCase();
         inp.value = "";
         setTimeout(() => {
-            let reply = "I'm specialized in word counting! Try asking for our email.";
-            if(val.includes('hi') || val.includes('hello')) reply = "Hello! 🤖 Need help with the tool?";
-            if(val.includes('email')) reply = "Contact us at kashif.asif72@gmail.com";
+            let reply = "I'm ready! Check out the About or Privacy pages.";
+            if(val.includes('hi') || val.includes('hello')) reply = "Hello! 🤖 Content is now live on all pages.";
+            if(val.includes('email')) reply = "Reach us at kashif.asif72@gmail.com";
             body.innerHTML += `<div class="msg bot-msg">${reply}</div>`;
             body.scrollTop = body.scrollHeight;
         }, 600);
