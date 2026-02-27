@@ -4,177 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word Counter Pro | Premium SEO Station</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { 
             --bg: #0a0e17; 
             --card: #141b2d; 
             --text: #e2e8f0; 
             --accent: linear-gradient(135deg, #ffd700 0%, #b8860b 100%); 
-            --input-bg: #1f2937;
             --border: #2d3748;
         }
 
-        .light { 
-            --bg: #f8fafc; 
-            --card: #ffffff; 
-            --text: #1e293b; 
-            --accent: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%); 
-            --input-bg: #f1f5f9;
-            --border: #e2e8f0;
-        }
+        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
 
-        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); transition: 0.5s; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-
-        /* Navigation Bar */
-        nav { margin-bottom: 20px; background: var(--card); padding: 12px 25px; border-radius: 50px; border: 1px solid var(--border); box-shadow: 0 10px 25px rgba(0,0,0,0.3); position: sticky; top: 20px; z-index: 1000; }
-        nav a { color: var(--text); text-decoration: none; font-size: 15px; margin: 0 15px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        nav { margin-bottom: 20px; background: var(--card); padding: 12px 25px; border-radius: 50px; border: 1px solid var(--border); position: sticky; top: 20px; z-index: 1000; }
+        nav a { color: var(--text); text-decoration: none; font-size: 15px; margin: 0 15px; font-weight: 600; cursor: pointer; }
         nav a:hover { color: #ffd700; }
 
-        /* Live Clock Style */
-        .clock-container { background: var(--input-bg); padding: 10px 20px; border-radius: 15px; border: 1px solid var(--border); margin-bottom: 25px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        #live-clock { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; color: #ffd700; margin-bottom: 2px; }
-        #live-date { font-size: 0.85rem; opacity: 0.8; font-weight: 500; }
-
-        .container, .info-section { max-width: 900px; width: 100%; background: var(--card); border-radius: 30px; padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid var(--border); box-sizing: border-box; display: none; }
-        .active-section { display: block !important; animation: slideUp 0.4s ease-out; }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        h1 { text-align: center; font-size: 2.5rem; margin-bottom: 10px; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+        /* --- ANALOG WALL CLOCK STYLE --- */
+        .clock-wrapper { margin-bottom: 30px; display: flex; flex-direction: column; align-items: center; }
         
-        textarea { width: 100%; height: 250px; border: 2px solid var(--border); border-radius: 20px; padding: 20px; font-size: 16px; background: var(--input-bg); color: var(--text); outline: none; resize: none; transition: 0.3s; box-sizing: border-box; line-height: 1.6; }
-        textarea:focus { border-color: #ffd700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.1); }
+        .wall-clock {
+            width: 150px; height: 150px;
+            border: 8px solid #ffd700;
+            border-radius: 50%;
+            position: relative;
+            background: var(--card);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2), inset 0 0 10px rgba(0,0,0,0.5);
+        }
 
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; margin: 25px 0; }
-        .stat-card { background: var(--input-bg); padding: 20px; border-radius: 20px; text-align: center; border: 1px solid var(--border); transition: 0.3s; }
-        .stat-card span { display: block; font-size: 1.8rem; font-weight: 700; color: #ffd700; }
+        .wall-clock::after { /* Center Dot */
+            content: ''; position: absolute; width: 8px; height: 8px;
+            background: #ffd700; border-radius: 50%; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); z-index: 10;
+        }
 
-        .score-circle { width: 120px; height: 120px; border-radius: 50%; background: conic-gradient(#ffd700 0%, var(--border) 0%); display: flex; align-items: center; justify-content: center; margin: 20px auto; font-size: 1.4rem; font-weight: 800; border: 6px solid var(--card); }
+        .hand {
+            position: absolute; bottom: 50%; left: 50%;
+            transform-origin: bottom; border-radius: 5px;
+            transform: translateX(-50%) rotate(0deg);
+        }
 
-        button { padding: 12px 25px; margin: 5px; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; background: var(--accent); color: #000; transition: 0.3s; }
-        button:hover { transform: scale(1.05); }
+        .hour { width: 4px; height: 40px; background: #e2e8f0; z-index: 3; }
+        .minute { width: 3px; height: 55px; background: #ffd700; z-index: 2; }
+        .second { width: 2px; height: 65px; background: #ef4444; z-index: 1; }
 
-        .mode-toggle { position: fixed; bottom: 30px; right: 30px; background: var(--accent); color: #000; border: none; padding: 15px; border-radius: 50%; cursor: pointer; width: 55px; height: 55px; font-size: 24px; z-index: 1000; }
+        #date-display { margin-top: 10px; font-weight: 600; color: #ffd700; font-size: 0.9rem; }
+        /* ------------------------------- */
+
+        .container { max-width: 900px; width: 100%; background: var(--card); border-radius: 30px; padding: 40px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        h1 { text-align: center; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; }
+        textarea { width: 100%; height: 200px; border-radius: 15px; padding: 15px; background: #1f2937; color: white; border: 1px solid var(--border); resize: none; outline: none; }
         
-        footer { margin-top: auto; padding: 40px 0 20px 0; opacity: 0.6; text-align: center; font-size: 13px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; margin: 20px 0; }
+        .stat-card { background: #1f2937; padding: 15px; border-radius: 15px; text-align: center; border: 1px solid var(--border); }
+        .stat-card span { display: block; font-size: 1.5rem; font-weight: 700; color: #ffd700; }
+
+        button { padding: 10px 20px; border-radius: 10px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; margin: 5px; }
     </style>
 </head>
 <body>
 
-<button class="mode-toggle" onclick="toggleMode()">🌓</button>
-
 <nav>
-    <a onclick="showSection('main')">Home</a>
-    <a onclick="showSection('about')">About Us</a>
-    <a onclick="showSection('privacy')">Privacy</a>
-    <a onclick="showSection('contact')">Contact</a>
+    <a onclick="location.reload()">Home</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
 </nav>
 
-<div class="clock-container">
-    <div id="live-clock">00:00:00</div>
-    <div id="live-date">Loading date...</div>
+<div class="clock-wrapper">
+    <div class="wall-clock">
+        <div class="hand hour" id="hour-hand"></div>
+        <div class="hand minute" id="min-hand"></div>
+        <div class="hand second" id="sec-hand"></div>
+    </div>
+    <div id="date-display">Loading...</div>
 </div>
 
-<div id="main-section" class="container active-section">
+<div class="container">
     <h1>Word Counter Pro</h1>
-    <p style="text-align: center; opacity: 0.7; margin-top: -10px;">Your Premium Content Workstation</p>
-    
-    <textarea id="mainInput" placeholder="Start typing..."></textarea>
+    <textarea id="mainInput" placeholder="Apna content yahan likhein..."></textarea>
     
     <div class="stats-grid">
         <div class="stat-card">Words<span id="words">0</span></div>
         <div class="stat-card">Chars<span id="chars">0</span></div>
-        <div class="stat-card">Score<span id="scoreText">0%</span></div>
         <div class="stat-card">Reading<span id="read">0m</span></div>
     </div>
 
     <div style="text-align: center;">
-        <h3>SEO Strength</h3>
-        <div class="score-circle" id="scoreCircle">0%</div>
-    </div>
-
-    <div style="text-align: center; margin-top: 30px;">
         <button onclick="toUpper()">UPPERCASE</button>
-        <button onclick="capitalize()">Capitalize</button>
-        <button onclick="download()">Download (.txt)</button>
-        <button onclick="clearAll()" style="background: #ef4444; color: white;">Clear All</button>
+        <button onclick="clearAll()" style="background: #ef4444; color: white;">Clear</button>
     </div>
 </div>
 
-<div id="about-section" class="info-section">
-    <h1>About Word Counter Pro</h1>
-    <p>This tool is designed for professional writers who need to track their progress and SEO performance in real-time. We ensure 100% privacy and local processing.</p>
-    <button onclick="showSection('main')">← Back to Tool</button>
-</div>
-
-<div id="privacy-section" class="info-section">
-    <h1>Privacy Policy</h1>
-    <p>We do not store or collect any text entered into our editor. Your content stays in your browser and is never sent to any server.</p>
-    <button onclick="showSection('main')">← Back to Tool</button>
-</div>
-
-<div id="contact-section" class="info-section">
-    <h1>Contact Support</h1>
-    <div style="background: var(--input-bg); padding: 25px; border-radius: 15px; border: 1px solid var(--border);">
-        <p>📧 Email: <strong>kashif.asif72@gmail.com</strong></p>
-        <p>📍 Location: Global Remote Office</p>
-    </div>
-    <br>
-    <button onclick="showSection('main')">← Back to Tool</button>
-</div>
-
-<footer>
-    <p>&copy; 2026 Word Counter Pro | Designed for Perfection</p>
+<footer style="margin-top: 40px; opacity: 0.5; font-size: 12px;">
+    &copy; 2026 Word Counter Pro | Contact: kashif.asif72@gmail.com
 </footer>
 
 <script>
-    // LIVE CLOCK LOGIC (User's Local Time)
-    function updateClock() {
+    // WALL CLOCK LOGIC
+    function setClock() {
         const now = new Date();
-        const timeStr = now.toLocaleTimeString();
-        const dateStr = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-        
-        document.getElementById('live-clock').innerText = timeStr;
-        document.getElementById('live-date').innerText = dateStr;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
+        const seconds = now.getSeconds();
+        const minutes = now.getMinutes();
+        const hours = now.getHours();
 
+        const secDegrees = (seconds / 60) * 360;
+        const minDegrees = (minutes / 60) * 360 + (seconds/60)*6;
+        const hourDegrees = (hours / 12) * 360 + (minutes/60)*30;
+
+        document.getElementById('sec-hand').style.transform = `translateX(-50%) rotate(${secDegrees}deg)`;
+        document.getElementById('min-hand').style.transform = `translateX(-50%) rotate(${minDegrees}deg)`;
+        document.getElementById('hour-hand').style.transform = `translateX(-50%) rotate(${hourDegrees}deg)`;
+
+        const options = { weekday: 'long', day: 'numeric', month: 'long' };
+        document.getElementById('date-display').innerText = now.toLocaleDateString('en-US', options);
+    }
+    setInterval(setClock, 1000);
+    setClock();
+
+    // WORD COUNTER LOGIC
     const input = document.getElementById('mainInput');
-
-    function showSection(name) {
-        document.querySelectorAll('.container, .info-section').forEach(s => s.classList.remove('active-section'));
-        document.getElementById(name + '-section').classList.add('active-section');
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    }
-
     input.addEventListener('input', () => {
-        let text = input.value;
-        let words = text.trim().split(/\s+/).filter(Boolean);
-        let wordCount = words.length;
-        document.getElementById('words').innerText = wordCount;
-        document.getElementById('chars').innerText = text.length;
-        document.getElementById('read').innerText = Math.ceil(wordCount / 200) + "m";
-        let score = Math.min(100, (wordCount / 6));
-        document.getElementById('scoreCircle').innerText = Math.round(score) + "%";
-        document.getElementById('scoreText').innerText = Math.round(score) + "%";
-        document.getElementById('scoreCircle').style.background = `conic-gradient(#ffd700 ${score}%, var(--border) ${score}%)`;
+        const text = input.value.trim();
+        const words = text ? text.split(/\s+/).length : 0;
+        document.getElementById('words').innerText = words;
+        document.getElementById('chars').innerText = input.value.length;
+        document.getElementById('read').innerText = Math.ceil(words / 200) + "m";
     });
 
-    function toggleMode() { document.body.classList.toggle('light'); }
     function toUpper() { input.value = input.value.toUpperCase(); }
-    function capitalize() { input.value = input.value.replace(/\b\w/g, l => l.toUpperCase()); }
     function clearAll() { if(confirm("Clear?")) input.value = ""; }
-    function download() {
-        const blob = new Blob([input.value], {type: "text/plain"});
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = "my-content.txt";
-        a.click();
-    }
 </script>
 </body>
 </html>
-
-  
