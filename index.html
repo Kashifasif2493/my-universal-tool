@@ -14,118 +14,114 @@
             --border: #2d3748;
         }
 
-        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); padding: 20px; min-height: 100vh; }
 
-        nav { margin-bottom: 20px; background: var(--card); padding: 12px 25px; border-radius: 50px; border: 1px solid var(--border); position: sticky; top: 20px; z-index: 1000; }
+        /* Main Flex Layout */
+        .main-wrapper { display: flex; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 20px auto; justify-content: center; align-items: flex-start; }
+
+        /* Navigation Bar */
+        nav { width: 100%; max-width: 1200px; margin: 0 auto 30px auto; background: var(--card); padding: 12px 25px; border-radius: 50px; border: 1px solid var(--border); display: flex; justify-content: center; position: sticky; top: 10px; z-index: 1000; }
         nav a { color: var(--text); text-decoration: none; font-size: 15px; margin: 0 15px; font-weight: 600; cursor: pointer; }
         nav a:hover { color: #ffd700; }
 
-        /* --- ANALOG WALL CLOCK STYLE --- */
-        .clock-wrapper { margin-bottom: 30px; display: flex; flex-direction: column; align-items: center; }
+        /* Left Content Area */
+        .container { flex: 2; min-width: 320px; background: var(--card); border-radius: 30px; padding: 30px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
         
+        /* Right Side Clock Area */
+        .side-panel { flex: 0.8; min-width: 250px; display: flex; flex-direction: column; align-items: center; background: var(--card); padding: 20px; border-radius: 30px; border: 1px solid var(--border); position: sticky; top: 100px; }
+
+        /* --- ANALOG CLOCK --- */
         .wall-clock {
-            width: 150px; height: 150px;
-            border: 8px solid #ffd700;
-            border-radius: 50%;
-            position: relative;
-            background: var(--card);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2), inset 0 0 10px rgba(0,0,0,0.5);
+            width: 180px; height: 180px; border: 8px solid #ffd700; border-radius: 50%;
+            position: relative; background: #0a0e17;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1), inset 0 0 10px rgba(0,0,0,0.8);
         }
+        .wall-clock::after { content: ''; position: absolute; width: 8px; height: 8px; background: #ffd700; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 15; }
+        .number { position: absolute; width: 100%; height: 100%; text-align: center; font-weight: 700; font-size: 1rem; color: #e2e8f0; padding: 8px; box-sizing: border-box; }
+        .n12 { transform: rotate(0deg); } .n3 { transform: rotate(90deg); } .n6 { transform: rotate(180deg); } .n9 { transform: rotate(270deg); }
+        /* Simplifying numbers for cleaner look */
+        .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; border-radius: 10px; transform: translateX(-50%) rotate(0deg); }
+        .hour { width: 5px; height: 40px; background: #e2e8f0; z-index: 5; }
+        .minute { width: 3px; height: 60px; background: #ffd700; z-index: 4; }
+        .second { width: 1.5px; height: 70px; background: #ef4444; z-index: 3; }
 
-        .wall-clock::after { /* Center Dot */
-            content: ''; position: absolute; width: 8px; height: 8px;
-            background: #ffd700; border-radius: 50%; top: 50%; left: 50%;
-            transform: translate(-50%, -50%); z-index: 10;
-        }
-
-        .hand {
-            position: absolute; bottom: 50%; left: 50%;
-            transform-origin: bottom; border-radius: 5px;
-            transform: translateX(-50%) rotate(0deg);
-        }
-
-        .hour { width: 4px; height: 40px; background: #e2e8f0; z-index: 3; }
-        .minute { width: 3px; height: 55px; background: #ffd700; z-index: 2; }
-        .second { width: 2px; height: 65px; background: #ef4444; z-index: 1; }
-
-        #date-display { margin-top: 10px; font-weight: 600; color: #ffd700; font-size: 0.9rem; }
-        /* ------------------------------- */
-
-        .container { max-width: 900px; width: 100%; background: var(--card); border-radius: 30px; padding: 40px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        h1 { text-align: center; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; }
-        textarea { width: 100%; height: 200px; border-radius: 15px; padding: 15px; background: #1f2937; color: white; border: 1px solid var(--border); resize: none; outline: none; }
+        h1 { text-align: center; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.2rem; font-weight: 800; }
+        textarea { width: 100%; height: 250px; border-radius: 15px; padding: 15px; background: #1f2937; color: white; border: 1px solid var(--border); resize: none; outline: none; box-sizing: border-box; }
         
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; margin: 20px 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin: 20px 0; }
         .stat-card { background: #1f2937; padding: 15px; border-radius: 15px; text-align: center; border: 1px solid var(--border); }
-        .stat-card span { display: block; font-size: 1.5rem; font-weight: 700; color: #ffd700; }
+        .stat-card span { display: block; font-size: 1.4rem; font-weight: 700; color: #ffd700; }
 
         button { padding: 10px 20px; border-radius: 10px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; margin: 5px; }
+
+        @media (max-width: 768px) { .main-wrapper { flex-direction: column-reverse; } .side-panel { position: static; width: 100%; } }
     </style>
 </head>
 <body>
 
 <nav>
     <a onclick="location.reload()">Home</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a href="#">About</a>
+    <a href="#">Privacy</a>
+    <a href="#">Contact</a>
 </nav>
 
-<div class="clock-wrapper">
-    <div class="wall-clock">
-        <div class="hand hour" id="hour-hand"></div>
-        <div class="hand minute" id="min-hand"></div>
-        <div class="hand second" id="sec-hand"></div>
+<div class="main-wrapper">
+    <div class="container">
+        <h1>Word Counter Pro</h1>
+        <textarea id="mainInput" placeholder="Start typing here..."></textarea>
+        
+        <div class="stats-grid">
+            <div class="stat-card">Words<span id="words">0</span></div>
+            <div class="stat-card">Chars<span id="chars">0</span></div>
+            <div class="stat-card">Reading<span id="read">0m</span></div>
+        </div>
+
+        <div style="text-align: center;">
+            <button onclick="toUpper()">UPPERCASE</button>
+            <button onclick="clearAll()" style="background: #ef4444; color: white;">Clear All</button>
+        </div>
     </div>
-    <div id="date-display">Loading...</div>
+
+    <div class="side-panel">
+        <h3 style="margin-top: 0; color: #ffd700;">Live Clock</h3>
+        <div class="wall-clock">
+            <div class="number n12">12</div>
+            <div class="number n3" style="padding: 45% 8px;">3</div>
+            <div class="number n6" style="padding: 78% 8px;">6</div>
+            <div class="number n9" style="padding: 45% 8px; text-align: left;">9</div>
+            
+            <div class="hand hour" id="hour-hand"></div>
+            <div class="hand minute" id="min-hand"></div>
+            <div class="hand second" id="sec-hand"></div>
+        </div>
+        <p id="date-display" style="text-align: center; margin-top: 20px; font-weight: 600;"></p>
+        <div style="font-size: 12px; opacity: 0.5; text-align: center;">
+            kashif.asif72@gmail.com
+        </div>
+    </div>
 </div>
-
-<div class="container">
-    <h1>Word Counter Pro</h1>
-    <textarea id="mainInput" placeholder="Apna content yahan likhein..."></textarea>
-    
-    <div class="stats-grid">
-        <div class="stat-card">Words<span id="words">0</span></div>
-        <div class="stat-card">Chars<span id="chars">0</span></div>
-        <div class="stat-card">Reading<span id="read">0m</span></div>
-    </div>
-
-    <div style="text-align: center;">
-        <button onclick="toUpper()">UPPERCASE</button>
-        <button onclick="clearAll()" style="background: #ef4444; color: white;">Clear</button>
-    </div>
-</div>
-
-<footer style="margin-top: 40px; opacity: 0.5; font-size: 12px;">
-    &copy; 2026 Word Counter Pro | Contact: kashif.asif72@gmail.com
-</footer>
 
 <script>
-    // WALL CLOCK LOGIC
     function setClock() {
         const now = new Date();
-        const seconds = now.getSeconds();
-        const minutes = now.getMinutes();
-        const hours = now.getHours();
-
-        const secDegrees = (seconds / 60) * 360;
-        const minDegrees = (minutes / 60) * 360 + (seconds/60)*6;
-        const hourDegrees = (hours / 12) * 360 + (minutes/60)*30;
+        const secDegrees = (now.getSeconds() / 60) * 360;
+        const minDegrees = (now.getMinutes() / 60) * 360;
+        const hourDegrees = (now.getHours() / 12) * 360 + (now.getMinutes()/60)*30;
 
         document.getElementById('sec-hand').style.transform = `translateX(-50%) rotate(${secDegrees}deg)`;
         document.getElementById('min-hand').style.transform = `translateX(-50%) rotate(${minDegrees}deg)`;
         document.getElementById('hour-hand').style.transform = `translateX(-50%) rotate(${hourDegrees}deg)`;
 
-        const options = { weekday: 'long', day: 'numeric', month: 'long' };
+        const options = { weekday: 'short', day: 'numeric', month: 'short' };
         document.getElementById('date-display').innerText = now.toLocaleDateString('en-US', options);
     }
     setInterval(setClock, 1000);
     setClock();
 
-    // WORD COUNTER LOGIC
     const input = document.getElementById('mainInput');
     input.addEventListener('input', () => {
-        const text = input.value.trim();
-        const words = text ? text.split(/\s+/).length : 0;
+        const words = input.value.trim() ? input.value.trim().split(/\s+/).length : 0;
         document.getElementById('words').innerText = words;
         document.getElementById('chars').innerText = input.value.length;
         document.getElementById('read').innerText = Math.ceil(words / 200) + "m";
