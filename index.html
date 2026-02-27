@@ -3,132 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word Counter Pro | Premium SEO Station</title>
+    <title>Word Counter Pro | AI AI Assistant</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --bg: #0a0e17; 
-            --card: #141b2d; 
-            --text: #e2e8f0; 
+            --bg: #0a0e17; --card: #141b2d; --text: #e2e8f0; 
             --accent: linear-gradient(135deg, #ffd700 0%, #b8860b 100%); 
-            --border: #2d3748;
+            --border: #2d3748; --input: #1f2937;
         }
 
-        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); padding: 20px; min-height: 100vh; }
+        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); padding: 10px; }
 
-        /* Main Flex Layout */
-        .main-wrapper { display: flex; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 20px auto; justify-content: center; align-items: flex-start; }
+        /* Navigation */
+        nav { width: 100%; max-width: 1100px; margin: 10px auto 30px auto; background: var(--card); padding: 15px; border-radius: 50px; border: 1px solid var(--border); display: flex; justify-content: center; gap: 15px; position: sticky; top: 10px; z-index: 1000; flex-wrap: wrap; }
+        nav a { color: var(--text); text-decoration: none; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; padding: 5px 10px; }
+        nav a.active { color: #ffd700; border-bottom: 2px solid #ffd700; }
 
-        /* Navigation Bar */
-        nav { width: 100%; max-width: 1200px; margin: 0 auto 30px auto; background: var(--card); padding: 12px 25px; border-radius: 50px; border: 1px solid var(--border); display: flex; justify-content: center; position: sticky; top: 10px; z-index: 1000; }
-        nav a { color: var(--text); text-decoration: none; font-size: 15px; margin: 0 15px; font-weight: 600; cursor: pointer; }
-        nav a:hover { color: #ffd700; }
+        /* Layout */
+        .main-wrapper { display: flex; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto; justify-content: center; }
+        .content-area { flex: 2; min-width: 320px; }
+        .page-section { display: none; background: var(--card); border-radius: 30px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); animation: fadeIn 0.4s; }
+        .active-section { display: block; }
 
-        /* Left Content Area */
-        .container { flex: 2; min-width: 320px; background: var(--card); border-radius: 30px; padding: 30px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Clock Sidebar */
+        .side-panel { flex: 0.8; min-width: 260px; display: flex; flex-direction: column; align-items: center; background: var(--card); padding: 25px; border-radius: 30px; border: 1px solid var(--border); height: fit-content; }
+        .wall-clock { width: 150px; height: 150px; border: 8px solid #ffd700; border-radius: 50%; position: relative; background: #000; margin-bottom: 15px; }
+        .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; border-radius: 10px; transform: translateX(-50%); }
+        .hour { width: 5px; height: 35px; background: #fff; }
+        .minute { width: 3px; height: 50px; background: #ffd700; }
+        .second { width: 1.5px; height: 60px; background: #ff4444; }
+
+        /* Tool Elements */
+        textarea { width: 100%; height: 250px; border-radius: 20px; padding: 15px; background: var(--input); color: white; border: 1px solid var(--border); outline: none; box-sizing: border-box; font-size: 16px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin: 20px 0; }
+        .stat-card { background: var(--input); padding: 15px; border-radius: 15px; text-align: center; border: 1px solid var(--border); }
+        .stat-card span { display: block; font-size: 1.6rem; font-weight: 700; color: #ffd700; }
+        button { padding: 12px 20px; border-radius: 10px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; margin: 5px; }
+
+        /* ✨ PREMIUM ROBOT CHATBOT ✨ */
+        #chatbot-launcher { position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px; background: #1f2937; border: 3px solid #ffd700; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3); z-index: 2000; font-size: 38px; animation: floatRobot 2s ease-in-out infinite; transition: 0.3s; }
+        #chatbot-launcher:hover { transform: scale(1.1); box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5); }
+        #chatbot-launcher::after { content: ''; position: absolute; width: 12px; height: 12px; background: #39FF14; border: 2px solid #000; border-radius: 50%; top: 5px; right: 5px; box-shadow: 0 0 8px #39FF14; }
+
+        @keyframes floatRobot { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+
+        #chat-window { position: fixed; bottom: 110px; right: 30px; width: 320px; background: var(--card); border: 1px solid var(--border); border-radius: 25px; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.6); z-index: 2000; animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .chat-header { background: #ffd700; color: #000; padding: 18px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; font-size: 16px; border-radius: 25px 25px 0 0; }
+        .chat-body { height: 320px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; font-size: 14px; background: #0c101b; }
+        .bot-msg { background: var(--input); padding: 10px 15px; border-radius: 12px 12px 12px 0; align-self: flex-start; color: #e2e8f0; border: 1px solid var(--border); }
+        .user-msg { background: #ffd700; color: #000; padding: 10px 15px; border-radius: 12px 12px 0 12px; align-self: flex-end; font-weight: 600; }
+        .chat-footer { padding: 15px; display: flex; gap: 8px; border-top: 1px solid var(--border); background: var(--card); }
+        .chat-footer input { flex: 1; background: var(--input); border: 1px solid var(--border); color: white; padding: 10px; border-radius: 8px; outline: none; }
         
-        /* Right Side Clock Area */
-        .side-panel { flex: 0.8; min-width: 250px; display: flex; flex-direction: column; align-items: center; background: var(--card); padding: 20px; border-radius: 30px; border: 1px solid var(--border); position: sticky; top: 100px; }
-
-        /* --- ANALOG CLOCK --- */
-        .wall-clock {
-            width: 180px; height: 180px; border: 8px solid #ffd700; border-radius: 50%;
-            position: relative; background: #0a0e17;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1), inset 0 0 10px rgba(0,0,0,0.8);
-        }
-        .wall-clock::after { content: ''; position: absolute; width: 8px; height: 8px; background: #ffd700; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 15; }
-        .number { position: absolute; width: 100%; height: 100%; text-align: center; font-weight: 700; font-size: 1rem; color: #e2e8f0; padding: 8px; box-sizing: border-box; }
-        .n12 { transform: rotate(0deg); } .n3 { transform: rotate(90deg); } .n6 { transform: rotate(180deg); } .n9 { transform: rotate(270deg); }
-        /* Simplifying numbers for cleaner look */
-        .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; border-radius: 10px; transform: translateX(-50%) rotate(0deg); }
-        .hour { width: 5px; height: 40px; background: #e2e8f0; z-index: 5; }
-        .minute { width: 3px; height: 60px; background: #ffd700; z-index: 4; }
-        .second { width: 1.5px; height: 70px; background: #ef4444; z-index: 3; }
-
-        h1 { text-align: center; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.2rem; font-weight: 800; }
-        textarea { width: 100%; height: 250px; border-radius: 15px; padding: 15px; background: #1f2937; color: white; border: 1px solid var(--border); resize: none; outline: none; box-sizing: border-box; }
-        
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin: 20px 0; }
-        .stat-card { background: #1f2937; padding: 15px; border-radius: 15px; text-align: center; border: 1px solid var(--border); }
-        .stat-card span { display: block; font-size: 1.4rem; font-weight: 700; color: #ffd700; }
-
-        button { padding: 10px 20px; border-radius: 10px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; margin: 5px; }
-
-        @media (max-width: 768px) { .main-wrapper { flex-direction: column-reverse; } .side-panel { position: static; width: 100%; } }
+        /* Mobile adjustment for chatbot launcher */
+        @media (max-width: 768px) { #chatbot-launcher { width: 60px; height: 60px; font-size: 32px; bottom: 20px; right: 20px; } #chat-window { width: 90%; right: 5%; bottom: 90px; } }
     </style>
 </head>
 <body>
 
 <nav>
-    <a onclick="location.reload()">Home</a>
-    <a href="#">About</a>
-    <a href="#">Privacy</a>
-    <a href="#">Contact</a>
+    <a onclick="showPage('home')" id="l-home" class="active">Home</a>
+    <a onclick="showPage('about')" id="l-about">About Us</a>
+    <a onclick="showPage('contact')" id="l-contact">Contact</a>
+    <a onclick="showPage('privacy')" id="l-privacy">Privacy</a>
+    <a onclick="showPage('terms')" id="l-terms">Terms</a>
 </nav>
 
 <div class="main-wrapper">
-    <div class="container">
-        <h1>Word Counter Pro</h1>
-        <textarea id="mainInput" placeholder="Start typing here..."></textarea>
+    <div class="content-area">
+        <section id="home" class="page-section active-section">
+            <h1 style="text-align:center; background:var(--accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:800; font-size:2.5rem;">LexiMetric Pro</h1>
+            <textarea id="mainInput" placeholder="Write or paste your amazing content here..."></textarea>
+            <div class="stats-grid">
+                <div class="stat-card">Words<span id="words">0</span></div>
+                <div class="stat-card">Chars<span id="chars">0</span></div>
+                <div class="stat-card">Reading<span id="read">0m</span></div>
+            </div>
+            <div style="text-align:center;">
+                <button onclick="input.value = input.value.toUpperCase(); updateStats();">UPPERCASE</button>
+                <button onclick="copyTxt()">Copy</button>
+                <button onclick="if(confirm('Clear?')) { input.value=''; updateStats(); }" style="background:#ff4444; color:#fff;">Clear</button>
+            </div>
+        </section>
         
-        <div class="stats-grid">
-            <div class="stat-card">Words<span id="words">0</span></div>
-            <div class="stat-card">Chars<span id="chars">0</span></div>
-            <div class="stat-card">Reading<span id="read">0m</span></div>
-        </div>
-
-        <div style="text-align: center;">
-            <button onclick="toUpper()">UPPERCASE</button>
-            <button onclick="clearAll()" style="background: #ef4444; color: white;">Clear All</button>
-        </div>
+        <section id="about" class="page-section"><h1>About Us</h1><p>Welcome to LexiMetric Pro. We provide professional text analysis tools designed for speed, accuracy, and 100% data privacy.</p></section>
+        <section id="contact" class="page-section"><h1>Contact</h1><p>You can reach our AI Support 24/7. For serious inquiries, email us at: <strong>kashif.asif72@gmail.com</strong></p></section>
+        <section id="privacy" class="page-section"><h1>Privacy Policy</h1><p>Your content is processed entirely within your browser. We never store, share, or upload your text to any server.</p></section>
+        <section id="terms" class="page-section"><h1>Terms</h1><p>Free to use for all personal and commercial projects. Usage is at your own discretion.</p></section>
     </div>
 
     <div class="side-panel">
-        <h3 style="margin-top: 0; color: #ffd700;">Live Clock</h3>
+        <h3 style="color:#ffd700; margin:0 0 15px 0;">Live Clock</h3>
         <div class="wall-clock">
-            <div class="number n12">12</div>
-            <div class="number n3" style="padding: 45% 8px;">3</div>
-            <div class="number n6" style="padding: 78% 8px;">6</div>
-            <div class="number n9" style="padding: 45% 8px; text-align: left;">9</div>
-            
-            <div class="hand hour" id="hour-hand"></div>
-            <div class="hand minute" id="min-hand"></div>
-            <div class="hand second" id="sec-hand"></div>
+            <div class="number" style="transform:rotate(0deg)">12</div>
+            <div class="number" style="transform:rotate(90deg); padding:43% 5px;">3</div>
+            <div class="number" style="transform:rotate(180deg); padding:78% 5px;">6</div>
+            <div class="number" style="transform:rotate(270deg); padding:43% 5px; text-align:left;">9</div>
+            <div class="hand hour" id="hr"></div>
+            <div class="hand minute" id="mn"></div>
+            <div class="hand second" id="sc"></div>
         </div>
-        <p id="date-display" style="text-align: center; margin-top: 20px; font-weight: 600;"></p>
-        <div style="font-size: 12px; opacity: 0.5; text-align: center;">
-            kashif.asif72@gmail.com
-        </div>
+        <p id="date-display" style="color:#ffd700; font-weight:700;"></p>
+        <div style="font-size: 11px; opacity: 0.5; text-align: center; margin-top: 10px;">kashif.asif72@gmail.com</div>
+    </div>
+</div>
+
+<div id="chatbot-launcher" onclick="toggleChat()">
+    🤖
+</div>
+
+<div id="chat-window">
+    <div class="chat-header">
+        <div style="display:flex; align-items:center; gap:8px;">🤖 <span>AI AI Assistant</span></div>
+        <span onclick="toggleChat()" style="cursor:pointer; font-size:20px; font-weight:bold;">&times;</span>
+    </div>
+    <div class="chat-body" id="chat-body">
+        <div class="bot-msg">Beep Boop! 🤖 Hello! I am your AI assistant. How can I help you today?</div>
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="chat-input" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+        <button onclick="sendMessage()" style="padding:10px 15px; margin:0; border-radius:8px;">Send</button>
     </div>
 </div>
 
 <script>
-    function setClock() {
-        const now = new Date();
-        const secDegrees = (now.getSeconds() / 60) * 360;
-        const minDegrees = (now.getMinutes() / 60) * 360;
-        const hourDegrees = (now.getHours() / 12) * 360 + (now.getMinutes()/60)*30;
-
-        document.getElementById('sec-hand').style.transform = `translateX(-50%) rotate(${secDegrees}deg)`;
-        document.getElementById('min-hand').style.transform = `translateX(-50%) rotate(${minDegrees}deg)`;
-        document.getElementById('hour-hand').style.transform = `translateX(-50%) rotate(${hourDegrees}deg)`;
-
-        const options = { weekday: 'short', day: 'numeric', month: 'short' };
-        document.getElementById('date-display').innerText = now.toLocaleDateString('en-US', options);
+    // Navigation
+    function showPage(id) {
+        document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-section'));
+        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+        document.getElementById(id).classList.add('active-section');
+        document.getElementById('l-'+id).classList.add('active');
+        window.scrollTo({top: 0, behavior: 'smooth'});
     }
-    setInterval(setClock, 1000);
-    setClock();
 
+    // Wall Clock
+    function updateClock() {
+        const n = new Date();
+        document.getElementById('sc').style.transform = `translateX(-50%) rotate(${(n.getSeconds()/60)*360}deg)`;
+        document.getElementById('mn').style.transform = `translateX(-50%) rotate(${(n.getMinutes()/60)*360}deg)`;
+        document.getElementById('hr').style.transform = `translateX(-50%) rotate(${(n.getHours()/12)*360}deg)`;
+        document.getElementById('date-display').innerText = n.toLocaleDateString('en-US', {weekday:'short', day:'numeric', month:'short'});
+    }
+    setInterval(updateClock, 1000); updateClock();
+
+    // Word Counter
     const input = document.getElementById('mainInput');
-    input.addEventListener('input', () => {
-        const words = input.value.trim() ? input.value.trim().split(/\s+/).length : 0;
+    function updateStats() {
+        const text = input.value.trim();
+        const words = text ? text.split(/\s+/).length : 0;
         document.getElementById('words').innerText = words;
         document.getElementById('chars').innerText = input.value.length;
         document.getElementById('read').innerText = Math.ceil(words / 200) + "m";
-    });
+    }
+    input.addEventListener('input', updateStats);
+    function copyTxt() { input.select(); document.execCommand('copy'); alert('Copied to clipboard!'); }
 
-    function toUpper() { input.value = input.value.toUpperCase(); }
-    function clearAll() { if(confirm("Clear?")) input.value = ""; }
+    // ✨ CHATBOT AI LOGIC ✨
+    function toggleChat() { 
+        const win = document.getElementById('chat-window');
+        win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    function handleKeyPress(e) { if(e.key === 'Enter') sendMessage(); }
+
+    function sendMessage() {
+        const inp = document.getElementById('chat-input');
+        const body = document.getElementById('chat-body');
+        if(!inp.value.trim()) return;
+        
+        body.innerHTML += `<div class="user-msg">${inp.value}</div>`;
+        const userTxt = inp.value.toLowerCase().trim();
+        inp.value = '';
+        body.scrollTop = body.scrollHeight;
+
+        setTimeout(() => {
+            let botReply = "I am a simple AI. I can help with word counting or finding contact details!";
+            if(userTxt.includes("hello") || userTxt.includes("hi")) botReply = "Hello! 🤖 Need help with LexiMetric Pro?";
+            if(userTxt.includes("email") || userTxt.includes("contact")) botReply = "You can contact kashif.asif72@gmail.com for help.";
+            if(userTxt.includes("how to use") || userTxt.includes("help")) botReply = "Just paste your text on the Home page to get instant words, characters, and reading time!";
+            if(userTxt.includes("privacy")) botReply = "Your text never leaves your browser. 🔒 100% Private.";
+            
+            body.innerHTML += `<div class="bot-msg">${botReply}</div>`;
+            body.scrollTop = body.scrollHeight;
+        }, 600);
+    }
 </script>
 </body>
 </html>
