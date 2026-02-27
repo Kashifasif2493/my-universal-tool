@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LexiMetric Pro | Perfect Sync</title>
+    <title>LexiMetric Pro | AI Powered</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -15,46 +15,25 @@
         body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); padding: 10px; }
 
         /* Navigation */
-        nav { width: 100%; max-width: 1100px; margin: 10px auto 30px auto; background: var(--card); padding: 15px; border-radius: 50px; border: 1px solid var(--border); display: flex; justify-content: center; gap: 15px; position: sticky; top: 10px; z-index: 1000; flex-wrap: wrap; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        nav a { color: var(--text); text-decoration: none; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; padding: 5px 12px; border-radius: 20px; }
-        nav a.active { background: var(--accent); color: #000; }
+        nav { width: 100%; max-width: 1100px; margin: 10px auto 30px auto; background: var(--card); padding: 15px; border-radius: 50px; border: 1px solid var(--border); display: flex; justify-content: center; gap: 15px; position: sticky; top: 10px; z-index: 1000; flex-wrap: wrap; }
+        nav a { color: var(--text); text-decoration: none; font-size: 14px; font-weight: 600; cursor: pointer; padding: 5px 12px; }
+        nav a.active { background: var(--accent); color: #000; border-radius: 20px; }
 
-        /* Layout Wrapper */
-        .main-wrapper { display: flex; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto; justify-content: center; align-items: flex-start; }
+        /* Layout */
+        .main-wrapper { display: flex; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto; justify-content: center; }
         .content-area { flex: 2; min-width: 320px; }
-        .page-section { display: none; background: var(--card); border-radius: 30px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); animation: fadeIn 0.4s; }
+        .page-section { display: none; background: var(--card); border-radius: 30px; padding: 35px; border: 1px solid var(--border); animation: fadeIn 0.4s; }
         .active-section { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- PERFECT ANALOG CLOCK --- */
-        .side-panel { flex: 0.8; min-width: 260px; display: flex; flex-direction: column; align-items: center; background: var(--card); padding: 25px; border-radius: 30px; border: 1px solid var(--border); height: fit-content; position: sticky; top: 100px; }
-        
-        .wall-clock {
-            width: 180px; height: 180px;
-            border: 10px solid #ffd700;
-            border-radius: 50%;
-            position: relative;
-            background: #000;
-            margin-bottom: 20px;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
-        }
-
-        /* Clock Numbers Alignment */
-        .number {
-            position: absolute;
-            width: 100%; height: 100%;
-            text-align: center;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #fff;
-            padding: 5px;
-            box-sizing: border-box;
-        }
-        /* Positioning each number individually */
-        .n1 { transform: rotate(30deg); }  .n1 span { transform: rotate(-30deg); display: block; }
-        .n2 { transform: rotate(60deg); }  .n2 span { transform: rotate(-60deg); display: block; }
-        .n3 { transform: rotate(90deg); }  .n3 span { transform: rotate(-90deg); display: block; }
+        /* Clock Fix */
+        .side-panel { flex: 0.8; min-width: 260px; display: flex; flex-direction: column; align-items: center; background: var(--card); padding: 25px; border-radius: 30px; border: 1px solid var(--border); position: sticky; top: 100px; }
+        .wall-clock { width: 180px; height: 180px; border: 8px solid #ffd700; border-radius: 50%; position: relative; background: #000; margin-bottom: 20px; }
+        .number { position: absolute; width: 100%; height: 100%; text-align: center; font-weight: 700; color: #fff; padding: 5px; }
+        /* Position Fix for Clock Digits */
+        .n1 { transform: rotate(30deg); } .n1 span { transform: rotate(-30deg); display: block; }
+        .n2 { transform: rotate(60deg); } .n2 span { transform: rotate(-60deg); display: block; }
+        .n3 { transform: rotate(90deg); } .n3 span { transform: rotate(-90deg); display: block; }
         .n4 { transform: rotate(120deg); } .n4 span { transform: rotate(-120deg); display: block; }
         .n5 { transform: rotate(150deg); } .n5 span { transform: rotate(-150deg); display: block; }
         .n6 { transform: rotate(180deg); } .n6 span { transform: rotate(-180deg); display: block; }
@@ -63,37 +42,29 @@
         .n9 { transform: rotate(270deg); } .n9 span { transform: rotate(-270deg); display: block; }
         .n10 { transform: rotate(300deg); } .n10 span { transform: rotate(-300deg); display: block; }
         .n11 { transform: rotate(330deg); } .n11 span { transform: rotate(-330deg); display: block; }
-        .n12 { transform: rotate(0deg); }   .n12 span { transform: rotate(0deg); display: block; }
-
+        .n12 { transform: rotate(0deg); }
+        
         .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; border-radius: 10px; transform: translateX(-50%); }
-        .hour { width: 6px; height: 45px; background: #fff; z-index: 3; }
-        .minute { width: 4px; height: 65px; background: #ffd700; z-index: 2; }
-        .second { width: 2px; height: 75px; background: #ff4444; z-index: 1; }
-        .wall-clock::after { content:''; position:absolute; width:10px; height:10px; background:#ffd700; border-radius:50%; top:50%; left:50%; transform:translate(-50%,-50%); z-index:10; }
+        .hour { width: 6px; height: 45px; background: #fff; }
+        .minute { width: 4px; height: 65px; background: #ffd700; }
+        .second { width: 2px; height: 75px; background: #ff4444; }
 
         /* Tool Styles */
-        h1 { margin-top: 0; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.2rem; text-align: center; font-weight: 800; }
-        textarea { width: 100%; height: 260px; border-radius: 20px; padding: 20px; background: var(--input); color: white; border: 1px solid var(--border); outline: none; box-sizing: border-box; font-size: 16px; transition: 0.3s; }
+        textarea { width: 100%; height: 250px; border-radius: 20px; padding: 20px; background: var(--input); color: white; border: 1px solid var(--border); outline: none; box-sizing: border-box; font-size: 16px; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin: 25px 0; }
         .stat-card { background: var(--input); padding: 15px; border-radius: 15px; text-align: center; border: 1px solid var(--border); }
         .stat-card span { display: block; font-size: 1.6rem; font-weight: 700; color: #ffd700; }
-        button { padding: 12px 25px; border-radius: 12px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; margin: 5px; color: #000; }
+        button { padding: 12px 25px; border-radius: 10px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; margin: 5px; }
 
-        /* 🤖 DIGITAL ROBOT BOT 🤖 */
-        #bot-launcher { position: fixed; bottom: 30px; right: 30px; width: 80px; height: 80px; cursor: pointer; z-index: 2000; animation: float 3s ease-in-out infinite; }
-        #bot-launcher img { width: 100%; height: auto; border-radius: 50%; border: 3px solid #ffd700; background: #141b2d; box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-
-        #bot-window { position: fixed; bottom: 120px; right: 30px; width: 330px; background: var(--card); border: 1px solid var(--border); border-radius: 25px; display: none; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.8); z-index: 2000; overflow: hidden; }
-        .bot-header { background: #ffd700; color: #000; padding: 15px 20px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
-        .bot-body { height: 350px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #0c121e; font-size: 14px; }
-        .msg { padding: 10px 15px; border-radius: 15px; max-width: 85%; }
-        .bot-msg { background: var(--input); color: #fff; align-self: flex-start; border: 1px solid var(--border); }
+        /* 🤖 ROBOT BOT (SVG - NO IMAGE ERROR) 🤖 */
+        #bot-launcher { position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px; cursor: pointer; z-index: 2000; animation: float 3s infinite ease-in-out; }
+        #bot-window { position: fixed; bottom: 110px; right: 30px; width: 320px; background: var(--card); border: 1px solid var(--border); border-radius: 25px; display: none; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.7); z-index: 2000; overflow: hidden; }
+        .bot-header { background: #ffd700; color: #000; padding: 15px; font-weight: 800; display: flex; justify-content: space-between; }
+        .bot-body { height: 300px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #0c121e; }
+        .msg { padding: 10px; border-radius: 10px; max-width: 80%; font-size: 13px; }
+        .bot-msg { background: var(--input); align-self: flex-start; }
         .user-msg { background: #ffd700; color: #000; align-self: flex-end; font-weight: 600; }
-        .bot-footer { padding: 15px; display: flex; gap: 8px; border-top: 1px solid var(--border); }
-        .bot-footer input { flex: 1; background: var(--input); border: 1px solid var(--border); color: #fff; padding: 10px; border-radius: 10px; outline: none; }
-
-        @media (max-width: 768px) { .main-wrapper { flex-direction: column-reverse; } .side-panel { position: static; width: 100%; } #bot-window { width: 90%; right: 5%; } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     </style>
 </head>
 <body>
@@ -109,116 +80,100 @@
 <div class="main-wrapper">
     <div class="content-area">
         <section id="home" class="page-section active-section">
-            <h1>LexiMetric Pro</h1>
-            <textarea id="txtInput" placeholder="Start typing here..."></textarea>
+            <h1 style="text-align:center; color:#ffd700;">LexiMetric Pro</h1>
+            <textarea id="ti" placeholder="Paste your text..."></textarea>
             <div class="stats-grid">
-                <div class="stat-card">Words<span id="wCount">0</span></div>
-                <div class="stat-card">Chars<span id="cCount">0</span></div>
-                <div class="stat-card">Reading<span id="rTime">0m</span></div>
+                <div class="stat-card">Words<span id="wc">0</span></div>
+                <div class="stat-card">Chars<span id="cc">0</span></div>
+                <div class="stat-card">Reading<span id="rt">0m</span></div>
             </div>
             <div style="text-align:center;">
-                <button onclick="upperCase()">UPPERCASE</button>
-                <button onclick="copyAll()">Copy</button>
-                <button onclick="clearTxt()" style="background:#ff4444; color:#fff;">Clear</button>
+                <button onclick="copyT()">Copy</button>
+                <button onclick="document.getElementById('ti').value=''" style="background:#ff4444; color:#fff;">Clear</button>
             </div>
         </section>
-
-        <section id="about" class="page-section"><h1>About Us</h1><p>LexiMetric Pro is a digital-first text analysis platform.</p></section>
-        <section id="contact" class="page-section"><h1>Contact</h1><p>Email: <strong>kashif.asif72@gmail.com</strong></p></section>
-        <section id="privacy" class="page-section"><h1>Privacy</h1><p>Local processing only. No data is stored.</p></section>
-        <section id="terms" class="page-section"><h1>Terms</h1><p>Free to use for everyone.</p></section>
+        <section id="about" class="page-section"><h1>About</h1><p>Digital AI tools for writers.</p></section>
+        <section id="contact" class="page-section"><h1>Contact</h1><p>kashif.asif72@gmail.com</p></section>
+        <section id="privacy" class="page-section"><h1>Privacy</h1><p>Safe & Local.</p></section>
+        <section id="terms" class="page-section"><h1>Terms</h1><p>Free usage.</p></section>
     </div>
 
     <div class="side-panel">
         <div class="wall-clock">
             <div class="number n12"><span>12</span></div>
-            <div class="number n1"><span>1</span></div>
-            <div class="number n2"><span>2</span></div>
-            <div class="number n3"><span>3</span></div>
-            <div class="number n4"><span>4</span></div>
-            <div class="number n5"><span>5</span></div>
-            <div class="number n6"><span>6</span></div>
-            <div class="number n7"><span>7</span></div>
-            <div class="number n8"><span>8</span></div>
-            <div class="number n9"><span>9</span></div>
-            <div class="number n10"><span>10</span></div>
+            <div class="number n1"><span>1</span></div><div class="number n2"><span>2</span></div>
+            <div class="number n3"><span>3</span></div><div class="number n4"><span>4</span></div>
+            <div class="number n5"><span>5</span></div><div class="number n6"><span>6</span></div>
+            <div class="number n7"><span>7</span></div><div class="number n8"><span>8</span></div>
+            <div class="number n9"><span>9</span></div><div class="number n10"><span>10</span></div>
             <div class="number n11"><span>11</span></div>
-            
-            <div class="hand hour" id="h-hand"></div>
-            <div class="hand minute" id="m-hand"></div>
-            <div class="hand second" id="s-hand"></div>
+            <div class="hand hour" id="hh"></div>
+            <div class="hand minute" id="mm"></div>
+            <div class="hand second" id="ss"></div>
         </div>
-        <p id="date-box" style="font-weight:700; color:#ffd700;"></p>
+        <p id="db" style="color:#ffd700; font-weight:700;"></p>
     </div>
 </div>
 
-<div id="bot-launcher" onclick="toggleChat()">
-    <img src="https://i.ibb.co/XfXkYvR/chatbot.avif" alt="Digital Robot">
+<div id="bot-launcher" onclick="tc()">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="45" fill="#141b2d" stroke="#ffd700" stroke-width="3"/>
+        <rect x="30" y="35" width="40" height="30" rx="5" fill="#0a0e17" stroke="#ffd700" stroke-width="2"/>
+        <circle cx="40" cy="45" r="3" fill="#00ffff"><animate attributeName="opacity" values="0;1;0" dur="2s" infinite/></circle>
+        <circle cx="60" cy="45" r="3" fill="#00ffff"><animate attributeName="opacity" values="0;1;0" dur="2s" infinite/></circle>
+        <path d="M40 55 Q50 60 60 55" stroke="#ffd700" fill="none" stroke-width="2"/>
+    </svg>
 </div>
 
 <div id="bot-window">
-    <div class="bot-header"><span>🤖 AI ASSISTANT</span><span onclick="toggleChat()" style="cursor:pointer">×</span></div>
-    <div class="bot-body" id="bot-chat">
-        <div class="msg bot-msg">Hello! 🤖 I am your digital assistant. How can I help?</div>
+    <div class="bot-header"><span>🤖 AI BOT</span><span onclick="tc()" style="cursor:pointer">×</span></div>
+    <div class="bot-body" id="bc">
+        <div class="msg bot-msg">Hello! I am LexiBot. 🦾 How can I help?</div>
     </div>
     <div class="bot-footer">
-        <input type="text" id="bot-input" placeholder="Ask me..." onkeypress="if(event.key=='Enter') sendMsg()">
-        <button onclick="sendMsg()">Send</button>
+        <input type="text" id="bi" placeholder="Type here..." onkeypress="if(event.key=='Enter') sm()">
+        <button onclick="sm()">Send</button>
     </div>
 </div>
 
 <script>
-    function show(id) {
-        document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-section'));
-        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    function show(id){
+        document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active-section'));
+        document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
         document.getElementById(id).classList.add('active-section');
         document.getElementById('n-'+id).classList.add('active');
     }
 
-    function startClock() {
-        const now = new Date();
-        const s = now.getSeconds();
-        const m = now.getMinutes();
-        const h = now.getHours();
-        document.getElementById('s-hand').style.transform = `translateX(-50%) rotate(${(s/60)*360}deg)`;
-        document.getElementById('m-hand').style.transform = `translateX(-50%) rotate(${(m/60)*360}deg)`;
-        document.getElementById('h-hand').style.transform = `translateX(-50%) rotate(${(h/12)*360 + (m/60)*30}deg)`;
-        document.getElementById('date-box').innerText = now.toLocaleDateString('en-US', {weekday:'short', day:'numeric', month:'short'});
+    function sc(){
+        const n=new Date();
+        document.getElementById('ss').style.transform=`translateX(-50%) rotate(${(n.getSeconds()/60)*360}deg)`;
+        document.getElementById('mm').style.transform=`translateX(-50%) rotate(${(n.getMinutes()/60)*360}deg)`;
+        document.getElementById('hh').style.transform=`translateX(-50%) rotate(${(n.getHours()/12)*360}deg)`;
+        document.getElementById('db').innerText=n.toLocaleDateString();
     }
-    setInterval(startClock, 1000); startClock();
+    setInterval(sc,1000); sc();
 
-    const area = document.getElementById('txtInput');
-    area.addEventListener('input', () => {
-        const words = area.value.trim() ? area.value.trim().split(/\s+/).length : 0;
-        document.getElementById('wCount').innerText = words;
-        document.getElementById('cCount').innerText = area.value.length;
-        document.getElementById('rTime').innerText = Math.ceil(words / 200) + "m";
+    document.getElementById('ti').addEventListener('input', function(){
+        const v=this.value.trim();
+        const w=v?v.split(/\s+/).length:0;
+        document.getElementById('wc').innerText=w;
+        document.getElementById('cc').innerText=this.value.length;
+        document.getElementById('rt').innerText=Math.ceil(w/200)+'m';
     });
 
-    function upperCase() { area.value = area.value.toUpperCase(); }
-    function clearTxt() { area.value = ""; }
-    function copyAll() { area.select(); document.execCommand('copy'); alert('Copied!'); }
-
-    function toggleChat() { 
-        const win = document.getElementById('bot-window');
-        win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+    function tc(){ const w=document.getElementById('bot-window'); w.style.display=w.style.display=='flex'?'none':'flex'; }
+    function sm(){
+        const i=document.getElementById('bi'); const b=document.getElementById('bc');
+        if(!i.value)return; b.innerHTML+=`<div class="msg user-msg">${i.value}</div>`;
+        const v=i.value.toLowerCase(); i.value='';
+        setTimeout(()=>{
+            let r="I can help with counts!";
+            if(v.includes('hi')) r="Hello! How can I help?";
+            if(v.includes('email')) r="Contact: kashif.asif72@gmail.com";
+            b.innerHTML+=`<div class="msg bot-msg">${r}</div>`; b.scrollTop=b.scrollHeight;
+        },600);
     }
-
-    function sendMsg() {
-        const inp = document.getElementById('bot-input');
-        const box = document.getElementById('bot-chat');
-        if(!inp.value.trim()) return;
-        box.innerHTML += `<div class="msg user-msg">${inp.value}</div>`;
-        const q = inp.value.toLowerCase();
-        inp.value = "";
-        setTimeout(() => {
-            let res = "I can help with word counts or contact details!";
-            if(q.includes("hi") || q.includes("hello")) res = "Hello! 🤖 Need any help with the tool?";
-            if(q.includes("email")) res = "Contact us at kashif.asif72@gmail.com";
-            box.innerHTML += `<div class="msg bot-msg">${res}</div>`;
-            box.scrollTop = box.scrollHeight;
-        }, 600);
-    }
+    function copyT(){ const t=document.getElementById('ti'); t.select(); document.execCommand('copy'); alert('Copied!'); }
 </script>
 </body>
 </html>
