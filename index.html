@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TextMaster Pro | Advanced Text Analysis Tool</title>
 
-<meta name="description" content="TextMaster Pro is a professional free text analysis tool with word counter, sentence counter, paragraph counter and live clock.">
-<meta name="keywords" content="word counter, text analyzer, seo tool, sentence counter">
+<meta name="description" content="Free advanced text analysis tool with word counter, sentence counter and live analog clock.">
+<meta name="keywords" content="word counter, text analyzer, seo tool">
 <meta name="author" content="TextMaster Pro">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
@@ -157,13 +157,39 @@ text-align:center;
 }
 
 .wall-clock{
-width:180px;
-height:180px;
+width:200px;
+height:200px;
 border:6px solid var(--accent);
 border-radius:50%;
 position:relative;
 margin:0 auto 15px auto;
+background:#000;
 }
+
+.number{
+position:absolute;
+width:100%;
+height:100%;
+text-align:center;
+font-weight:700;
+color:#fff;
+padding:5px;
+box-sizing:border-box;
+}
+
+.number span{display:block;}
+
+.n1{transform:rotate(30deg);} .n1 span{transform:rotate(-30deg);}
+.n2{transform:rotate(60deg);} .n2 span{transform:rotate(-60deg);}
+.n3{transform:rotate(90deg);} .n3 span{transform:rotate(-90deg);}
+.n4{transform:rotate(120deg);} .n4 span{transform:rotate(-120deg);}
+.n5{transform:rotate(150deg);} .n5 span{transform:rotate(-150deg);}
+.n6{transform:rotate(180deg);} .n6 span{transform:rotate(-180deg);}
+.n7{transform:rotate(210deg);} .n7 span{transform:rotate(-210deg);}
+.n8{transform:rotate(240deg);} .n8 span{transform:rotate(-240deg);}
+.n9{transform:rotate(270deg);} .n9 span{transform:rotate(-270deg);}
+.n10{transform:rotate(300deg);} .n10 span{transform:rotate(-300deg);}
+.n11{transform:rotate(330deg);} .n11 span{transform:rotate(-330deg);}
 
 .hand{
 position:absolute;
@@ -173,9 +199,9 @@ transform-origin:bottom;
 transform:translateX(-50%);
 }
 
-.hour{width:6px;height:45px;background:#fff;}
-.minute{width:4px;height:65px;background:var(--accent);}
-.second{width:2px;height:75px;background:red;}
+.hour{width:6px;height:50px;background:#fff;}
+.minute{width:4px;height:70px;background:var(--accent);}
+.second{width:2px;height:80px;background:red;}
 
 footer{
 text-align:center;
@@ -222,36 +248,46 @@ font-size:13px;
 
 <section id="about" class="page-section">
 <h2>About Us</h2>
-<p>TextMaster Pro is a modern browser-based text analysis platform designed for writers, students, bloggers and SEO professionals. Our tool provides accurate word, character, sentence and paragraph analysis instantly.</p>
-<p>We believe in privacy-first technology. All processing happens locally in your browser without storing any data on servers.</p>
+<p>TextMaster Pro is a professional browser-based writing assistant tool for writers, students and SEO experts.</p>
 </section>
 
 <section id="contact" class="page-section">
-<h2>Contact Us</h2>
-<p>If you have questions, suggestions or business inquiries, feel free to contact us.</p>
+<h2>Contact</h2>
 <p>Email: <strong>kashif.asif72@gmail.com</strong></p>
-<p>Response Time: Within 24 hours</p>
 </section>
 
 <section id="privacy" class="page-section">
 <h2>Privacy Policy</h2>
-<p>TextMaster Pro does not collect, store or share any user data. All text processing happens directly inside your browser.</p>
-<p>We do not maintain any database of user content and do not track personal information.</p>
+<p>All processing happens locally in your browser. We do not store or share any data.</p>
 </section>
 
 <section id="terms" class="page-section">
 <h2>Terms of Service</h2>
-<p>By using TextMaster Pro, you agree to use this tool responsibly and for lawful purposes only. We strive to provide accurate results but recommend verifying critical content independently.</p>
+<p>Use this tool responsibly. We provide accurate results but recommend verification for critical work.</p>
 </section>
 
 </div>
 
 <div class="side-panel">
 <div class="wall-clock">
+<div class="number n12"><span>12</span></div>
+<div class="number n1"><span>1</span></div>
+<div class="number n2"><span>2</span></div>
+<div class="number n3"><span>3</span></div>
+<div class="number n4"><span>4</span></div>
+<div class="number n5"><span>5</span></div>
+<div class="number n6"><span>6</span></div>
+<div class="number n7"><span>7</span></div>
+<div class="number n8"><span>8</span></div>
+<div class="number n9"><span>9</span></div>
+<div class="number n10"><span>10</span></div>
+<div class="number n11"><span>11</span></div>
+
 <div class="hand hour" id="hh"></div>
 <div class="hand minute" id="mm"></div>
 <div class="hand second" id="ss"></div>
 </div>
+
 <p id="dateBox" style="color:var(--accent);font-weight:700;"></p>
 </div>
 
