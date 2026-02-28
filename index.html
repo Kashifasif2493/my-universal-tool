@@ -1,225 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TextMaster Pro | Professional Text Analysis & SEO Tool</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root { 
-            --bg: #0a0e17; --card: #141b2d; --text: #e2e8f0; 
-            --accent: linear-gradient(135deg, #ffd700 0%, #b8860b 100%); 
-            --border: #2d3748; --input: #1f2937;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); padding: 10px; }
+<title>TextMaster Pro | Free Advanced Text Analysis Tool</title>
 
-        /* Navigation */
-        nav { width: 100%; max-width: 1100px; margin: 10px auto 30px auto; background: var(--card); padding: 15px; border-radius: 50px; border: 1px solid var(--border); display: flex; justify-content: center; gap: 15px; position: sticky; top: 10px; z-index: 1000; flex-wrap: wrap; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        nav a { color: var(--text); text-decoration: none; font-size: 14px; font-weight: 600; cursor: pointer; padding: 8px 15px; transition: 0.3s; }
-        nav a.active { background: var(--accent); color: #000; border-radius: 25px; }
+<meta name="description" content="Free advanced text analysis tool. Count words, characters, sentences, paragraphs and optimize text instantly.">
+<meta name="keywords" content="word counter, sentence counter, paragraph counter, text tool, seo writing tool">
+<meta name="author" content="TextMaster Pro">
 
-        /* Layout */
-        .main-wrapper { display: flex; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto; justify-content: center; align-items: flex-start; }
-        .content-area { flex: 2; min-width: 320px; }
-        .page-section { display: none; background: var(--card); border-radius: 30px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); animation: fadeIn 0.4s; line-height: 1.6; }
-        .active-section { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-        /* Perfect Analog Clock */
-        .side-panel { flex: 0.8; min-width: 260px; display: flex; flex-direction: column; align-items: center; background: var(--card); padding: 25px; border-radius: 30px; border: 1px solid var(--border); position: sticky; top: 100px; }
-        .wall-clock { width: 180px; height: 180px; border: 8px solid #ffd700; border-radius: 50%; position: relative; background: #000; margin-bottom: 20px; box-shadow: 0 0 20px rgba(255,215,0,0.3); }
-        .number { position: absolute; width: 100%; height: 100%; text-align: center; font-weight: 700; color: #fff; padding: 5px; box-sizing: border-box; }
-        .n1 { transform: rotate(30deg); } .n1 span { transform: rotate(-30deg); display: block; }
-        .n2 { transform: rotate(60deg); } .n2 span { transform: rotate(-60deg); display: block; }
-        .n3 { transform: rotate(90deg); } .n3 span { transform: rotate(-90deg); display: block; }
-        .n4 { transform: rotate(120deg); } .n4 span { transform: rotate(-120deg); display: block; }
-        .n5 { transform: rotate(150deg); } .n5 span { transform: rotate(-150deg); display: block; }
-        .n6 { transform: rotate(180deg); } .n6 span { transform: rotate(-180deg); display: block; }
-        .n7 { transform: rotate(210deg); } .n7 span { transform: rotate(-210deg); display: block; }
-        .n8 { transform: rotate(240deg); } .n8 span { transform: rotate(-240deg); display: block; }
-        .n9 { transform: rotate(270deg); } .n9 span { transform: rotate(-270deg); display: block; }
-        .n10 { transform: rotate(300deg); } .n10 span { transform: rotate(-300deg); display: block; }
-        .n11 { transform: rotate(330deg); } .n11 span { transform: rotate(-330deg); display: block; }
-        .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; border-radius: 10px; transform: translateX(-50%); }
-        .hour { width: 6px; height: 45px; background: #fff; }
-        .minute { width: 4px; height: 65px; background: #ffd700; }
-        .second { width: 2px; height: 75px; background: #ff4444; }
+<style>
+:root{
+--bg:#0f172a;
+--card:#1e293b;
+--text:#e2e8f0;
+--accent:#38bdf8;
+--border:#334155;
+--input:#0f172a;
+}
 
-        /* Tool Styles */
-        h1, h2 { background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; text-align: center; }
-        textarea { width: 100%; height: 260px; border-radius: 20px; padding: 20px; background: var(--input); color: white; border: 1px solid var(--border); outline: none; box-sizing: border-box; font-size: 16px; transition: 0.3s; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin: 25px 0; }
-        .stat-card { background: var(--input); padding: 15px; border-radius: 15px; text-align: center; border: 1px solid var(--border); }
-        .stat-card span { display: block; font-size: 1.6rem; font-weight: 700; color: #ffd700; }
-        .btn-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-        button { padding: 12px 20px; border-radius: 10px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; color: #000; }
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:var(--bg);
+color:var(--text);
+padding:15px;
+}
 
-        /* Digital Robot Bot */
-        #bot-launcher { position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px; cursor: pointer; z-index: 2000; animation: float 3s infinite ease-in-out; }
-        #bot-window { position: fixed; bottom: 110px; right: 30px; width: 320px; background: var(--card); border: 1px solid var(--border); border-radius: 25px; display: none; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.7); z-index: 2000; overflow: hidden; }
-        .bot-header { background: #ffd700; color: #000; padding: 15px; font-weight: 800; display: flex; justify-content: space-between; }
-        .bot-body { height: 300px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #0c121e; font-size: 13px; }
-        .msg { padding: 10px; border-radius: 10px; max-width: 80%; }
-        .bot-msg { background: var(--input); align-self: flex-start; color: #fff; }
-        .user-msg { background: #ffd700; color: #000; align-self: flex-end; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-    </style>
+nav{
+max-width:1100px;
+margin:0 auto 30px auto;
+background:var(--card);
+padding:15px;
+border-radius:50px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+border:1px solid var(--border);
+}
+
+nav a{
+text-decoration:none;
+color:var(--text);
+font-weight:600;
+padding:8px 15px;
+border-radius:20px;
+cursor:pointer;
+}
+
+nav a.active{
+background:var(--accent);
+color:#000;
+}
+
+.main-wrapper{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+max-width:1200px;
+margin:0 auto;
+}
+
+.content-area{
+flex:2;
+min-width:320px;
+}
+
+.page-section{
+display:none;
+background:var(--card);
+padding:30px;
+border-radius:25px;
+border:1px solid var(--border);
+}
+
+.active-section{
+display:block;
+}
+
+textarea{
+width:100%;
+height:260px;
+border-radius:15px;
+padding:20px;
+background:var(--input);
+color:#fff;
+border:1px solid var(--border);
+font-size:16px;
+resize:none;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:15px;
+margin:20px 0;
+}
+
+.stat-card{
+background:var(--input);
+padding:15px;
+border-radius:15px;
+text-align:center;
+border:1px solid var(--border);
+}
+
+.stat-card span{
+display:block;
+font-size:1.4rem;
+font-weight:700;
+color:var(--accent);
+}
+
+.btn-container{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+justify-content:center;
+}
+
+button{
+padding:10px 18px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+background:var(--accent);
+color:#000;
+}
+
+button.danger{
+background:#ef4444;
+color:#fff;
+}
+
+footer{
+text-align:center;
+margin-top:40px;
+opacity:0.6;
+font-size:13px;
+}
+</style>
 </head>
+
 <body>
 
 <nav>
-    <a onclick="show('home')" id="n-home" class="active">Home</a>
-    <a onclick="show('about')" id="n-about">About Us</a>
-    <a onclick="show('contact')" id="n-contact">Contact</a>
-    <a onclick="show('privacy')" id="n-privacy">Privacy Policy</a>
-    <a onclick="show('terms')" id="n-terms">Terms</a>
+<a onclick="show('home')" id="n-home" class="active">Home</a>
+<a onclick="show('about')" id="n-about">About</a>
+<a onclick="show('contact')" id="n-contact">Contact</a>
 </nav>
 
 <div class="main-wrapper">
-    <div class="content-area">
-        <section id="home" class="page-section active-section">
-            <h1>TextMaster Pro</h1>
-            <textarea id="mainInput" placeholder="Enter your text for master analysis..."></textarea>
-            <div class="stats-grid">
-                <div class="stat-card">Words<span id="wCount">0</span></div>
-                <div class="stat-card">Characters<span id="cCount">0</span></div>
-                <div class="stat-card">Read Time<span id="rTime">0m</span></div>
-            </div>
-            <div class="btn-container">
-                <button onclick="changeCase('up')">UPPERCASE</button>
-                <button onclick="changeCase('low')">lowercase</button>
-                <button onclick="copyText()">Copy Text</button>
-                <button onclick="clearText()" style="background:#ff4444; color:#fff;">Clear All</button>
-            </div>
-        </section>
+<div class="content-area">
 
-        <section id="about" class="page-section">
-            <h2>About TextMaster Pro</h2>
-            <p>Welcome to <strong>TextMaster Pro</strong>, the most reliable and efficient tool for modern writers. Our platform is designed to provide detailed insights into your text, ensuring that every piece of content you create is polished and professional.</p>
-            <p>Whether you are a blogger, an SEO expert, or a student, TextMaster Pro offers the speed and accuracy you need to stay ahead. We take pride in our "Local-First" approach, meaning your work stays with you, always.</p>
-        </section>
+<section id="home" class="page-section active-section">
+<h1 style="text-align:center;">TextMaster Pro</h1>
 
-        <section id="contact" class="page-section">
-            <h2>Contact Us</h2>
-            <p>At TextMaster Pro, we value our users' feedback. If you have any suggestions or need technical support, feel free to reach out to our team.</p>
-            <div style="background:var(--input); padding:20px; border-radius:15px; border:1px solid var(--border); margin-top:15px;">
-                <p>📧 <strong>Support Email:</strong> kashif.asif72@gmail.com</p>
-                <p>📍 <strong>Office:</strong> Digital Innovation Hub</p>
-                <p>🕒 <strong>Response Time:</strong> Within 24 Hours</p>
-            </div>
-        </section>
+<textarea id="mainInput" placeholder="Enter your text here..."></textarea>
 
-        <section id="privacy" class="page-section">
-            <h2>Privacy Policy</h2>
-            <p>Your privacy is the core of TextMaster Pro. We have built this tool with a strict privacy-first policy:</p>
-            <ul>
-                <li><strong>Browser Processing:</strong> Your text is never sent to our servers. All counting and formatting happen in your browser.</li>
-                <li><strong>No Database:</strong> We do not maintain any database of your input or personal information.</li>
-                <li><strong>Transparency:</strong> We are open about our process. No hidden trackers, no selling of data.</li>
-            </ul>
-        </section>
-
-        <section id="terms" class="page-section">
-            <h2>Terms of Service</h2>
-            <p>By accessing TextMaster Pro, you agree to use our tool for lawful purposes. We provide this service for free and strive for 100% accuracy, though we encourage users to verify critical data independently. You are free to use TextMaster Pro for any commercial or personal writing project.</p>
-        </section>
-    </div>
-
-    <div class="side-panel">
-        <div class="wall-clock">
-            <div class="number n12"><span>12</span></div>
-            <div class="number n1"><span>1</span></div><div class="number n2"><span>2</span></div>
-            <div class="number n3"><span>3</span></div><div class="number n4"><span>4</span></div>
-            <div class="number n5"><span>5</span></div><div class="number n6"><span>6</span></div>
-            <div class="number n7"><span>7</span></div><div class="number n8"><span>8</span></div>
-            <div class="number n9"><span>9</span></div><div class="number n10"><span>10</span></div>
-            <div class="number n11"><span>11</span></div>
-            <div class="hand hour" id="hh"></div>
-            <div class="hand minute" id="mm"></div>
-            <div class="hand second" id="ss"></div>
-        </div>
-        <p id="dateBox" style="color:#ffd700; font-weight:700;"></p>
-        <div style="font-size:10px; opacity:0.4; margin-top:10px;">TEXTMASTER PRO v1.0</div>
-    </div>
+<div class="stats-grid">
+<div class="stat-card">Words<span id="wCount">0</span></div>
+<div class="stat-card">Characters<span id="cCount">0</span></div>
+<div class="stat-card">Sentences<span id="sCount">0</span></div>
+<div class="stat-card">Paragraphs<span id="pCount">0</span></div>
+<div class="stat-card">Read Time<span id="rTime">0m</span></div>
 </div>
 
-<div id="bot-launcher" onclick="toggleChat()">
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="45" fill="#141b2d" stroke="#ffd700" stroke-width="3"/>
-        <rect x="30" y="35" width="40" height="30" rx="5" fill="#0a0e17" stroke="#ffd700" stroke-width="2"/>
-        <circle cx="40" cy="45" r="3" fill="#00ffff"><animate attributeName="opacity" values="0;1;0" dur="2s" infinite/></circle>
-        <circle cx="60" cy="45" r="3" fill="#00ffff"><animate attributeName="opacity" values="0;1;0" dur="2s" infinite/></circle>
-        <path d="M40 55 Q50 60 60 55" stroke="#ffd700" fill="none" stroke-width="2"/>
-    </svg>
+<div class="btn-container">
+<button onclick="changeCase('up')">UPPERCASE</button>
+<button onclick="changeCase('low')">lowercase</button>
+<button onclick="capitalizeText()">Capitalize</button>
+<button onclick="removeSpaces()">Remove Extra Spaces</button>
+<button onclick="copyText()">Copy</button>
+<button onclick="clearText()" class="danger">Clear</button>
 </div>
 
-<div id="bot-window">
-    <div class="bot-header"><span>🤖 TextMaster AI</span><span onclick="toggleChat()" style="cursor:pointer">×</span></div>
-    <div class="bot-body" id="chatBody">
-        <div class="msg bot-msg">Welcome to TextMaster Pro! 🦾 I can help you navigate the tool or answer policy questions.</div>
-    </div>
-    <div class="bot-footer" style="padding:10px; display:flex; gap:5px; border-top:1px solid var(--border);">
-        <input type="text" id="botInput" placeholder="Ask me..." style="flex:1; background:var(--input); border:1px solid var(--border); color:#fff; padding:8px; border-radius:5px;" onkeypress="if(event.key=='Enter') sendBotMsg()">
-        <button onclick="sendBotMsg()" style="padding:5px 10px; background:#ffd700; border:none; border-radius:5px; cursor:pointer; font-weight:700;">Send</button>
-    </div>
+</section>
+
+<section id="about" class="page-section">
+<h2>About</h2>
+<p>TextMaster Pro is a free advanced text analysis tool designed for writers, bloggers and students. Everything runs in your browser for maximum privacy.</p>
+</section>
+
+<section id="contact" class="page-section">
+<h2>Contact</h2>
+<p>Email: kashif.asif72@gmail.com</p>
+</section>
+
 </div>
+</div>
+
+<footer>
+© 2026 TextMaster Pro - Advanced Writing Toolkit
+</footer>
 
 <script>
-    function show(id){
-        document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active-section'));
-        document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
-        document.getElementById(id).classList.add('active-section');
-        document.getElementById('n-'+id).classList.add('active');
-    }
 
-    function updateClock(){
-        const now = new Date();
-        document.getElementById('ss').style.transform = `translateX(-50%) rotate(${(now.getSeconds()/60)*360}deg)`;
-        document.getElementById('mm').style.transform = `translateX(-50%) rotate(${(now.getMinutes()/60)*360}deg)`;
-        document.getElementById('hh').style.transform = `translateX(-50%) rotate(${(now.getHours()/12)*360 + (now.getMinutes()/60)*30}deg)`;
-        document.getElementById('dateBox').innerText = now.toLocaleDateString();
-    }
-    setInterval(updateClock, 1000); updateClock();
+const input = document.getElementById('mainInput');
+const wCount = document.getElementById('wCount');
+const cCount = document.getElementById('cCount');
+const sCount = document.getElementById('sCount');
+const pCount = document.getElementById('pCount');
+const rTime = document.getElementById('rTime');
 
-    const inputArea = document.getElementById('mainInput');
-    inputArea.addEventListener('input', () => {
-        const text = inputArea.value.trim();
-        const words = text ? text.split(/\s+/).length : 0;
-        document.getElementById('wCount').innerText = words;
-        document.getElementById('cCount').innerText = inputArea.value.length;
-        document.getElementById('rTime').innerText = Math.ceil(words / 200) + 'm';
-    });
+function updateStats(){
+let text = input.value.trim();
 
-    function changeCase(type) {
-        if(type === 'up') inputArea.value = inputArea.value.toUpperCase();
-        else inputArea.value = inputArea.value.toLowerCase();
-    }
+let words = text ? text.split(/\s+/).length : 0;
+let sentences = text ? text.split(/[.!?]+/).filter(s=>s.trim().length>0).length : 0;
+let paragraphs = text ? text.split(/\n+/).filter(p=>p.trim().length>0).length : 0;
 
-    function clearText() { if(confirm("Clear master board?")) { inputArea.value = ""; } }
-    function copyText() { inputArea.select(); document.execCommand('copy'); alert("TextMaster: Copied to clipboard!"); }
+wCount.textContent = words;
+cCount.textContent = input.value.length;
+sCount.textContent = sentences;
+pCount.textContent = paragraphs;
+rTime.textContent = words ? Math.ceil(words/200)+"m" : "0m";
+}
 
-    function toggleChat() {
-        const win = document.getElementById('bot-window');
-        win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
-    }
+input.addEventListener('input', updateStats);
 
-    function sendBotMsg() {
-        const inp = document.getElementById('botInput');
-        const body = document.getElementById('chatBody');
-        if(!inp.value.trim()) return;
-        body.innerHTML += `<div class="msg user-msg">${inp.value}</div>`;
-        const val = inp.value.toLowerCase();
-        inp.value = "";
-        setTimeout(() => {
-            let reply = "TextMaster AI at your service. Check our 'About' page for more info!";
-            if(val.includes('hi') || val.includes('hello')) reply = "Hello! 🤖 Welcome to TextMaster Pro. How can I assist?";
-            if(val.includes('email')) reply = "Contact TextMaster Pro at kashif.asif72@gmail.com";
-            if(val.includes('privacy')) reply = "We don't store data. Everything is masterfully private!";
-            body.innerHTML += `<div class="msg bot-msg">${reply}</div>`;
-            body.scrollTop = body.scrollHeight;
-        }, 600);
-    }
+function changeCase(type){
+if(type==='up') input.value = input.value.toUpperCase();
+else input.value = input.value.toLowerCase();
+updateStats();
+}
+
+function capitalizeText(){
+input.value = input.value.replace(/\b\w/g,l=>l.toUpperCase());
+updateStats();
+}
+
+function removeSpaces(){
+input.value = input.value.replace(/\s+/g,' ').trim();
+updateStats();
+}
+
+function clearText(){
+if(confirm("Clear all text?")){
+input.value="";
+updateStats();
+}
+}
+
+async function copyText(){
+try{
+await navigator.clipboard.writeText(input.value);
+alert("Copied successfully!");
+}catch{
+alert("Copy failed.");
+}
+}
+
+function show(id){
+document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active-section'));
+document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+document.getElementById(id).classList.add('active-section');
+document.getElementById('n-'+id).classList.add('active');
+}
+
 </script>
+
 </body>
 </html>
