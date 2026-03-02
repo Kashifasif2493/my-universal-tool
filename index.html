@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TextMaster Pro | Master Your Content</title>
+    <title>TextMaster Pro | Multi-Tool Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -26,21 +26,20 @@
         .active-section { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Content Styling */
-        h2 { background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; margin-top: 0; }
-        p { margin-bottom: 15px; font-size: 15px; opacity: 0.9; }
-        ul { margin-bottom: 20px; padding-left: 20px; }
-        li { margin-bottom: 8px; font-size: 14px; }
-
-        /* Tool Styles */
-        textarea { width: 100%; height: 260px; border-radius: 20px; padding: 20px; background: var(--input); color: white; border: 1px solid var(--border); outline: none; box-sizing: border-box; font-size: 16px; transition: 0.3s; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin: 25px 0; }
+        /* General Styling */
+        h1, h2, h3 { background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; text-align: center; }
+        .tool-box { background: var(--input); padding: 20px; border-radius: 20px; border: 1px solid var(--border); margin-top: 25px; }
+        textarea, input[type="text"], input[type="number"] { width: 100%; border-radius: 12px; padding: 15px; background: #0a0e17; color: white; border: 1px solid var(--border); outline: none; box-sizing: border-box; font-size: 15px; }
+        
+        /* Stats & Buttons */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin: 20px 0; }
         .stat-card { background: var(--input); padding: 15px; border-radius: 15px; text-align: center; border: 1px solid var(--border); }
-        .stat-card span { display: block; font-size: 1.6rem; font-weight: 700; color: #ffd700; }
-        .btn-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-        button { padding: 12px 20px; border-radius: 10px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; color: #000; }
+        .stat-card span { display: block; font-size: 1.5rem; font-weight: 700; color: #ffd700; }
+        .btn-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 15px; }
+        button { padding: 10px 18px; border-radius: 8px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; color: #000; transition: 0.2s; }
+        button:hover { transform: scale(1.05); }
 
-        /* Clock */
+        /* Clock Panel */
         .side-panel { flex: 0.8; min-width: 260px; display: flex; flex-direction: column; align-items: center; background: var(--card); padding: 25px; border-radius: 30px; border: 1px solid var(--border); position: sticky; top: 100px; }
         .wall-clock { width: 180px; height: 180px; border: 8px solid #ffd700; border-radius: 50%; position: relative; background: #000; margin-bottom: 20px; }
         .number { position: absolute; width: 100%; height: 100%; text-align: center; font-weight: 700; color: #fff; padding: 5px; box-sizing: border-box; }
@@ -64,8 +63,8 @@
         #bot-launcher { position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px; cursor: pointer; z-index: 2000; animation: float 3s infinite ease-in-out; }
         #bot-window { position: fixed; bottom: 110px; right: 30px; width: 320px; background: var(--card); border: 1px solid var(--border); border-radius: 25px; display: none; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.7); z-index: 2000; overflow: hidden; }
         .bot-header { background: #ffd700; color: #000; padding: 15px; font-weight: 800; display: flex; justify-content: space-between; }
-        .bot-body { height: 300px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #0c121e; font-size: 13px; }
-        .msg { padding: 10px; border-radius: 10px; max-width: 80%; }
+        .bot-body { height: 250px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #0c121e; font-size: 13px; }
+        .msg { padding: 8px 12px; border-radius: 12px; max-width: 80%; }
         .bot-msg { background: var(--input); align-self: flex-start; color: #fff; }
         .user-msg { background: #ffd700; color: #000; align-self: flex-end; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
@@ -74,65 +73,77 @@
 <body>
 
 <nav>
-    <a onclick="show('home')" id="n-home" class="active">Home</a>
+    <a onclick="show('home')" id="n-home" class="active">Home (Tools)</a>
     <a onclick="show('about')" id="n-about">About Us</a>
     <a onclick="show('contact')" id="n-contact">Contact</a>
     <a onclick="show('privacy')" id="n-privacy">Privacy Policy</a>
-    <a onclick="show('terms')" id="n-terms">Terms</a>
 </nav>
 
 <div class="main-wrapper">
     <div class="content-area">
         <section id="home" class="page-section active-section">
-            <h1 style="text-align:center; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">TextMaster Pro</h1>
-            <textarea id="mainInput" placeholder="Enter your text here for analysis..."></textarea>
-            <div class="stats-grid">
-                <div class="stat-card">Words<span id="wCount">0</span></div>
-                <div class="stat-card">Characters<span id="cCount">0</span></div>
-                <div class="stat-card">Read Time<span id="rTime">0m</span></div>
+            <h1>TextMaster Pro - Tool Hub</h1>
+            
+            <div class="tool-box">
+                <h3>1. Master Text Analyzer</h3>
+                <textarea id="mainInput" placeholder="Paste your text here..."></textarea>
+                <div class="stats-grid">
+                    <div class="stat-card">Words<span id="wCount">0</span></div>
+                    <div class="stat-card">Chars<span id="cCount">0</span></div>
+                    <div class="stat-card">Read Time<span id="rTime">0m</span></div>
+                </div>
+                <div class="btn-container">
+                    <button onclick="changeCase('up')">UPPERCASE</button>
+                    <button onclick="changeCase('low')">lowercase</button>
+                    <button onclick="cleanText()">Clean Extra Spaces</button>
+                    <button onclick="copyText('mainInput')">Copy Results</button>
+                </div>
             </div>
-            <div class="btn-container">
-                <button onclick="changeCase('up')">UPPERCASE</button>
-                <button onclick="changeCase('low')">lowercase</button>
-                <button onclick="copyText()">Copy Text</button>
-                <button onclick="clearText()" style="background:#ff4444; color:#fff;">Clear All</button>
+
+            <div class="tool-box">
+                <h3>2. Secure Password Generator</h3>
+                <div style="display:flex; gap:10px; margin-bottom:15px;">
+                    <input type="text" id="passResult" readonly placeholder="Your Secure Password">
+                    <button onclick="genPass()">Generate</button>
+                </div>
+                <div class="btn-container">
+                    <button onclick="copyText('passResult')" style="background:#2d3748; color:white;">Copy Password</button>
+                </div>
+            </div>
+
+            <div class="tool-box">
+                <h3>3. PX to REM Converter</h3>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-bottom:15px;">
+                    <div>
+                        <label style="font-size:12px;">Pixels (PX)</label>
+                        <input type="number" id="pxInp" placeholder="16" oninput="convertUnit()">
+                    </div>
+                    <div>
+                        <label style="font-size:12px;">Result (REM)</label>
+                        <input type="text" id="remRes" readonly placeholder="1">
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="about" class="page-section">
             <h2>About TextMaster Pro</h2>
-            <p>Welcome to <strong>TextMaster Pro</strong>, a futuristic digital toolkit designed for content creators, students, and SEO professionals. Our platform was born out of a simple need: to provide fast, reliable, and secure text analysis without the clutter of traditional tools.</p>
-            <p>At TextMaster Pro, we believe that efficiency is the key to great writing. Our mission is to empower writers by giving them instant feedback on word count, character density, and reading time, all within a sleek and modern interface.</p>
-            <p>We are constantly evolving, integrating smart features like our AI-driven LexiBot to ensure that your experience is as intuitive as possible. Thank you for choosing us to be a part of your writing journey!</p>
+            <p>Welcome to <strong>TextMaster Pro</strong>, a comprehensive digital hub designed to simplify your daily digital tasks. We provide high-quality, free tools ranging from advanced text analysis to security-focused password generation.</p>
+            <p>Our tools are built for performance and privacy, ensuring that no data is ever uploaded to a server. We are committed to helping writers, developers, and everyday users master their digital workflow.</p>
         </section>
 
         <section id="contact" class="page-section">
             <h2>Contact Us</h2>
-            <p>Got a question, a bug report, or a feature suggestion? We are all ears! Our team at TextMaster Pro is dedicated to providing the best possible service to our community.</p>
-            <div style="background:var(--input); padding:25px; border-radius:20px; border:1px solid var(--border); margin-top:20px;">
-                <p>📧 <strong>Direct Email:</strong> kashif.asif72@gmail.com</p>
-                <p>💬 <strong>AI Support:</strong> Click the Robot icon at the bottom right for instant help.</p>
-                <p>📍 <strong>HQ:</strong> Based in the Cloud, serving the World.</p>
+            <p>We'd love to hear from you! Whether you have a tool request or need support, reach out to us:</p>
+            <div style="background:var(--input); padding:20px; border-radius:15px; border:1px solid var(--border); margin-top:15px;">
+                <p>📧 <strong>Email:</strong> kashif.asif72@gmail.com</p>
+                <p>🕒 <strong>Support:</strong> Available 24/7 via LexiBot</p>
             </div>
-            <p style="margin-top:20px;">We typically respond to emails within 24 to 48 hours. Looking forward to hearing from you!</p>
         </section>
 
         <section id="privacy" class="page-section">
             <h2>Privacy Policy</h2>
-            <p>At TextMaster Pro, your privacy is not just a policy—it is our priority. We understand the sensitivity of the content you process through our tool.</p>
-            <ul>
-                <li><strong>Local-First Processing:</strong> Your text never leaves your browser. All calculations (word count, case conversion) are performed locally on your device.</li>
-                <li><strong>No Data Storage:</strong> We do not have a database to store your text or personal details. Once you close the tab, your data is gone forever.</li>
-                <li><strong>No Tracking:</strong> We do not use invasive tracking cookies or sell your information to third-party advertisers.</li>
-                <li><strong>Security:</strong> Our site is built using secure coding practices to protect against digital threats.</li>
-            </ul>
-            <p>By using TextMaster Pro, you can rest assured that your creative work remains yours and yours alone.</p>
-        </section>
-
-        <section id="terms" class="page-section">
-            <h2>Terms of Service</h2>
-            <p>By using TextMaster Pro, you agree to the following simple terms:</p>
-            <p>This tool is provided for free to help you with text analysis. While we strive for 100% accuracy, we are not liable for any errors in final calculations. You are free to use TextMaster Pro for personal, educational, or commercial purposes. We reserve the right to update our tools and features at any time to improve the user experience.</p>
+            <p>Your privacy is our mission. <strong>TextMaster Pro</strong> does not collect, store, or track any data you enter into our tools. Everything happens right inside your web browser. No databases, no tracking cookies, just pure utility.</p>
         </section>
     </div>
 
@@ -150,6 +161,7 @@
             <div class="hand second" id="ss"></div>
         </div>
         <p id="dateBox" style="color:#ffd700; font-weight:700;"></p>
+        <div style="font-size:11px; color:#ffd700; margin-top:10px;">TEXTMASTER PRO v2.0</div>
     </div>
 </div>
 
@@ -164,9 +176,9 @@
 </div>
 
 <div id="bot-window">
-    <div class="bot-header"><span>🤖 TextMaster AI</span><span onclick="toggleChat()" style="cursor:pointer">×</span></div>
+    <div class="bot-header"><span>🤖 Multi-Tool AI</span><span onclick="toggleChat()" style="cursor:pointer">×</span></div>
     <div class="bot-body" id="chatBody">
-        <div class="msg bot-msg">Hello! 🦾 I've updated all the pages with professional content. How can I help you today?</div>
+        <div class="msg bot-msg">Welcome! 🦾 I can help you with Text Analysis, Passwords, or PX Conversion. What's the plan?</div>
     </div>
     <div class="bot-footer" style="padding:10px; display:flex; gap:5px; border-top:1px solid var(--border);">
         <input type="text" id="botInput" placeholder="Ask me..." style="flex:1; background:var(--input); border:1px solid var(--border); color:#fff; padding:8px; border-radius:5px;" onkeypress="if(event.key=='Enter') sendBotMsg()">
@@ -182,6 +194,7 @@
         document.getElementById('n-'+id).classList.add('active');
     }
 
+    /* CLOCK */
     function updateClock(){
         const now = new Date();
         document.getElementById('ss').style.transform = `translateX(-50%) rotate(${(now.getSeconds()/60)*360}deg)`;
@@ -191,6 +204,7 @@
     }
     setInterval(updateClock, 1000); updateClock();
 
+    /* TEXT TOOL */
     const inputArea = document.getElementById('mainInput');
     inputArea.addEventListener('input', () => {
         const text = inputArea.value.trim();
@@ -199,20 +213,29 @@
         document.getElementById('cCount').innerText = inputArea.value.length;
         document.getElementById('rTime').innerText = Math.ceil(words / 200) + 'm';
     });
+    function changeCase(t) { inputArea.value = (t === 'up') ? inputArea.value.toUpperCase() : inputArea.value.toLowerCase(); }
+    function cleanText() { inputArea.value = inputArea.value.replace(/\s+/g, ' ').trim(); }
+    function copyText(id) { document.getElementById(id).select(); document.execCommand('copy'); alert("Copied to clipboard!"); }
 
-    function changeCase(type) {
-        if(type === 'up') inputArea.value = inputArea.value.toUpperCase();
-        else inputArea.value = inputArea.value.toLowerCase();
+    /* PASSWORD TOOL */
+    function genPass() {
+        const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+        let pass = "";
+        for (let i = 0; i < 14; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
+        document.getElementById('passResult').value = pass;
     }
 
-    function clearText() { inputArea.value = ""; }
-    function copyText() { inputArea.select(); document.execCommand('copy'); alert("Copied!"); }
+    /* CONVERTER TOOL */
+    function convertUnit() {
+        const px = document.getElementById('pxInp').value;
+        document.getElementById('remRes').value = (px / 16).toFixed(3) + " rem";
+    }
 
+    /* BOT */
     function toggleChat() {
         const win = document.getElementById('bot-window');
         win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
     }
-
     function sendBotMsg() {
         const inp = document.getElementById('botInput');
         const body = document.getElementById('chatBody');
@@ -221,10 +244,9 @@
         const val = inp.value.toLowerCase();
         inp.value = "";
         setTimeout(() => {
-            let reply = "I'm TextMaster AI. You can find our email in the Contact page!";
-            if(val.includes('hi') || val.includes('hello')) reply = "Hello! 🤖 Need help with our master tools?";
-            if(val.includes('email')) reply = "Contact: kashif.asif72@gmail.com";
-            if(val.includes('privacy')) reply = "We respect your privacy. All processing is local.";
+            let reply = "I'm the TextMaster Multi-AI. Check out our new Converter tool!";
+            if(val.includes('hi')) reply = "Hello! 🤖 Need help with our tools?";
+            if(val.includes('password')) reply = "Just click 'Generate' in Tool #2 for a strong password.";
             body.innerHTML += `<div class="msg bot-msg">${reply}</div>`;
             body.scrollTop = body.scrollHeight;
         }, 600);
