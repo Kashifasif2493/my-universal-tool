@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TextMaster Pro | 10-in-1 Digital Hub</title>
+    <title>TextMaster Pro | Multi-Tool Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -14,11 +14,16 @@
 
         body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); padding: 10px; }
 
-        /* Navigation - Multi-row for many tools */
-        nav { width: 100%; max-width: 1150px; margin: 10px auto 30px auto; background: var(--card); padding: 15px; border-radius: 30px; border: 1px solid var(--border); display: flex; justify-content: center; gap: 8px; position: sticky; top: 10px; z-index: 1000; flex-wrap: wrap; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        nav a { color: var(--text); text-decoration: none; font-size: 11px; font-weight: 600; cursor: pointer; padding: 6px 12px; transition: 0.3s; border-radius: 15px; border: 1px solid transparent; }
-        nav a:hover { border-color: #ffd700; }
-        nav a.active { background: var(--accent); color: #000; }
+        /* MAIN TOP NAVIGATION */
+        .top-nav { width: 100%; max-width: 1100px; margin: 10px auto 30px auto; background: var(--card); padding: 15px; border-radius: 50px; border: 1px solid var(--border); display: flex; justify-content: center; gap: 20px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .top-nav a { color: var(--text); text-decoration: none; font-size: 14px; font-weight: 700; cursor: pointer; padding: 8px 20px; transition: 0.3s; border-radius: 25px; }
+        .top-nav a:hover { background: rgba(255, 215, 0, 0.1); }
+        .top-nav a.active { background: var(--accent); color: #000; }
+
+        /* TOOL PAGINATION (Niche wala numbering system) */
+        .tool-pagination { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .page-num { width: 35px; height: 35px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px; transition: 0.3s; background: var(--card); }
+        .page-num.active-tool { background: var(--accent); color: #000; border-color: transparent; transform: scale(1.2); font-weight: bold; }
 
         /* Layout */
         .main-wrapper { display: flex; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto; justify-content: center; }
@@ -27,21 +32,18 @@
         .active-section { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Tool UI */
+        /* Tool Styles */
         .tool-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-        .tool-num { background: var(--accent); color: #000; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
-        h1 { background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; margin: 0; font-size: 24px; }
-        
-        .description-box { background: rgba(255, 215, 0, 0.05); border-left: 4px solid #ffd700; padding: 15px; margin-top: 20px; border-radius: 0 10px 10px 0; font-size: 13px; line-height: 1.6; color: #cbd5e0; }
-        .tool-body { background: var(--input); padding: 25px; border-radius: 20px; border: 1px solid var(--border); }
-        textarea, input, select { width: 100%; border-radius: 12px; padding: 12px; background: #0a0e17; color: white; border: 1px solid var(--border); box-sizing: border-box; font-size: 15px; margin-bottom: 12px; outline: none; }
-        
-        button { padding: 10px 18px; border-radius: 10px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; color: #000; transition: 0.2s; }
+        .tool-num-badge { background: var(--accent); color: #000; padding: 5px 15px; border-radius: 10px; font-weight: 800; font-size: 14px; }
+        h1 { background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; margin: 0; font-size: 26px; }
+        .description-box { background: rgba(255, 215, 0, 0.05); border-left: 4px solid #ffd700; padding: 15px; margin-top: 20px; border-radius: 8px; font-size: 13px; color: #cbd5e0; line-height: 1.6; }
+        textarea, input { width: 100%; border-radius: 12px; padding: 15px; background: #0a0e17; color: white; border: 1px solid var(--border); box-sizing: border-box; font-size: 15px; margin-bottom: 15px; outline: none; }
+        button { padding: 12px 25px; border-radius: 10px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; color: #000; transition: 0.2s; }
 
-        /* Clock */
+        /* Clock Sidebar */
         .side-panel { flex: 0.8; min-width: 260px; display: flex; flex-direction: column; align-items: center; background: var(--card); padding: 25px; border-radius: 30px; border: 1px solid var(--border); position: sticky; top: 120px; height: fit-content; }
         .wall-clock { width: 150px; height: 150px; border: 5px solid #ffd700; border-radius: 50%; position: relative; background: #000; margin-bottom: 15px; }
-        .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; transform: translateX(-50%); border-radius: 10px; }
+        .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; transform: translateX(-50%); }
         .hour { width: 4px; height: 30px; background: #fff; }
         .minute { width: 3px; height: 45px; background: #ffd700; }
         .second { width: 1px; height: 55px; background: #ff4444; }
@@ -49,137 +51,162 @@
 </head>
 <body>
 
-<nav>
-    <a onclick="show('t1')" id="n-t1" class="active">1. Analyzer</a>
-    <a onclick="show('t2')" id="n-t2">2. Password</a>
-    <a onclick="show('t3')" id="n-t3">3. PX Conv</a>
-    <a onclick="show('t4')" id="n-t4">4. Lorem</a>
-    <a onclick="show('t5')" id="n-t5">5. Case</a>
-    <a onclick="show('t6')" id="n-t6">6. Reverse</a>
-    <a onclick="show('t7')" id="n-t7">7. Word Count</a>
-    <a onclick="show('t8')" id="n-t8">8. Binary</a>
-    <a onclick="show('t9')" id="n-t9">9. Space Clean</a>
-    <a onclick="show('t10')" id="n-t10">10. Line Counter</a>
-    <a onclick="show('about')" id="n-about">About</a>
-    <a onclick="show('contact')" id="n-contact">Contact</a>
+<nav class="top-nav">
+    <a onclick="showPage('home-hub')" id="n-home" class="active">HOME</a>
+    <a onclick="showPage('about')" id="n-about">ABOUT US</a>
+    <a onclick="showPage('privacy')" id="n-privacy">PRIVACY POLICY</a>
+    <a onclick="showPage('contact')" id="n-contact">CONTACT</a>
 </nav>
 
 <div class="main-wrapper">
     <div class="content-area">
         
-        <section id="t1" class="page-section active-section">
-            <div class="tool-header"><div class="tool-num">1</div><h1>Text Analysis</h1></div>
-            <div class="tool-body">
-                <textarea id="t1In" placeholder="Type for analysis..."></textarea>
-                <div id="t1Res" style="font-size:14px; color:#ffd700;">Words: 0 | Chars: 0</div>
+        <div id="home-hub" class="page-section active-section">
+            
+            <div class="tool-pagination">
+                <span style="font-size: 12px; font-weight: bold; color: #ffd700; margin-right: 10px;">SELECT TOOL:</span>
+                <div class="page-num active-tool" onclick="showTool(1)" id="p1">1</div>
+                <div class="page-num" onclick="showTool(2)" id="p2">2</div>
+                <div class="page-num" onclick="showTool(3)" id="p3">3</div>
+                <div class="page-num" onclick="showTool(4)" id="p4">4</div>
+                <div class="page-num" onclick="showTool(5)" id="p5">5</div>
+                <div class="page-num" onclick="showTool(6)" id="p6">6</div>
+                <div class="page-num" onclick="showTool(7)" id="p7">7</div>
+                <div class="page-num" onclick="showTool(8)" id="p8">8</div>
+                <div class="page-num" onclick="showTool(9)" id="p9">9</div>
+                <div class="page-num" onclick="showTool(10)" id="p10">10</div>
             </div>
-            <div class="description-box">Aapke content ka mukammal analysis (word aur character count) karta hai.</div>
-        </section>
 
-        <section id="t2" class="page-section">
-            <div class="tool-header"><div class="tool-num">2</div><h1>Secure Password</h1></div>
-            <div class="tool-body">
-                <input type="text" id="t2Out" readonly>
-                <button onclick="genPass()">Generate</button>
+            <hr style="border: 0; border-top: 1px solid var(--border); margin-bottom: 30px;">
+
+            <div id="tool1" class="tool-content">
+                <div class="tool-header"><div class="tool-num-badge">TOOL 01</div><h1>Text Analysis</h1></div>
+                <textarea id="t1In" placeholder="Enter text here..."></textarea>
+                <div id="t1Res" style="color:#ffd700; font-weight:bold;">Words: 0 | Characters: 0</div>
+                <div class="description-box">Provides a comprehensive analysis of your content, including real-time word and character counts for SEO optimization.</div>
             </div>
-            <div class="description-box">Cyber security ke liye high-strength random passwords banata hai.</div>
-        </section>
 
-        <section id="t3" class="page-section">
-            <div class="tool-header"><div class="tool-num">3</div><h1>PX to REM</h1></div>
-            <div class="tool-body">
-                <input type="number" id="pxIn" placeholder="Pixels" oninput="convPX()">
-                <input type="text" id="remOut" readonly placeholder="REM Result">
+            <div id="tool2" class="tool-content" style="display:none;">
+                <div class="tool-header"><div class="tool-num-badge">TOOL 02</div><h1>Secure Password</h1></div>
+                <input type="text" id="t2Out" readonly placeholder="Result...">
+                <button onclick="genPass()">Generate Secure Key</button>
+                <div class="description-box">Generates high-strength, random security keys using a mix of alphanumeric characters and symbols to protect your accounts.</div>
             </div>
-            <div class="description-box">Web developers ke liye pixels ko modern REM units mein badalta hai.</div>
-        </section>
 
-        <section id="t4" class="page-section">
-            <div class="tool-header"><div class="tool-num">4</div><h1>Lorem Ipsum</h1></div>
-            <div class="tool-body">
+            <div id="tool3" class="tool-content" style="display:none;">
+                <div class="tool-header"><div class="tool-num-badge">TOOL 03</div><h1>PX to REM</h1></div>
+                <input type="number" id="pxIn" placeholder="Pixels (PX)" oninput="convPX()">
+                <input type="text" id="remOut" readonly placeholder="Result in REM">
+                <div class="description-box">A vital utility for web developers to convert pixel-based measurements into flexible REM units for responsive design.</div>
+            </div>
+
+            <div id="tool4" class="tool-content" style="display:none;">
+                <div class="tool-header"><div class="tool-num-badge">TOOL 04</div><h1>Lorem Ipsum</h1></div>
                 <textarea readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</textarea>
+                <div class="description-box">Standard dummy text generator for design layouts.</div>
             </div>
-            <div class="description-box">Designers ke liye standard dummy text generator.</div>
-        </section>
-
-        <section id="t5" class="page-section">
-            <div class="tool-header"><div class="tool-num">5</div><h1>Case Master</h1></div>
-            <div class="tool-body">
-                <textarea id="t5In"></textarea>
-                <button onclick="caseM('up')">UPPERCASE</button>
-                <button onclick="caseM('low')">lowercase</button>
+            
+            <div id="tool5" class="tool-content" style="display:none;">
+                <div class="tool-header"><div class="tool-num-badge">TOOL 05</div><h1>Case Master</h1></div>
+                <textarea id="t5In" placeholder="Enter text..."></textarea>
+                <button onclick="caseM('up')">UPPERCASE</button> <button onclick="caseM('low')">lowercase</button>
+                <div class="description-box">Transforms text case instantly.</div>
             </div>
-            <div class="description-box">Text ka case aik click mein tabdeel karein.</div>
-        </section>
 
-        <section id="t6" class="page-section">
-            <div class="tool-header"><div class="tool-num">6</div><h1>Reverse Text</h1></div>
-            <div class="tool-body">
-                <textarea id="t6In" placeholder="Enter text to reverse..." oninput="revText()"></textarea>
-                <textarea id="t6Out" readonly placeholder="Output will appear here..."></textarea>
+            <div id="tool6" class="tool-content" style="display:none;">
+                <div class="tool-header"><div class="tool-num-badge">TOOL 06</div><h1>Reverse Text</h1></div>
+                <textarea id="t6In" placeholder="Input..." oninput="revText()"></textarea>
+                <textarea id="t6Out" readonly placeholder="Output..."></textarea>
+                <div class="description-box">Flips your text backwards.</div>
             </div>
-            <div class="description-box">Aapke text ko ulta (backwards) kar deta hai. Fun aur coding ke liye best hai.</div>
-        </section>
 
-        <section id="t7" class="page-section">
-            <div class="tool-header"><div class="tool-num">7</div><h1>Word Frequency</h1></div>
-            <div class="tool-body">
+            <div id="tool7" class="tool-content" style="display:none;">
+                <div class="tool-header"><div class="tool-num-badge">TOOL 07</div><h1>Word Frequency</h1></div>
                 <textarea id="t7In" placeholder="Paste text..."></textarea>
-                <button onclick="freq()">Check Frequency</button>
-                <div id="t7Res" style="margin-top:10px; font-size:12px;"></div>
+                <button onclick="freq()">Analyze</button>
+                <div id="t7Res" style="margin-top:10px; font-size:12px; color:#ffd700;"></div>
+                <div class="description-box">Counts how often each word appears.</div>
             </div>
-            <div class="description-box">Check karein ke aapke text mein kaunsa lafz kitni baar aya hai.</div>
+
+            <div id="tool8" class="tool-content" style="display:none;">
+                <div class="tool-header"><div class="tool-num-badge">TOOL 08</div><h1>Binary Converter</h1></div>
+                <textarea id="t8In" oninput="toBin()"></textarea>
+                <textarea id="t8Out" readonly></textarea>
+                <div class="description-box">Converts text to binary.</div>
+            </div>
+
+            <div id="tool9" class="tool-content" style="display:none;">
+                <div class="tool-header"><div class="tool-num-badge">TOOL 09</div><h1>Space Cleaner</h1></div>
+                <textarea id="t9In"></textarea>
+                <button onclick="cleanSp()">Clean Spaces</button>
+                <div class="description-box">Removes redundant white spaces.</div>
+            </div>
+
+            <div id="tool10" class="tool-content" style="display:none;">
+                <div class="tool-header"><div class="tool-num-badge">TOOL 10</div><h1>Line Counter</h1></div>
+                <textarea id="t10In" oninput="countLines()"></textarea>
+                <div style="color:#ffd700;">Lines: <span id="lineRes">0</span></div>
+                <div class="description-box">Calculates total number of lines.</div>
+            </div>
+
+        </div>
+
+        <section id="about" class="page-section">
+            <h1>About Us</h1>
+            <p>TextMaster Pro is a premier digital utility station designed for modern creators.</p>
         </section>
 
-        <section id="t8" class="page-section">
-            <div class="tool-header"><div class="tool-num">8</div><h1>Binary Converter</h1></div>
-            <div class="tool-body">
-                <textarea id="t8In" placeholder="Text to Binary..." oninput="toBin()"></textarea>
-                <textarea id="t8Out" readonly placeholder="010101..."></textarea>
-            </div>
-            <div class="description-box">Aapke simple text ko computer ki binary language (0101) mein badalta hai.</div>
+        <section id="privacy" class="page-section">
+            <h1>Privacy Policy</h1>
+            <p>Your data never leaves your browser. 100% Client-side processing.</p>
         </section>
 
-        <section id="t9" class="page-section">
-            <div class="tool-header"><div class="tool-num">9</div><h1>Space Cleaner</h1></div>
-            <div class="tool-body">
-                <textarea id="t9In" placeholder="Paste messy text..."></textarea>
-                <button onclick="cleanSp()">Clean Extra Spaces</button>
-            </div>
-            <div class="description-box">Text ke darmiyan fazool spaces aur gaps ko khatam karke text ko saaf karta hai.</div>
+        <section id="contact" class="page-section">
+            <h1>Contact Us</h1>
+            <p>Support Email: kashif.asif72@gmail.com</p>
         </section>
-
-        <section id="t10" class="page-section">
-            <div class="tool-header"><div class="tool-num">10</div><h1>Line Counter</h1></div>
-            <div class="tool-body">
-                <textarea id="t10In" placeholder="Paste text with many lines..." oninput="countLines()"></textarea>
-                <div style="color:#ffd700;">Total Lines: <span id="lineRes">0</span></div>
-            </div>
-            <div class="description-box">Ye batata hai ke aapki file ya text mein total kitni lines hain.</div>
-        </section>
-
-        <section id="about" class="page-section"><h2>About Hub</h2><p>Professional multi-tool platform.</p></section>
-        <section id="contact" class="page-section"><h2>Contact</h2><p>kashif.asif72@gmail.com</p></section>
-        <section id="privacy" class="page-section"><h2>Privacy</h2><p>100% Secure & Local.</p></section>
 
     </div>
 
     <div class="side-panel">
-        <div class="wall-clock"><div class="hand hour" id="hh"></div><div class="hand minute" id="mm"></div><div class="hand second" id="ss"></div></div>
+        <div class="wall-clock">
+            <div class="hand hour" id="hh"></div>
+            <div class="hand minute" id="mm"></div>
+            <div class="hand second" id="ss"></div>
+        </div>
         <p id="dateBox" style="color:#ffd700; font-weight:700;"></p>
-        <p style="font-size:10px;">10 TOOLS LOADED</p>
+        <p style="font-size:10px; margin-top:10px; opacity:0.5;">DECA-TOOL SYSTEM v8.0</p>
     </div>
 </div>
 
 <script>
-    function show(id){
-        document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-section'));
-        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    // PAGE NAVIGATION
+    function showPage(id) {
+        document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active-section'));
+        document.querySelectorAll('.top-nav a').forEach(a => a.classList.remove('active'));
         document.getElementById(id).classList.add('active-section');
-        document.getElementById('n-'+id).classList.add('active');
+        document.getElementById('n-' + id.split('-')[0]).classList.add('active');
     }
 
-    // Logic for all 10 tools
+    // TOOL NAVIGATION
+    function showTool(num) {
+        document.querySelectorAll('.tool-content').forEach(t => t.style.display = 'none');
+        document.querySelectorAll('.page-num').forEach(p => p.classList.remove('active-tool'));
+        document.getElementById('tool' + num).style.display = 'block';
+        document.getElementById('p' + num).classList.add('active-tool');
+    }
+
+    // CLOCK
+    function tick(){
+        const n = new Date();
+        document.getElementById('ss').style.transform = `translateX(-50%) rotate(${(n.getSeconds()/60)*360}deg)`;
+        document.getElementById('mm').style.transform = `translateX(-50%) rotate(${(n.getMinutes()/60)*360}deg)`;
+        document.getElementById('hh').style.transform = `translateX(-50%) rotate(${(n.getHours()/12)*360 + (n.getMinutes()/60)*30}deg)`;
+        document.getElementById('dateBox').innerText = n.toLocaleDateString();
+    }
+    setInterval(tick, 1000); tick();
+
+    // TOOLS LOGIC
     function genPass() {
         let s="ABCDEFGH23456789!@#$%^&*abcdefgh";
         let p=""; for(let i=0;i<16;i++) p+=s.charAt(Math.floor(Math.random()*s.length));
@@ -188,10 +215,7 @@
     function convPX() { document.getElementById('remOut').value = (document.getElementById('pxIn').value/16).toFixed(3) + " rem"; }
     function caseM(m) { let i = document.getElementById('t5In'); i.value = (m==='up')?i.value.toUpperCase():i.value.toLowerCase(); }
     function revText() { document.getElementById('t6Out').value = document.getElementById('t6In').value.split("").reverse().join(""); }
-    function toBin() { 
-        let output = document.getElementById('t8Out');
-        output.value = document.getElementById('t8In').value.split('').map(char => char.charCodeAt(0).toString(2)).join(' ');
-    }
+    function toBin() { document.getElementById('t8Out').value = document.getElementById('t8In').value.split('').map(c => c.charCodeAt(0).toString(2)).join(' '); }
     function cleanSp() { let i = document.getElementById('t9In'); i.value = i.value.replace(/\s+/g, ' ').trim(); }
     function countLines() { document.getElementById('lineRes').innerText = document.getElementById('t10In').value.split('\n').filter(l=>l!=='').length; }
     function freq() {
@@ -201,17 +225,9 @@
     }
     document.getElementById('t1In').addEventListener('input', function(){
         let v = this.value.trim();
-        document.getElementById('t1Res').innerText = `Words: ${v?v.split(/\s+/).length:0} | Chars: ${this.value.length}`;
+        document.getElementById('t1Res').innerText = `Words: ${v?v.split(/\s+/).length:0} | Characters: ${this.value.length}`;
     });
-
-    function tick(){
-        const n = new Date();
-        document.getElementById('ss').style.transform = `translateX(-50%) rotate(${(n.getSeconds()/60)*360}deg)`;
-        document.getElementById('mm').style.transform = `translateX(-50%) rotate(${(n.getMinutes()/60)*360}deg)`;
-        document.getElementById('hh').style.transform = `translateX(-50%) rotate(${(n.getHours()/12)*360 + (n.getMinutes()/60)*30}deg)`;
-        document.getElementById('dateBox').innerText = n.toLocaleDateString();
-    }
-    setInterval(tick, 1000); tick();
 </script>
 </body>
 </html>
+          
