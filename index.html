@@ -3,137 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TextMaster Pro | Professional Tool Station</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>TextMaster Pro | Complete Suite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #0a0e17; --card: #141b2d; --text: #e2e8f0; --accent: linear-gradient(135deg, #ffd700 0%, #b8860b 100%); --border: #2d3748; }
-        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); padding: 10px; line-height: 1.6; }
+        :root { --bg: #0a0e17; --card: #141b2d; --text: #e2e8f0; --accent: #ffd700; --border: #2d3748; }
+        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
         
-        /* TOP NAVIGATION */
-        .top-nav { width: 100%; max-width: 1000px; margin: 10px auto 30px; background: var(--card); padding: 12px; border-radius: 50px; border: 1px solid var(--border); display: flex; justify-content: center; gap: 15px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .top-nav a { color: var(--text); text-decoration: none; font-size: 13px; font-weight: 700; cursor: pointer; padding: 8px 18px; border-radius: 25px; transition: 0.3s; }
-        .top-nav a.active { background: var(--accent); color: #000; }
+        /* Navigation */
+        .top-nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 15px 5%; display: flex; justify-content: center; gap: 25px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .top-nav a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.3s; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
+        .top-nav a:hover, .top-nav a.active { color: var(--accent); opacity: 1; }
 
-        .container { max-width: 1150px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-        .main-content { flex: 2; min-width: 320px; }
-        
-        /* PAGE & TOOL SECTIONS */
-        .page-sec { display: none; background: var(--card); border-radius: 30px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 20px 40px rgba(0,0,0,0.4); animation: fadeIn 0.4s; }
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .page-sec { display: none; background: var(--card); border-radius: 24px; padding: 35px; border: 1px solid var(--border); animation: slideUp 0.4s ease-out; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .active-page { display: block; }
-        
-        /* TOOLS NUMBERING */
-        .tool-nav { display: flex; justify-content: center; gap: 8px; margin-bottom: 30px; flex-wrap: wrap; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 20px; }
-        .t-btn { width: 35px; height: 35px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; transition: 0.2s; background: var(--card); }
-        .t-btn.active-t { background: var(--accent); color: #000; font-weight: bold; border-color: transparent; transform: scale(1.1); }
 
+        /* Tools Selection */
+        .tool-nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 30px; }
+        .t-btn { padding: 12px; background: #0f172a; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; font-size: 12px; font-weight: 600; color: #94a3b8; transition: 0.2s; text-align: center; }
+        .t-btn.active-t { background: var(--accent); color: #000; border-color: var(--accent); transform: scale(1.05); }
+
+        /* Tool Boxes */
         .tool-box { display: none; }
-        .active-tool { display: block; }
+        .active-tool { display: block; animation: fadeIn 0.3s; }
+        h2 { margin-top: 0; color: var(--accent); font-size: 22px; margin-bottom: 20px; }
 
-        /* INPUTS & BUTTONS */
-        textarea, input { width: 100%; border-radius: 12px; padding: 15px; background: #0a0e17; color: white; border: 1px solid var(--border); box-sizing: border-box; font-size: 16px; margin-bottom: 15px; outline: none; }
-        .btn-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
-        button { padding: 12px 22px; border-radius: 10px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; color: #000; transition: 0.2s; }
-        button.red { background: #ff4444; color: white; }
+        textarea, input { width: 100%; border-radius: 12px; padding: 15px; background: #070a11; color: #fff; border: 1px solid var(--border); box-sizing: border-box; font-size: 15px; margin-bottom: 15px; outline: none; font-family: inherit; }
+        textarea:focus { border-color: var(--accent); }
         
-        .desc-box { background: rgba(255,215,0,0.05); border-left: 4px solid #ffd700; padding: 15px; margin-top: 20px; border-radius: 5px; font-size: 13px; color: #cbd5e0; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .btn-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
+        button { padding: 12px 18px; border-radius: 8px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; color: #000; font-size: 11px; text-transform: uppercase; transition: 0.2s; }
+        button:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-sec { background: #1e293b; color: #fff; border: 1px solid var(--border); }
 
-        /* SIDEBAR */
-        .sidebar { flex: 0.8; min-width: 260px; background: var(--card); padding: 25px; border-radius: 30px; border: 1px solid var(--border); text-align: center; height: fit-content; position: sticky; top: 100px; }
-        .clock { width: 150px; height: 150px; border: 5px solid #ffd700; border-radius: 50%; position: relative; background: #000; margin: 0 auto 20px; }
-        .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; transform: translateX(-50%); }
-        .hour { width: 4px; height: 35px; background: #fff; }
-        .minute { width: 3px; height: 50px; background: #ffd700; }
-        .second { width: 1px; height: 60px; background: #ff4444; }
+        /* Stats & Feedback */
+        .stats { display: flex; gap: 15px; margin-bottom: 15px; }
+        .stat-card { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; flex: 1; text-align: center; border: 1px solid var(--border); }
+        .stat-val { display: block; font-size: 20px; font-weight: 800; color: var(--accent); }
+        .error-msg { color: #ff4444; font-size: 12px; margin-top: -10px; margin-bottom: 10px; }
+
+        /* Content Pages */
+        .pro-content h1 { color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+        .pro-content p { color: #94a3b8; line-height: 1.8; }
+
+        #toast { visibility: hidden; background: var(--accent); color: #000; text-align: center; border-radius: 50px; padding: 12px 30px; position: fixed; z-index: 2000; bottom: 30px; left: 50%; transform: translateX(-50%); font-weight: 700; }
+        #toast.show { visibility: visible; animation: fadeInUp 0.4s forwards; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; bottom: 0; } to { opacity: 1; bottom: 30px; } }
     </style>
 </head>
 <body>
 
+<div id="toast">Copied!</div>
+
 <nav class="top-nav">
-    <a onclick="showP('home')" id="n-home" class="active">HOME</a>
-    <a onclick="showP('about')" id="n-about">ABOUT US</a>
-    <a onclick="showP('privacy')" id="n-privacy">PRIVACY POLICY</a>
-    <a onclick="showP('contact')" id="n-contact">CONTACT US</a>
+    <a onclick="showP('home')" id="n-home" class="active">Home</a>
+    <a onclick="showP('about')" id="n-about">About Us</a>
+    <a onclick="showP('privacy')" id="n-privacy">Privacy Policy</a>
+    <a onclick="showP('contact')" id="n-contact">Contact Us</a>
 </nav>
 
 <div class="container">
-    <div class="main-content">
-        
-        <section id="home-p" class="page-sec active-page">
-            <div class="tool-nav">
-                <div class="t-btn active-t" onclick="showT(1)" id="tb1">1</div>
-                <div class="t-btn" onclick="showT(2)" id="tb2">2</div>
-                <div class="t-btn" onclick="showT(3)" id="tb3">3</div>
-                <div class="t-btn" onclick="showT(4)" id="tb4">4</div>
-                <div class="t-btn" onclick="showT(5)" id="tb5">5</div>
-                <div class="t-btn" onclick="showT(6)" id="tb6">6</div>
-                <div class="t-btn" onclick="showT(7)" id="tb7">7</div>
-                <div class="t-btn" onclick="showT(8)" id="tb8">8</div>
-                <div class="t-btn" onclick="showT(9)" id="tb9">9</div>
-                <div class="t-btn" onclick="showT(10)" id="tb10">10</div>
+    <section id="home-p" class="page-sec active-page">
+        <div class="tool-nav">
+            <div class="t-btn active-t" onclick="showT(1)" id="tb1">Analyzer</div>
+            <div class="t-btn" onclick="showT(2)" id="tb2">Password</div>
+            <div class="t-btn" onclick="showT(3)" id="tb3">PX to REM</div>
+            <div class="t-btn" onclick="showT(4)" id="tb4">Binary</div>
+            <div class="t-btn" onclick="showT(5)" id="tb5">JSON</div>
+            <div class="t-btn" onclick="showT(6)" id="tb6">Frequency</div>
+            <div class="t-btn" onclick="showT(7)" id="tb7">Cleaner</div>
+            <div class="t-btn" onclick="showT(8)" id="tb8">Base64</div>
+            <div class="t-btn" onclick="showT(9)" id="tb9">Slugify</div>
+            <div class="t-btn" onclick="showT(10)" id="tb10">Lorem</div>
+        </div>
+
+        <div id="t1" class="tool-box active-tool">
+            <h2>Master Text Analyzer</h2>
+            <textarea id="ti1" placeholder="Type or paste text..." rows="8" oninput="runMaster()"></textarea>
+            <div class="stats">
+                <div class="stat-card"><span class="stat-val" id="w1">0</span>Words</div>
+                <div class="stat-card"><span class="stat-val" id="c1">0</span>Chars</div>
             </div>
-
-            <div id="t1" class="tool-box active-tool">
-                <h2>01. Text Analyzer Pro</h2>
-                <textarea id="ti1" placeholder="Paste your text here for deep analysis..." oninput="doAnalysis()"></textarea>
-                <div class="btn-group">
-                    <button onclick="copyTool('ti1')">Copy Text</button>
-                    <button class="red" onclick="clearTool('ti1')">Clear All</button>
-                </div>
-                <div style="color:#ffd700; font-weight:bold; font-size:18px;">Words: <span id="w1">0</span> | Characters: <span id="c1">0</span></div>
-                <div class="desc-box">Provides a comprehensive analysis of your content, including real-time word and character counts for SEO optimization.</div>
+            <div class="btn-group">
+                <button onclick="mCase('u')">UPPERCASE</button>
+                <button onclick="mCase('l')">lowercase</button>
+                <button class="btn-sec" onclick="copy('ti1')">Copy</button>
             </div>
+        </div>
 
-            <div id="t2" class="tool-box">
-                <h2>02. Secure Password Generator</h2>
-                <input type="text" id="ti2" readonly placeholder="Your new secure password...">
-                <button onclick="genP()">Generate 16-Char Key</button>
-                <button onclick="copyTool('ti2')">Copy</button>
-                <div class="desc-box">Generates high-strength, random security keys using a mix of alphanumeric characters and symbols.</div>
-            </div>
+        <div id="t2" class="tool-box">
+            <h2>Secure Pass Generator</h2>
+            <input id="ti2" readonly placeholder="Secure key...">
+            <button onclick="genP()">Generate</button>
+            <button class="btn-sec" onclick="copy('ti2')">Copy</button>
+        </div>
 
-            <div id="t3" class="tool-box">
-                <h2>03. PX to REM Converter</h2>
-                <input type="number" id="ti3" placeholder="Enter Pixels (PX)" oninput="doPx()">
-                <input type="text" id="to3" readonly placeholder="Result in REM">
-                <div class="desc-box">A vital utility for web developers to convert pixel-based measurements into flexible REM units.</div>
-            </div>
+        <div id="t3" class="tool-box">
+            <h2>PX to REM Converter</h2>
+            <input type="number" id="ti3" placeholder="Enter Pixels (PX)" oninput="runPx()">
+            <input id="to3" readonly placeholder="Result in REM">
+        </div>
 
-            <div id="t4" class="tool-box"><h2>04. Lorem Ipsum</h2><textarea readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore...</textarea><button onclick="copyTool(this.previousElementSibling)">Copy Dummy Text</button><div class="desc-box">Standard dummy text generator for design layouts.</div></div>
-            <div id="t5" class="tool-box"><h2>05. Case Master</h2><textarea id="ti5"></textarea><div class="btn-group"><button onclick="doCase('u')">UPPERCASE</button><button onclick="doCase('l')">lowercase</button></div><div class="desc-box">Transforms text case instantly.</div></div>
-            <div id="t6" class="tool-box"><h2>06. Reverse Text</h2><textarea id="ti6" oninput="document.getElementById('to6').value=this.value.split('').reverse().join('')"></textarea><textarea id="to6" readonly></textarea><div class="desc-box">Flips your text backwards.</div></div>
-            <div id="t7" class="tool-box"><h2>07. Word Frequency</h2><textarea id="ti7"></textarea><button onclick="doFreq()">Check Frequency</button><div id="to7" style="color:#ffd700; margin-top:10px;"></div><div class="desc-box">Identifies how often each word appears.</div></div>
-            <div id="t8" class="tool-box"><h2>08. Binary Converter</h2><textarea oninput="this.nextElementSibling.value=this.value.split('').map(c=>c.charCodeAt(0).toString(2)).join(' ')"></textarea><textarea readonly></textarea><div class="desc-box">Converts standard text into binary code.</div></div>
-            <div id="t9" class="tool-box"><h2>09. Space Cleaner</h2><textarea id="ti9"></textarea><button onclick="this.previousElementSibling.value=this.previousElementSibling.value.replace(/\s+/g,' ').trim()">Clean Spaces</button><div class="desc-box">Removes redundant white spaces.</div></div>
-            <div id="t10" class="tool-box"><h2>10. Line Counter</h2><textarea oninput="this.nextElementSibling.innerHTML='Total Lines: '+this.value.split('\n').filter(l=>l!='').length"></textarea><div style="color:#ffd700">Total Lines: 0</div><div class="desc-box">Accurately calculates the total number of lines.</div></div>
-        </section>
+        <div id="t4" class="tool-box">
+            <h2>Binary Converter</h2>
+            <textarea id="ti4" placeholder="Text to convert..." oninput="runBin()"></textarea>
+            <textarea id="to4" readonly placeholder="Binary output..."></textarea>
+        </div>
 
-        <section id="about-p" class="page-sec">
-            <h1>About TextMaster Pro</h1>
-            <p>We are a dedicated team providing free, high-quality digital tools for developers, writers, and students. Our tools are processed entirely in your browser, meaning your data is never sent to any server. Security and speed are our top priorities.</p>
-        </section>
+        <div id="t5" class="tool-box">
+            <h2>JSON Formatter</h2>
+            <textarea id="ti5" placeholder="Paste messy JSON..." rows="8"></textarea>
+            <div id="je" class="error-msg"></div>
+            <button onclick="runJSON()">Format JSON</button>
+            <button class="btn-sec" onclick="copy('ti5')">Copy</button>
+        </div>
 
-        <section id="privacy-p" class="page-sec">
-            <h1>Privacy Policy</h1>
-            <p><strong>Last Updated: 2026</strong><br><br>At TextMaster Pro, we value your privacy. We do not use cookies to track you, and we do not store any text or data you input into our tools. Everything happens locally on your device.</p>
-        </section>
+        <div id="t6" class="tool-box">
+            <h2>Word Frequency Analyzer</h2>
+            <textarea id="ti6" placeholder="Paste text for analysis..."></textarea>
+            <button onclick="runFreq()">Analyze Frequency</button>
+            <div id="to6" style="margin-top:15px; display:flex; flex-wrap:wrap; gap:8px;"></div>
+        </div>
 
-        <section id="contact-p" class="page-sec">
-            <h1>Contact Us</h1>
-            <p>Have a suggestion or found a bug? Reach out to us at:<br><br><strong>Email: kashif.asif72@gmail.com</strong></p>
-        </section>
+        <div id="t7" class="tool-box">
+            <h2>Character Remover</h2>
+            <input id="rc" placeholder="Character to remove (e.g. , or @)">
+            <textarea id="ti7" placeholder="Your text..."></textarea>
+            <button onclick="runClean()">Clean Text</button>
+        </div>
 
-    </div>
+        <div id="t8" class="tool-box">
+            <h2>Base64 Encoder</h2>
+            <textarea id="ti8" placeholder="String to encode..." oninput="runB64()"></textarea>
+            <textarea id="to8" readonly placeholder="Base64 result..."></textarea>
+        </div>
 
-    <div class="sidebar">
-        <div class="clock"><div class="hand hour" id="hh"></div><div class="hand minute" id="mm"></div><div class="hand second" id="ss"></div></div>
-        <p id="dtBox" style="color:#ffd700; font-weight:700;"></p>
-        <p style="font-size:10px; opacity:0.6;">SYSTEM v10.0 STABLE</p>
-    </div>
+        <div id="t9" class="tool-box">
+            <h2>URL Slug Generator</h2>
+            <textarea id="ti9" placeholder="Enter title (Supports Unicode)..." oninput="runSlug()"></textarea>
+            <input id="to9" readonly placeholder="url-friendly-slug">
+        </div>
+
+        <div id="t10" class="tool-box">
+            <h2>Lorem Ipsum Generator</h2>
+            <textarea id="ti10" readonly rows="8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</textarea>
+            <button onclick="copy('ti10')">Copy Placeholder</button>
+        </div>
+    </section>
+
+    <section id="about-p" class="page-sec pro-content">
+        <h1>About Us</h1>
+        <p>TextMaster Pro is an elite suite of text manipulation tools designed for efficiency. We believe in providing high-quality utilities without the bloat of traditional software.</p>
+    </section>
+
+    <section id="privacy-p" class="page-sec pro-content">
+        <h1>Privacy Policy</h1>
+        <p>Your data stays with you. All processing is performed locally in your browser. We never transmit your text, passwords, or JSON data to any server.</p>
+    </section>
+
+    <section id="contact-p" class="page-sec pro-content">
+        <h1>Contact Us</h1>
+        <p>For support or feedback, please reach out to: <b>kashif.asif72@gmail.com</b></p>
+    </section>
 </div>
 
 <script>
-    // PAGE NAVIGATION
+    // --- Navigation Logic ---
     function showP(p) {
         document.querySelectorAll('.page-sec').forEach(s => s.classList.remove('active-page'));
         document.querySelectorAll('.top-nav a').forEach(a => a.classList.remove('active'));
@@ -141,51 +179,116 @@
         document.getElementById('n-' + p).classList.add('active');
     }
 
-    // TOOL NAVIGATION
     function showT(n) {
         document.querySelectorAll('.tool-box').forEach(b => b.classList.remove('active-tool'));
         document.querySelectorAll('.t-btn').forEach(btn => btn.classList.remove('active-t'));
-        document.getElementById('t' + n).classList.add('active-tool');
-        document.getElementById('tb' + n).classList.add('active-t');
+        const target = document.getElementById('t' + n);
+        if(target) target.classList.add('active-tool');
+        const navBtn = document.getElementById('tb' + n);
+        if(navBtn) navBtn.classList.add('active-t');
     }
 
-    // TOOL LOGIC
-    function doAnalysis() {
-        let v = document.getElementById('ti1').value.trim();
-        document.getElementById('w1').innerText = v ? v.split(/\s+/).length : 0;
-        document.getElementById('c1').innerText = document.getElementById('ti1').value.length;
+    function showToast(m) {
+        const t = document.getElementById('toast');
+        t.innerText = m; t.className = "show";
+        setTimeout(() => t.className = "", 2000);
     }
-    function copyTool(id) {
-        let el = typeof id === 'string' ? document.getElementById(id) : id;
-        el.select(); document.execCommand('copy'); alert('Copied to clipboard!');
+
+    // --- Core Logic ---
+
+    // 01. Analyzer
+    function runMaster() {
+        const t = document.getElementById('ti1').value;
+        const words = t.trim() ? (t.match(/\p{L}+/gu) || t.match(/\w+/g) || []).length : 0;
+        document.getElementById('w1').innerText = words;
+        document.getElementById('c1').innerText = t.length;
     }
-    function clearTool(id) { document.getElementById(id).value = ''; doAnalysis(); }
-    
-    function genP() {
-        let s = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*";
-        let p = ""; for(let i=0; i<16; i++) p += s.charAt(Math.floor(Math.random()*s.length));
-        document.getElementById('ti2').value = p;
-    }
-    function doPx() { document.getElementById('to3').value = (document.getElementById('ti3').value/16).toFixed(3) + " rem"; }
-    function doCase(m) {
-        let i = document.getElementById('ti5');
+    function mCase(m) {
+        const i = document.getElementById('ti1');
         i.value = (m === 'u') ? i.value.toUpperCase() : i.value.toLowerCase();
-    }
-    function doFreq() {
-        let words = document.getElementById('ti7').value.toLowerCase().match(/\w+/g);
-        let f = {}; words?.forEach(w => f[w] = (f[w]||0)+1);
-        document.getElementById('to7').innerText = JSON.stringify(f).replace(/["{}]/g, ' ');
+        runMaster();
     }
 
-    // CLOCK
-    function tick(){
-        const n = new Date();
-        document.getElementById('ss').style.transform = `translateX(-50%) rotate(${(n.getSeconds()/60)*360}deg)`;
-        document.getElementById('mm').style.transform = `translateX(-50%) rotate(${(n.getMinutes()/60)*360}deg)`;
-        document.getElementById('hh').style.transform = `translateX(-50%) rotate(${(n.getHours()/12)*360 + (n.getMinutes()/60)*30}deg)`;
-        document.getElementById('dtBox').innerText = n.toLocaleDateString();
+    // 02. Secure Pass (Zero Bias)
+    function genP() {
+        const charset = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789!@#$%^&*";
+        const crypto = window.crypto || window.msCrypto;
+        let res = "";
+        const maxRange = 256 - (256 % charset.length);
+        while (res.length < 16) {
+            const byte = new Uint8Array(1);
+            crypto.getRandomValues(byte);
+            if (byte[0] < maxRange) res += charset[byte[0] % charset.length];
+        }
+        document.getElementById('ti2').value = res;
+        showToast("Key Generated!");
     }
-    setInterval(tick, 1000); tick();
+
+    // 03. PX to REM
+    function runPx() {
+        const v = document.getElementById('ti3').value;
+        document.getElementById('to3').value = v ? (parseFloat(v)/16).toFixed(3) + " rem" : "";
+    }
+
+    // 04. Binary
+    function runBin() {
+        const val = document.getElementById('ti4').value;
+        let out = "";
+        for(let c of val) out += c.codePointAt(0).toString(2) + " ";
+        document.getElementById('to4').value = out.trim();
+    }
+
+    // 05. JSON
+    function runJSON() {
+        const i = document.getElementById('ti5');
+        const e = document.getElementById('je'); e.innerText = "";
+        try { i.value = JSON.stringify(JSON.parse(i.value), null, 4); showToast("Formatted!"); }
+        catch (err) { e.innerText = "Invalid JSON: " + err.message; }
+    }
+
+    // 06. Frequency
+    function runFreq() {
+        const t = document.getElementById('ti6').value.toLowerCase();
+        const w = t.match(/\p{L}+/gu) || t.match(/\w+/g) || [];
+        let f = {}; w.forEach(x => f[x] = (f[x]||0)+1);
+        const out = document.getElementById('to6');
+        out.innerHTML = Object.entries(f).sort((a,b)=>b[1]-a[1]).slice(0,20)
+            .map(([k,v]) => `<span style="background:#1e293b; padding:5px 10px; border-radius:5px; font-size:12px;">${k}: <b>${v}</b></span>`).join('');
+    }
+
+    // 07. Cleaner
+    function runClean() {
+        const c = document.getElementById('rc').value;
+        const i = document.getElementById('ti7');
+        if(c) { i.value = i.value.split(c).join(''); showToast("Cleaned!"); }
+    }
+
+    // 08. Base64 (Modern)
+    function runB64() {
+        const s = document.getElementById('ti8').value;
+        if(!s) { document.getElementById('to8').value = ""; return; }
+        const bytes = new TextEncoder().encode(s);
+        const bin = Array.from(bytes, b => String.fromCharCode(b)).join("");
+        document.getElementById('to8').value = btoa(bin);
+    }
+
+    // 09. Slugify
+    function runSlug() {
+        const v = document.getElementById('ti9').value;
+        document.getElementById('to9').value = v.toLowerCase().trim()
+            .replace(/[^\p{L}\p{N} ]/gu, '').replace(/\s+/g, '-');
+    }
+
+    // Global Copy
+    function copy(id) {
+        const el = document.getElementById(id);
+        const val = el.value || el.innerText;
+        if(navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(val).then(()=>showToast("Copied!"));
+        } else {
+            el.select(); document.execCommand('copy'); showToast("Copied!");
+        }
+    }
 </script>
 </body>
 </html>
