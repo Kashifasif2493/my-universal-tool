@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TextMaster Pro | Multi-Tool Hub</title>
+    <title>TextMaster Pro | 10-in-1 Digital Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -14,243 +14,204 @@
 
         body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); padding: 10px; }
 
-        /* Navigation */
-        nav { width: 100%; max-width: 1100px; margin: 10px auto 30px auto; background: var(--card); padding: 15px; border-radius: 50px; border: 1px solid var(--border); display: flex; justify-content: center; gap: 15px; position: sticky; top: 10px; z-index: 1000; flex-wrap: wrap; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        nav a { color: var(--text); text-decoration: none; font-size: 14px; font-weight: 600; cursor: pointer; padding: 8px 15px; transition: 0.3s; }
-        nav a.active { background: var(--accent); color: #000; border-radius: 25px; }
+        /* Navigation - Multi-row for many tools */
+        nav { width: 100%; max-width: 1150px; margin: 10px auto 30px auto; background: var(--card); padding: 15px; border-radius: 30px; border: 1px solid var(--border); display: flex; justify-content: center; gap: 8px; position: sticky; top: 10px; z-index: 1000; flex-wrap: wrap; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        nav a { color: var(--text); text-decoration: none; font-size: 11px; font-weight: 600; cursor: pointer; padding: 6px 12px; transition: 0.3s; border-radius: 15px; border: 1px solid transparent; }
+        nav a:hover { border-color: #ffd700; }
+        nav a.active { background: var(--accent); color: #000; }
 
         /* Layout */
-        .main-wrapper { display: flex; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto; justify-content: center; align-items: flex-start; }
+        .main-wrapper { display: flex; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto; justify-content: center; }
         .content-area { flex: 2; min-width: 320px; }
-        .page-section { display: none; background: var(--card); border-radius: 30px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); animation: fadeIn 0.4s; line-height: 1.8; }
+        .page-section { display: none; background: var(--card); border-radius: 30px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); animation: fadeIn 0.4s; }
         .active-section { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* General Styling */
-        h1, h2, h3 { background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; text-align: center; }
-        .tool-box { background: var(--input); padding: 20px; border-radius: 20px; border: 1px solid var(--border); margin-top: 25px; }
-        textarea, input[type="text"], input[type="number"] { width: 100%; border-radius: 12px; padding: 15px; background: #0a0e17; color: white; border: 1px solid var(--border); outline: none; box-sizing: border-box; font-size: 15px; }
+        /* Tool UI */
+        .tool-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .tool-num { background: var(--accent); color: #000; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
+        h1 { background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; margin: 0; font-size: 24px; }
         
-        /* Stats & Buttons */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin: 20px 0; }
-        .stat-card { background: var(--input); padding: 15px; border-radius: 15px; text-align: center; border: 1px solid var(--border); }
-        .stat-card span { display: block; font-size: 1.5rem; font-weight: 700; color: #ffd700; }
-        .btn-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 15px; }
-        button { padding: 10px 18px; border-radius: 8px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; color: #000; transition: 0.2s; }
-        button:hover { transform: scale(1.05); }
+        .description-box { background: rgba(255, 215, 0, 0.05); border-left: 4px solid #ffd700; padding: 15px; margin-top: 20px; border-radius: 0 10px 10px 0; font-size: 13px; line-height: 1.6; color: #cbd5e0; }
+        .tool-body { background: var(--input); padding: 25px; border-radius: 20px; border: 1px solid var(--border); }
+        textarea, input, select { width: 100%; border-radius: 12px; padding: 12px; background: #0a0e17; color: white; border: 1px solid var(--border); box-sizing: border-box; font-size: 15px; margin-bottom: 12px; outline: none; }
+        
+        button { padding: 10px 18px; border-radius: 10px; border: none; background: var(--accent); cursor: pointer; font-weight: 700; color: #000; transition: 0.2s; }
 
-        /* Clock Panel */
-        .side-panel { flex: 0.8; min-width: 260px; display: flex; flex-direction: column; align-items: center; background: var(--card); padding: 25px; border-radius: 30px; border: 1px solid var(--border); position: sticky; top: 100px; }
-        .wall-clock { width: 180px; height: 180px; border: 8px solid #ffd700; border-radius: 50%; position: relative; background: #000; margin-bottom: 20px; }
-        .number { position: absolute; width: 100%; height: 100%; text-align: center; font-weight: 700; color: #fff; padding: 5px; box-sizing: border-box; }
-        .n1 { transform: rotate(30deg); } .n1 span { transform: rotate(-30deg); display: block; }
-        .n2 { transform: rotate(60deg); } .n2 span { transform: rotate(-60deg); display: block; }
-        .n3 { transform: rotate(90deg); } .n3 span { transform: rotate(-90deg); display: block; }
-        .n4 { transform: rotate(120deg); } .n4 span { transform: rotate(-120deg); display: block; }
-        .n5 { transform: rotate(150deg); } .n5 span { transform: rotate(-150deg); display: block; }
-        .n6 { transform: rotate(180deg); } .n6 span { transform: rotate(-180deg); display: block; }
-        .n7 { transform: rotate(210deg); } .n7 span { transform: rotate(-210deg); display: block; }
-        .n8 { transform: rotate(240deg); } .n8 span { transform: rotate(-240deg); display: block; }
-        .n9 { transform: rotate(270deg); } .n9 span { transform: rotate(-270deg); display: block; }
-        .n10 { transform: rotate(300deg); } .n10 span { transform: rotate(-300deg); display: block; }
-        .n11 { transform: rotate(330deg); } .n11 span { transform: rotate(-330deg); display: block; }
-        .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; border-radius: 10px; transform: translateX(-50%); }
-        .hour { width: 6px; height: 45px; background: #fff; }
-        .minute { width: 4px; height: 65px; background: #ffd700; }
-        .second { width: 2px; height: 75px; background: #ff4444; }
-
-        /* Robot Bot */
-        #bot-launcher { position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px; cursor: pointer; z-index: 2000; animation: float 3s infinite ease-in-out; }
-        #bot-window { position: fixed; bottom: 110px; right: 30px; width: 320px; background: var(--card); border: 1px solid var(--border); border-radius: 25px; display: none; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.7); z-index: 2000; overflow: hidden; }
-        .bot-header { background: #ffd700; color: #000; padding: 15px; font-weight: 800; display: flex; justify-content: space-between; }
-        .bot-body { height: 250px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #0c121e; font-size: 13px; }
-        .msg { padding: 8px 12px; border-radius: 12px; max-width: 80%; }
-        .bot-msg { background: var(--input); align-self: flex-start; color: #fff; }
-        .user-msg { background: #ffd700; color: #000; align-self: flex-end; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        /* Clock */
+        .side-panel { flex: 0.8; min-width: 260px; display: flex; flex-direction: column; align-items: center; background: var(--card); padding: 25px; border-radius: 30px; border: 1px solid var(--border); position: sticky; top: 120px; height: fit-content; }
+        .wall-clock { width: 150px; height: 150px; border: 5px solid #ffd700; border-radius: 50%; position: relative; background: #000; margin-bottom: 15px; }
+        .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; transform: translateX(-50%); border-radius: 10px; }
+        .hour { width: 4px; height: 30px; background: #fff; }
+        .minute { width: 3px; height: 45px; background: #ffd700; }
+        .second { width: 1px; height: 55px; background: #ff4444; }
     </style>
 </head>
 <body>
 
 <nav>
-    <a onclick="show('home')" id="n-home" class="active">Home (Tools)</a>
-    <a onclick="show('about')" id="n-about">About Us</a>
+    <a onclick="show('t1')" id="n-t1" class="active">1. Analyzer</a>
+    <a onclick="show('t2')" id="n-t2">2. Password</a>
+    <a onclick="show('t3')" id="n-t3">3. PX Conv</a>
+    <a onclick="show('t4')" id="n-t4">4. Lorem</a>
+    <a onclick="show('t5')" id="n-t5">5. Case</a>
+    <a onclick="show('t6')" id="n-t6">6. Reverse</a>
+    <a onclick="show('t7')" id="n-t7">7. Word Count</a>
+    <a onclick="show('t8')" id="n-t8">8. Binary</a>
+    <a onclick="show('t9')" id="n-t9">9. Space Clean</a>
+    <a onclick="show('t10')" id="n-t10">10. Line Counter</a>
+    <a onclick="show('about')" id="n-about">About</a>
     <a onclick="show('contact')" id="n-contact">Contact</a>
-    <a onclick="show('privacy')" id="n-privacy">Privacy Policy</a>
 </nav>
 
 <div class="main-wrapper">
     <div class="content-area">
-        <section id="home" class="page-section active-section">
-            <h1>TextMaster Pro - Tool Hub</h1>
-            
-            <div class="tool-box">
-                <h3>1. Master Text Analyzer</h3>
-                <textarea id="mainInput" placeholder="Paste your text here..."></textarea>
-                <div class="stats-grid">
-                    <div class="stat-card">Words<span id="wCount">0</span></div>
-                    <div class="stat-card">Chars<span id="cCount">0</span></div>
-                    <div class="stat-card">Read Time<span id="rTime">0m</span></div>
-                </div>
-                <div class="btn-container">
-                    <button onclick="changeCase('up')">UPPERCASE</button>
-                    <button onclick="changeCase('low')">lowercase</button>
-                    <button onclick="cleanText()">Clean Extra Spaces</button>
-                    <button onclick="copyText('mainInput')">Copy Results</button>
-                </div>
+        
+        <section id="t1" class="page-section active-section">
+            <div class="tool-header"><div class="tool-num">1</div><h1>Text Analysis</h1></div>
+            <div class="tool-body">
+                <textarea id="t1In" placeholder="Type for analysis..."></textarea>
+                <div id="t1Res" style="font-size:14px; color:#ffd700;">Words: 0 | Chars: 0</div>
             </div>
-
-            <div class="tool-box">
-                <h3>2. Secure Password Generator</h3>
-                <div style="display:flex; gap:10px; margin-bottom:15px;">
-                    <input type="text" id="passResult" readonly placeholder="Your Secure Password">
-                    <button onclick="genPass()">Generate</button>
-                </div>
-                <div class="btn-container">
-                    <button onclick="copyText('passResult')" style="background:#2d3748; color:white;">Copy Password</button>
-                </div>
-            </div>
-
-            <div class="tool-box">
-                <h3>3. PX to REM Converter</h3>
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-bottom:15px;">
-                    <div>
-                        <label style="font-size:12px;">Pixels (PX)</label>
-                        <input type="number" id="pxInp" placeholder="16" oninput="convertUnit()">
-                    </div>
-                    <div>
-                        <label style="font-size:12px;">Result (REM)</label>
-                        <input type="text" id="remRes" readonly placeholder="1">
-                    </div>
-                </div>
-            </div>
+            <div class="description-box">Aapke content ka mukammal analysis (word aur character count) karta hai.</div>
         </section>
 
-        <section id="about" class="page-section">
-            <h2>About TextMaster Pro</h2>
-            <p>Welcome to <strong>TextMaster Pro</strong>, a comprehensive digital hub designed to simplify your daily digital tasks. We provide high-quality, free tools ranging from advanced text analysis to security-focused password generation.</p>
-            <p>Our tools are built for performance and privacy, ensuring that no data is ever uploaded to a server. We are committed to helping writers, developers, and everyday users master their digital workflow.</p>
-        </section>
-
-        <section id="contact" class="page-section">
-            <h2>Contact Us</h2>
-            <p>We'd love to hear from you! Whether you have a tool request or need support, reach out to us:</p>
-            <div style="background:var(--input); padding:20px; border-radius:15px; border:1px solid var(--border); margin-top:15px;">
-                <p>📧 <strong>Email:</strong> kashif.asif72@gmail.com</p>
-                <p>🕒 <strong>Support:</strong> Available 24/7 via LexiBot</p>
+        <section id="t2" class="page-section">
+            <div class="tool-header"><div class="tool-num">2</div><h1>Secure Password</h1></div>
+            <div class="tool-body">
+                <input type="text" id="t2Out" readonly>
+                <button onclick="genPass()">Generate</button>
             </div>
+            <div class="description-box">Cyber security ke liye high-strength random passwords banata hai.</div>
         </section>
 
-        <section id="privacy" class="page-section">
-            <h2>Privacy Policy</h2>
-            <p>Your privacy is our mission. <strong>TextMaster Pro</strong> does not collect, store, or track any data you enter into our tools. Everything happens right inside your web browser. No databases, no tracking cookies, just pure utility.</p>
+        <section id="t3" class="page-section">
+            <div class="tool-header"><div class="tool-num">3</div><h1>PX to REM</h1></div>
+            <div class="tool-body">
+                <input type="number" id="pxIn" placeholder="Pixels" oninput="convPX()">
+                <input type="text" id="remOut" readonly placeholder="REM Result">
+            </div>
+            <div class="description-box">Web developers ke liye pixels ko modern REM units mein badalta hai.</div>
         </section>
+
+        <section id="t4" class="page-section">
+            <div class="tool-header"><div class="tool-num">4</div><h1>Lorem Ipsum</h1></div>
+            <div class="tool-body">
+                <textarea readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</textarea>
+            </div>
+            <div class="description-box">Designers ke liye standard dummy text generator.</div>
+        </section>
+
+        <section id="t5" class="page-section">
+            <div class="tool-header"><div class="tool-num">5</div><h1>Case Master</h1></div>
+            <div class="tool-body">
+                <textarea id="t5In"></textarea>
+                <button onclick="caseM('up')">UPPERCASE</button>
+                <button onclick="caseM('low')">lowercase</button>
+            </div>
+            <div class="description-box">Text ka case aik click mein tabdeel karein.</div>
+        </section>
+
+        <section id="t6" class="page-section">
+            <div class="tool-header"><div class="tool-num">6</div><h1>Reverse Text</h1></div>
+            <div class="tool-body">
+                <textarea id="t6In" placeholder="Enter text to reverse..." oninput="revText()"></textarea>
+                <textarea id="t6Out" readonly placeholder="Output will appear here..."></textarea>
+            </div>
+            <div class="description-box">Aapke text ko ulta (backwards) kar deta hai. Fun aur coding ke liye best hai.</div>
+        </section>
+
+        <section id="t7" class="page-section">
+            <div class="tool-header"><div class="tool-num">7</div><h1>Word Frequency</h1></div>
+            <div class="tool-body">
+                <textarea id="t7In" placeholder="Paste text..."></textarea>
+                <button onclick="freq()">Check Frequency</button>
+                <div id="t7Res" style="margin-top:10px; font-size:12px;"></div>
+            </div>
+            <div class="description-box">Check karein ke aapke text mein kaunsa lafz kitni baar aya hai.</div>
+        </section>
+
+        <section id="t8" class="page-section">
+            <div class="tool-header"><div class="tool-num">8</div><h1>Binary Converter</h1></div>
+            <div class="tool-body">
+                <textarea id="t8In" placeholder="Text to Binary..." oninput="toBin()"></textarea>
+                <textarea id="t8Out" readonly placeholder="010101..."></textarea>
+            </div>
+            <div class="description-box">Aapke simple text ko computer ki binary language (0101) mein badalta hai.</div>
+        </section>
+
+        <section id="t9" class="page-section">
+            <div class="tool-header"><div class="tool-num">9</div><h1>Space Cleaner</h1></div>
+            <div class="tool-body">
+                <textarea id="t9In" placeholder="Paste messy text..."></textarea>
+                <button onclick="cleanSp()">Clean Extra Spaces</button>
+            </div>
+            <div class="description-box">Text ke darmiyan fazool spaces aur gaps ko khatam karke text ko saaf karta hai.</div>
+        </section>
+
+        <section id="t10" class="page-section">
+            <div class="tool-header"><div class="tool-num">10</div><h1>Line Counter</h1></div>
+            <div class="tool-body">
+                <textarea id="t10In" placeholder="Paste text with many lines..." oninput="countLines()"></textarea>
+                <div style="color:#ffd700;">Total Lines: <span id="lineRes">0</span></div>
+            </div>
+            <div class="description-box">Ye batata hai ke aapki file ya text mein total kitni lines hain.</div>
+        </section>
+
+        <section id="about" class="page-section"><h2>About Hub</h2><p>Professional multi-tool platform.</p></section>
+        <section id="contact" class="page-section"><h2>Contact</h2><p>kashif.asif72@gmail.com</p></section>
+        <section id="privacy" class="page-section"><h2>Privacy</h2><p>100% Secure & Local.</p></section>
+
     </div>
 
     <div class="side-panel">
-        <div class="wall-clock">
-            <div class="number n12"><span>12</span></div>
-            <div class="number n1"><span>1</span></div><div class="number n2"><span>2</span></div>
-            <div class="number n3"><span>3</span></div><div class="number n4"><span>4</span></div>
-            <div class="number n5"><span>5</span></div><div class="number n6"><span>6</span></div>
-            <div class="number n7"><span>7</span></div><div class="number n8"><span>8</span></div>
-            <div class="number n9"><span>9</span></div><div class="number n10"><span>10</span></div>
-            <div class="number n11"><span>11</span></div>
-            <div class="hand hour" id="hh"></div>
-            <div class="hand minute" id="mm"></div>
-            <div class="hand second" id="ss"></div>
-        </div>
+        <div class="wall-clock"><div class="hand hour" id="hh"></div><div class="hand minute" id="mm"></div><div class="hand second" id="ss"></div></div>
         <p id="dateBox" style="color:#ffd700; font-weight:700;"></p>
-        <div style="font-size:11px; color:#ffd700; margin-top:10px;">TEXTMASTER PRO v2.0</div>
-    </div>
-</div>
-
-<div id="bot-launcher" onclick="toggleChat()">
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="45" fill="#141b2d" stroke="#ffd700" stroke-width="3"/>
-        <rect x="30" y="35" width="40" height="30" rx="5" fill="#0a0e17" stroke="#ffd700" stroke-width="2"/>
-        <circle cx="40" cy="45" r="3" fill="#00ffff"><animate attributeName="opacity" values="0;1;0" dur="2s" infinite/></circle>
-        <circle cx="60" cy="45" r="3" fill="#00ffff"><animate attributeName="opacity" values="0;1;0" dur="2s" infinite/></circle>
-        <path d="M40 55 Q50 60 60 55" stroke="#ffd700" fill="none" stroke-width="2"/>
-    </svg>
-</div>
-
-<div id="bot-window">
-    <div class="bot-header"><span>🤖 Multi-Tool AI</span><span onclick="toggleChat()" style="cursor:pointer">×</span></div>
-    <div class="bot-body" id="chatBody">
-        <div class="msg bot-msg">Welcome! 🦾 I can help you with Text Analysis, Passwords, or PX Conversion. What's the plan?</div>
-    </div>
-    <div class="bot-footer" style="padding:10px; display:flex; gap:5px; border-top:1px solid var(--border);">
-        <input type="text" id="botInput" placeholder="Ask me..." style="flex:1; background:var(--input); border:1px solid var(--border); color:#fff; padding:8px; border-radius:5px;" onkeypress="if(event.key=='Enter') sendBotMsg()">
-        <button onclick="sendBotMsg()" style="padding:5px 10px; background:#ffd700; border:none; border-radius:5px; cursor:pointer; font-weight:700;">Send</button>
+        <p style="font-size:10px;">10 TOOLS LOADED</p>
     </div>
 </div>
 
 <script>
     function show(id){
-        document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active-section'));
-        document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+        document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-section'));
+        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
         document.getElementById(id).classList.add('active-section');
         document.getElementById('n-'+id).classList.add('active');
     }
 
-    /* CLOCK */
-    function updateClock(){
-        const now = new Date();
-        document.getElementById('ss').style.transform = `translateX(-50%) rotate(${(now.getSeconds()/60)*360}deg)`;
-        document.getElementById('mm').style.transform = `translateX(-50%) rotate(${(now.getMinutes()/60)*360}deg)`;
-        document.getElementById('hh').style.transform = `translateX(-50%) rotate(${(now.getHours()/12)*360 + (now.getMinutes()/60)*30}deg)`;
-        document.getElementById('dateBox').innerText = now.toLocaleDateString();
-    }
-    setInterval(updateClock, 1000); updateClock();
-
-    /* TEXT TOOL */
-    const inputArea = document.getElementById('mainInput');
-    inputArea.addEventListener('input', () => {
-        const text = inputArea.value.trim();
-        const words = text ? text.split(/\s+/).length : 0;
-        document.getElementById('wCount').innerText = words;
-        document.getElementById('cCount').innerText = inputArea.value.length;
-        document.getElementById('rTime').innerText = Math.ceil(words / 200) + 'm';
-    });
-    function changeCase(t) { inputArea.value = (t === 'up') ? inputArea.value.toUpperCase() : inputArea.value.toLowerCase(); }
-    function cleanText() { inputArea.value = inputArea.value.replace(/\s+/g, ' ').trim(); }
-    function copyText(id) { document.getElementById(id).select(); document.execCommand('copy'); alert("Copied to clipboard!"); }
-
-    /* PASSWORD TOOL */
+    // Logic for all 10 tools
     function genPass() {
-        const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-        let pass = "";
-        for (let i = 0; i < 14; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
-        document.getElementById('passResult').value = pass;
+        let s="ABCDEFGH23456789!@#$%^&*abcdefgh";
+        let p=""; for(let i=0;i<16;i++) p+=s.charAt(Math.floor(Math.random()*s.length));
+        document.getElementById('t2Out').value=p;
     }
+    function convPX() { document.getElementById('remOut').value = (document.getElementById('pxIn').value/16).toFixed(3) + " rem"; }
+    function caseM(m) { let i = document.getElementById('t5In'); i.value = (m==='up')?i.value.toUpperCase():i.value.toLowerCase(); }
+    function revText() { document.getElementById('t6Out').value = document.getElementById('t6In').value.split("").reverse().join(""); }
+    function toBin() { 
+        let output = document.getElementById('t8Out');
+        output.value = document.getElementById('t8In').value.split('').map(char => char.charCodeAt(0).toString(2)).join(' ');
+    }
+    function cleanSp() { let i = document.getElementById('t9In'); i.value = i.value.replace(/\s+/g, ' ').trim(); }
+    function countLines() { document.getElementById('lineRes').innerText = document.getElementById('t10In').value.split('\n').filter(l=>l!=='').length; }
+    function freq() {
+        let words = document.getElementById('t7In').value.toLowerCase().match(/\w+/g);
+        let f = {}; words?.forEach(w => f[w] = (f[w]||0)+1);
+        document.getElementById('t7Res').innerText = JSON.stringify(f).replace(/["{}]/g, ' ');
+    }
+    document.getElementById('t1In').addEventListener('input', function(){
+        let v = this.value.trim();
+        document.getElementById('t1Res').innerText = `Words: ${v?v.split(/\s+/).length:0} | Chars: ${this.value.length}`;
+    });
 
-    /* CONVERTER TOOL */
-    function convertUnit() {
-        const px = document.getElementById('pxInp').value;
-        document.getElementById('remRes').value = (px / 16).toFixed(3) + " rem";
+    function tick(){
+        const n = new Date();
+        document.getElementById('ss').style.transform = `translateX(-50%) rotate(${(n.getSeconds()/60)*360}deg)`;
+        document.getElementById('mm').style.transform = `translateX(-50%) rotate(${(n.getMinutes()/60)*360}deg)`;
+        document.getElementById('hh').style.transform = `translateX(-50%) rotate(${(n.getHours()/12)*360 + (n.getMinutes()/60)*30}deg)`;
+        document.getElementById('dateBox').innerText = n.toLocaleDateString();
     }
-
-    /* BOT */
-    function toggleChat() {
-        const win = document.getElementById('bot-window');
-        win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
-    }
-    function sendBotMsg() {
-        const inp = document.getElementById('botInput');
-        const body = document.getElementById('chatBody');
-        if(!inp.value.trim()) return;
-        body.innerHTML += `<div class="msg user-msg">${inp.value}</div>`;
-        const val = inp.value.toLowerCase();
-        inp.value = "";
-        setTimeout(() => {
-            let reply = "I'm the TextMaster Multi-AI. Check out our new Converter tool!";
-            if(val.includes('hi')) reply = "Hello! 🤖 Need help with our tools?";
-            if(val.includes('password')) reply = "Just click 'Generate' in Tool #2 for a strong password.";
-            body.innerHTML += `<div class="msg bot-msg">${reply}</div>`;
-            body.scrollTop = body.scrollHeight;
-        }, 600);
-    }
+    setInterval(tick, 1000); tick();
 </script>
 </body>
 </html>
